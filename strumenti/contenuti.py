@@ -41,7 +41,7 @@ SERVIZI = [
         nome='Riparazione PC e Mac',
         breve='Computer fissi e portatili: schermi, tastiere, batterie, dischi, lentezza e problemi di avvio.',
         titolo='Riparazione PC, notebook e Mac a Roma',
-        sotto='Computer fissi e portatili di tutte le marche, Windows, Mac e Linux. Anche se acquistati altrove.',
+        sotto='Computer fissi e portatili di tutte le marche, con Windows, macOS o Linux.',
         intro=("Il computer non si accende, è diventato lentissimo, lo schermo è rotto o fa rumori strani? "
                "Portalo in Via Tripoli 17: facciamo la diagnosi, ti spieghiamo il problema con parole semplici "
                "e ripariamo sia l'hardware sia il software."),
@@ -53,7 +53,6 @@ SERVIZI = [
             'Installazione e aggiornamento di Windows, macOS e Linux',
             'Installazione di stampanti, scanner e periferiche',
             'Assemblaggio di PC e server su misura',
-            'Assistenza anche su computer acquistati altrove',
         ],
         passi=PASSI_RIPARAZIONE,
         faq=[
@@ -93,9 +92,9 @@ SERVIZI = [
         nome='Recupero dati',
         breve='Da dischi, chiavette, cellulari e fotocamere che non si leggono più.',
         titolo='Recupero dati a Roma',
-        sotto='Foto, documenti e lavoro da dischi, chiavette, cellulari e fotocamere danneggiati.',
-        intro=("Foto, documenti, anni di lavoro su un disco che non si legge più? Proviamo a recuperare i dati da "
-               "dischi, chiavette, schede di memoria, cellulari e fotocamere, anche danneggiati o infettati da virus."),
+        sotto='Non è detto che sia tutto perso.',
+        intro=("Foto, documenti, anni di lavoro su un disco che non si legge più? Proviamo a recuperarli da dischi, "
+               "chiavette, schede di memoria, cellulari e fotocamere, anche se danneggiati o colpiti da un virus."),
         avviso=('Cosa fare subito', "Se il disco fa rumori strani o non viene riconosciuto, smetti di usarlo: ogni "
                 "tentativo può peggiorare la situazione. Spegnilo e portacelo così com'è."),
         cosa=[
@@ -119,7 +118,7 @@ SERVIZI = [
         nome='Virus e sicurezza',
         breve='Rimozione di virus e malware, anche nei casi più difficili, e protezione dei tuoi dati.',
         titolo='Rimozione virus e sicurezza informatica',
-        sotto='Virus, malware, spyware e trojan rimossi a mano, anche nei casi più difficili.',
+        sotto='Un computer di nuovo pulito, veloce e protetto.',
         intro=("Pubblicità che si aprono da sole, computer lentissimo, programmi mai installati, email strane "
                "inviate a tuo nome? Rimuoviamo a mano virus, malware, spyware e trojan, anche nei casi più "
                "difficili, e mettiamo in sicurezza il computer."),
@@ -145,7 +144,7 @@ SERVIZI = [
         nome='Assistenza per aziende',
         breve='Reti cablate e wireless, server, backup e contratti di assistenza continuativa.',
         titolo='Assistenza informatica per aziende e uffici',
-        sotto='Computer, server, reti e backup, con un punto di riferimento sempre disponibile.',
+        sotto="Un unico punto di riferimento per l'informatica del tuo ufficio.",
         intro=("Seguiamo l'informatica di studi, uffici e negozi: computer, server, reti, stampanti e backup, "
                "con contratti di assistenza e manutenzione preventiva per lavorare senza interruzioni."),
         cosa=[
@@ -155,7 +154,7 @@ SERVIZI = [
             'Router, firewall, access point e stampanti di rete',
             'Sicurezza della rete e misure per la privacy',
             'Fornitura di computer, accessori e materiali di consumo',
-            'Connettività business [[MCLINK e Fastweb]]',
+            'Connettività business Fastweb e [[MCLINK]]',
             'Siti e gestionali su misura per la tua azienda',
         ],
         passi=[
@@ -174,9 +173,9 @@ SERVIZI = [
         nome='Assistenza da remoto',
         breve='Risolviamo i problemi software collegandoci al tuo computer, senza che tu debba venire.',
         titolo='Assistenza informatica da remoto',
-        sotto='Ci colleghiamo al tuo computer in sicurezza e risolviamo mentre guardi.',
-        intro=("Molti problemi si risolvono senza muoverti da casa o dall'ufficio: con il tuo permesso ci colleghiamo "
-               "al computer tramite TeamViewer e lo sistemiamo mentre guardi."),
+        sotto='Veloce e sicura, senza uscire di casa.',
+        intro=("Molti problemi si risolvono a distanza: con il tuo permesso ci colleghiamo al computer "
+               "tramite TeamViewer e lo sistemiamo mentre guardi."),
         prezzi=[('30 minuti', '[[30 €]]'), ('60 minuti', '[[60 €]]')],
         cosa=[
             'Programmi che non funzionano o non si installano',
@@ -202,9 +201,9 @@ SERVIZI = [
         nome='Vendita',
         breve='Computer, portatili, smartphone e accessori delle migliori marche, consigliati su misura.',
         titolo='Vendita computer, notebook e accessori',
-        sotto='Le migliori marche, consigliate su come userai il dispositivo.',
-        intro=("Computer, portatili, smartphone e accessori delle migliori marche. Ti aiutiamo a scegliere quello "
-               "giusto per come lo userai, [[e te lo consegniamo già pronto e configurato]]."),
+        sotto='Ti aiutiamo a scegliere il dispositivo giusto per te.',
+        intro=("Computer, portatili, smartphone e accessori delle migliori marche. Partiamo da come lo userai "
+               "per consigliarti quello giusto[[, e te lo consegniamo pronto e configurato]]."),
         cosa=[
             'Computer fissi e portatili',
             'PC assemblati su misura',
@@ -227,14 +226,14 @@ SERVIZI = [
     dict(
         slug='telefonia-internet', gruppo='riparazioni', icona='wifi',
         nome='Telefonia e internet',
-        breve='Offerte [[Iliad e Fastweb]] per privati e aziende, attivabili in negozio.',
+        breve='Offerte Iliad e Fastweb per privati e aziende, da attivare in negozio.',
         titolo='Telefonia e internet: offerte in negozio',
-        sotto='Cellulare, fibra e linee per ufficio, con qualcuno che ti spiega tutto.',
-        intro=("Attivi in negozio la tua offerta per casa, ufficio o cellulare, con qualcuno che ti spiega "
-               "le condizioni e ti aiuta a configurare tutto."),
+        sotto='Offerte Iliad e Fastweb per casa, ufficio e cellulare.',
+        intro=("Scegli e attivi l'offerta direttamente in negozio: ti spieghiamo le condizioni in modo chiaro "
+               "e ti aiutiamo a configurare tutto."),
         cosa=[
-            'Offerte [[Iliad]] per cellulare',
-            'Fibra e telefonia [[Fastweb]] per casa e ufficio',
+            'Offerte Iliad per il cellulare',
+            'Fibra e telefonia Fastweb per casa e ufficio',
             'Connettività business [[MCLINK]]',
             'Configurazione di router e rete Wi-Fi',
             'Portabilità del numero',
@@ -258,7 +257,7 @@ SERVIZI = [
         titolo='Landing page e siti web',
         sotto='Siti veloci e chiari, pensati prima per il telefono e per farsi trovare su Google.',
         intro=("Un sito che faccia capire in pochi secondi cosa fai e porti le persone a chiamarti, scriverti o "
-               "venire da te. Veloce, chiaro, pensato prima per il telefono."),
+               "venire da te."),
         cosa=[
             'Landing page per un servizio, un evento o una campagna',
             'Siti vetrina per attività e professionisti',
@@ -274,9 +273,9 @@ SERVIZI = [
     dict(
         slug='gestionali', gruppo='su-misura', icona='dashboard',
         nome='Gestionali su misura',
-        breve='Clienti, preventivi, fatture, magazzino, appuntamenti: un programma costruito sul tuo modo di lavorare, non il contrario.',
+        breve='Clienti, preventivi, fatture, magazzino, appuntamenti: un programma costruito sul tuo modo di lavorare.',
         titolo='Gestionali su misura',
-        sotto='Un programma costruito su come lavori tu, dal computer, dal tablet o dal telefono.',
+        sotto='Il programma che si adatta a te, non il contrario.',
         intro=("Invece di adattarti a un software pensato per tutti, un gestionale fatto sul tuo modo di lavorare. "
                "Si usa dal browser, su computer, tablet e telefono, senza installare niente."),
         cosa=[
@@ -302,7 +301,7 @@ SERVIZI = [
         nome='App per telefono e computer',
         breve='App che funzionano dal browser e si installano sul telefono con un tocco, senza passare dagli store.',
         titolo='App per telefono e computer',
-        sotto='Si aprono dal browser e si installano sul telefono con un tocco, senza store.',
+        sotto="Un'app tutta tua, per i clienti o per il personale.",
         intro=("App che si installano sulla schermata del telefono con un tocco, senza passare da App Store o "
                "Google Play. Un solo progetto che funziona su telefono, tablet e computer."),
         cosa=[
@@ -321,9 +320,9 @@ SERVIZI = [
         nome='Automazioni',
         breve="I lavori ripetitivi fatti da soli: promemoria ai clienti, email, report, dati che passano da un programma all'altro.",
         titolo='Automazioni per la tua attività',
-        sotto='I lavori ripetitivi fatti da soli, mentre tu pensi al resto.',
-        intro=("Le attività ripetitive che ti rubano tempo possono farsi da sole: promemoria, email, report, "
-               "dati copiati da un programma all'altro."),
+        sotto='Meno tempo perso, meno errori.',
+        intro=("Le attività ripetitive che ti rubano tempo possono andare avanti da sole: promemoria, email, "
+               "report, dati copiati da un programma all'altro."),
         cosa=[
             'Promemoria ai clienti: appuntamenti, ritiri, scadenze',
             'Email e messaggi inviati al momento giusto',
@@ -340,7 +339,7 @@ SERVIZI = [
         nome='Documenti e stampe automatiche',
         breve='Preventivi, schede, etichette e cartellini generati in PDF con i tuoi dati e il tuo logo, pronti da stampare o inviare.',
         titolo='Documenti e stampe automatiche',
-        sotto='PDF con i tuoi dati e il tuo logo, pronti da stampare, inviare o condividere.',
+        sotto='Documenti professionali in un clic.',
         intro=("Preventivi, schede, etichette, cartellini e ricevute che si compilano da soli con i tuoi dati "
                "e il tuo logo, pronti da stampare, mandare per email o condividere su WhatsApp."),
         cosa=[
@@ -360,9 +359,9 @@ SERVIZI = [
         nome='Visibilità su Google',
         breve='Scheda Google, recensioni e ottimizzazione per le ricerche in zona: farti trovare da chi cerca vicino a te.',
         titolo='Visibilità su Google',
-        sotto='Farti trovare da chi cerca quello che fai, vicino a te.',
-        intro=("Scheda Google curata, recensioni e un sito ottimizzato per le ricerche in zona: così ti trova chi "
-               "cerca quello che fai, proprio vicino a te."),
+        sotto='Fatti trovare da chi ti cerca in zona.',
+        intro=("Scheda Google curata, recensioni e un sito ottimizzato per le ricerche locali: così chi cerca "
+               "quello che fai trova proprio te."),
         cosa=[
             'Creazione e cura della scheda Google: orari, foto, categorie',
             'Raccolta di recensioni, anche con un QR code',

@@ -250,7 +250,7 @@ def corpo_pagina(s, veste):
   <section class="invito" aria-labelledby="titolo-invito">
     <div class="contenitore">
       <h2 id="titolo-invito">{titolo_invito}</h2>
-      <p>Chiamaci o scrivici su WhatsApp: ti rispondiamo noi, non un call center. Oppure passa in negozio in {INDIRIZZO}.</p>
+      <p>Chiamaci o scrivici su WhatsApp: ti rispondiamo noi, non un call center. Oppure passa a trovarci in Via Tripoli 17, a Roma.</p>
       <div class="azioni">
         <a class="bottone bottone--primario bottone--grande" href="{TEL_LINK}">{ic('phone')} {TELEFONO}</a>
         <a class="bottone bottone--secondario bottone--grande" href="{whatsapp(msg)}" rel="noopener">{ic('chat')} WhatsApp</a>
@@ -462,7 +462,6 @@ def home_a():
     perche = ''.join(f'<li>{ic("check")}<span>{x}</span></li>' for x in [
         'Ti spieghiamo il problema con parole semplici, prima di fare qualsiasi cosa',
         'Parti originali per smartphone e tablet',
-        'Assistenza anche su dispositivi acquistati altrove',
         'In negozio, a domicilio e da remoto',
         'Un punto di riferimento a Roma da oltre 20 anni',
     ])
@@ -481,7 +480,7 @@ def home_a():
     <div class="contenitore">
       <p><a class="a-eroe__occhiello" href="{MAPPA}" rel="noopener" title="Apri in Google Maps">{ic('pin')} Roma, Via Tripoli 17 · il negozio di fiducia sotto casa {ic('arrow', 'ic a-eroe__freccia')}</a></p>
       <h1>Problemi con il PC<br>o lo <em>smartphone</em>?</h1>
-      <p class="a-eroe__sotto">Ripariamo computer, Mac, smartphone e tablet di tutte le marche. In negozio, a domicilio e da remoto. Scegli il tuo problema:</p>
+      <p class="a-eroe__sotto">Ripariamo computer, Mac, smartphone e tablet di tutte le marche, in negozio, a domicilio o da remoto. Qual è il problema?</p>
       <ul class="a-problemi">{problemi}</ul>
       <div class="azioni">
         <a class="bottone bottone--primario bottone--grande" href="{TEL_LINK}">{ic('phone')} Chiama ora · {TELEFONO}</a>
@@ -494,7 +493,7 @@ def home_a():
   <section class="a-fiducia" aria-label="Perché fidarti">
     <div class="contenitore">
       <ul>
-        <li>{ic('award')}<div><strong>Da oltre 20 anni</strong><span>il negozio di fiducia a Roma</span></div></li>
+        <li>{ic('award')}<div><strong>Da oltre 20 anni</strong><span>a Roma, in Via Tripoli</span></div></li>
         <li>{ic('star')}<div><strong>{stelle()}</strong><span>5 stelle su Google · 66 recensioni</span></div></li>
         <li>{ic('laptop')}<div><strong>Windows · Mac · Linux</strong><span>computer e smartphone di tutte le marche</span></div></li>
         <li>{ic('home')}<div><strong>Dove ti serve</strong><span>in negozio, a domicilio e da remoto</span></div></li>
@@ -517,7 +516,7 @@ def home_a():
         <a class="a-mondo a-mondo--scuro" href="siti-e-gestionali.html">
           {ic('dashboard', 'ic a-mondo__icona')}
           <h3>Siti, gestionali e software su misura</h3>
-          <p>Costruiti su come lavori tu. Un esempio? Il gestionale del nostro negozio l'abbiamo fatto noi.</p>
+          <p>Pensati per il tuo modo di lavorare. Un esempio? Il gestionale del nostro negozio l'abbiamo fatto noi.</p>
           <span class="a-mondo__altro">Scopri cosa possiamo realizzare {ic('arrow')}</span>
         </a>
       </div>
@@ -616,8 +615,8 @@ def home_a():
 def panoramica_a(gruppo):
     if gruppo == 'riparazioni':
         servizi, titolo, sotto = RIPARAZIONI, 'Riparazioni e assistenza a Roma', 'Tutti i servizi del negozio'
-        intro = ("Computer, Mac, smartphone e tablet di tutte le marche, anche acquistati altrove. "
-                 "In negozio in Via Tripoli 17, a domicilio e da remoto, per privati e aziende.")
+        intro = ("Ripariamo computer, Mac, smartphone e tablet di tutte le marche, per privati e aziende: "
+                 "nel nostro negozio di Via Tripoli 17, a domicilio o da remoto.")
         icona, passi, titolo_passi = 'tool', PER_SLUG['riparazione-pc-mac']['passi'], 'Come funziona una riparazione'
         chiusura = ''
     else:
