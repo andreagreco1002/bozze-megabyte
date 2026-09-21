@@ -367,7 +367,7 @@ def testata_a():
 <nav class="a-menu" aria-label="Menu principale">
   <div class="contenitore">
     <ul class="a-menu__lista">
-      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="index.html"><span>Home</span><small>Meg@byte Informatica</small></a></li>
       <li class="a-menu__tendina">
         <a href="riparazioni.html"><span>Riparazioni {ic('chevron')}</span><small>PC, Mac, smartphone</small></a>
         <ul class="a-sottomenu">{rip}</ul>
