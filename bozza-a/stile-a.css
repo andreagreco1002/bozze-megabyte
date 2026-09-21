@@ -1200,7 +1200,52 @@ mark.da-confermare {
   .a-menu-mobile__pannello > li + li { border-top: 1px solid rgb(255 255 255 / 0.08); }
 }
 
+/* ---------- Home: le due anime del negozio ---------- */
+.a-mondi { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.a-mondo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 36px 32px;
+  border-radius: var(--raggio);
+  background:
+    radial-gradient(400px 200px at 100% 0%, var(--blu-chiaro), transparent 70%),
+    #fff;
+  border: 1px solid var(--bordo);
+  color: var(--testo);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.a-mondo:hover { transform: translateY(-4px); box-shadow: var(--ombra); color: var(--testo); }
+.a-mondo h3 { font-size: 1.45rem; margin: 6px 0 0; }
+.a-mondo p { margin: 0; color: var(--testo-tenue); }
+.a-mondo__icona {
+  width: 60px;
+  height: 60px;
+  padding: 14px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--arancio), var(--arancio-bottone));
+}
+.a-mondo__altro { margin-top: auto; padding-top: 12px; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--blu); }
+.a-mondo__altro .ic { transition: transform 0.15s; }
+.a-mondo:hover .a-mondo__altro .ic { transform: translateX(4px); }
+.a-mondo--scuro {
+  background:
+    radial-gradient(400px 220px at 100% 0%, rgb(224 124 44 / 0.3), transparent 70%),
+    linear-gradient(160deg, #0d3246, var(--blu));
+  border-color: transparent;
+  color: #d9e7f0;
+}
+.a-mondo--scuro:hover { color: #d9e7f0; }
+.a-mondo--scuro h3 { color: #fff; }
+.a-mondo--scuro p { color: #c3d4e0; }
+.a-mondo--scuro .a-mondo__altro { color: #f2a86b; }
+.pagina-eroe--panoramica { padding-bottom: 56px; }
+.pagina-eroe--panoramica .pagina-eroe__icona { margin-top: 20px; }
+
 /* ---------- Tablet ---------- */
+
 @media (max-width: 1024px) {
   .a-menu__lista > li > a { padding: 12px 14px; }
   .a-griglia-servizi { grid-template-columns: repeat(2, 1fr); }
@@ -1240,6 +1285,10 @@ mark.da-confermare {
   .scheda-link__altro { font-size: 0.85rem; padding-top: 10px; }
   .correlati .a-servizio p { display: block; }
   .a-perche { grid-template-columns: 1fr; gap: 28px; }
+  .a-mondi { grid-template-columns: 1fr; gap: 16px; }
+  .a-griglia-servizi--completa { grid-template-columns: 1fr; }
+  .a-griglia-servizi--completa .a-servizio p { display: block; }
+  .a-mondo { padding: 26px 22px; }
   .a-recensioni .recensioni { grid-template-columns: 1fr; }
   .a-banda-cta__riga { flex-direction: column; text-align: center; }
   .a-banda-cta h2 { text-align: center; }

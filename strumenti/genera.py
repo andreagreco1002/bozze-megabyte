@@ -53,6 +53,8 @@ ICONE = {
 }
 
 RIPARAZIONI = [s for s in SERVIZI if s['gruppo'] == 'riparazioni']
+# Bozza A: ogni gruppo ha una pagina riassuntiva, cosi' la home non ripete le liste del menu
+PANORAMICA_A = {'riparazioni': 'riparazioni.html', 'su-misura': 'siti-e-gestionali.html'}
 SU_MISURA = [s for s in SERVIZI if s['gruppo'] == 'su-misura']
 FONT = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
         '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -196,7 +198,7 @@ def corpo_pagina(s, veste):
       <nav class="briciole" aria-label="Sei qui">
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#{ancora}">{gruppo}</a></li>
+          <li><a href="{PANORAMICA_A[s['gruppo']] if veste == 'a' else f'index.html#{ancora}'}">{gruppo}</a></li>
           <li aria-current="page">{t(s['nome'])}</li>
         </ol>
       </nav>{nota}
@@ -367,11 +369,11 @@ def testata_a():
     <ul class="a-menu__lista">
       <li><a href="index.html"><span>Home</span><small>Meg@byte Informatica</small></a></li>
       <li class="a-menu__tendina">
-        <a href="index.html#servizi"><span>Riparazioni {ic('chevron')}</span><small>PC, Mac, smartphone</small></a>
+        <a href="riparazioni.html"><span>Riparazioni {ic('chevron')}</span><small>PC, Mac, smartphone</small></a>
         <ul class="a-sottomenu">{rip}</ul>
       </li>
       <li class="a-menu__tendina">
-        <a href="index.html#su-misura"><span>Siti e gestionali {ic('chevron')}</span><small>su misura per te</small></a>
+        <a href="siti-e-gestionali.html"><span>Siti e gestionali {ic('chevron')}</span><small>su misura per te</small></a>
         <ul class="a-sottomenu">{mis}</ul>
       </li>
       <li><a href="index.html#recensioni"><span>Recensioni</span><small>5 stelle su Google</small></a></li>
@@ -384,13 +386,13 @@ def testata_a():
         <li>
           <details class="a-gruppo">
             <summary>Riparazioni e assistenza {ic('chevron')}</summary>
-            <ul><li><a href="index.html#servizi">Tutti i servizi</a></li>{rip_m}</ul>
+            <ul><li><a href="riparazioni.html">Tutti i servizi</a></li>{rip_m}</ul>
           </details>
         </li>
         <li>
           <details class="a-gruppo">
             <summary>Siti e gestionali {ic('chevron')}</summary>
-            <ul><li><a href="index.html#su-misura">Panoramica</a></li>{mis_m}</ul>
+            <ul><li><a href="siti-e-gestionali.html">Tutti i servizi su misura</a></li>{mis_m}</ul>
           </details>
         </li>
         <li><a href="index.html#recensioni">Recensioni</a></li>
@@ -403,8 +405,6 @@ def testata_a():
 
 
 def piede_a():
-    rip = ''.join(f'<li><a href="{s["slug"]}.html">{t(s["nome"])}</a></li>' for s in RIPARAZIONI)
-    mis = ''.join(f'<li><a href="{s["slug"]}.html">{t(s["nome"])}</a></li>' for s in SU_MISURA)
     return f'''
 <footer class="a-piede">
   <div class="contenitore a-piede__griglia">
@@ -412,15 +412,29 @@ def piede_a():
       <img class="a-piede__logo" src="img/logo.png" alt="Meg@byte Informatica" width="1200" height="294" loading="lazy">
       <p>Assistenza specializzata in ambienti Windows, Mac e Linux, vendita di computer e periferiche, telefonia fissa e mobile, siti e software su misura. A Roma da oltre 20 anni.</p>
     </div>
-    <div><h3>Riparazioni e assistenza</h3><ul>{rip}</ul></div>
-    <div><h3>Siti e gestionali</h3><ul>{mis}</ul></div>
+    <div>
+      <h3>Meg@byte</h3>
+      <ul>
+        <li><a href="riparazioni.html">Riparazioni e assistenza</a></li>
+        <li><a href="siti-e-gestionali.html">Siti e gestionali</a></li>
+        <li><a href="index.html#recensioni">Recensioni</a></li>
+        <li><a href="index.html#contatti">Dove siamo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Orari</h3>
+      <ul>
+        <li>Lunedì – Venerdì<br>9:00–13:00 · 15:30–19:30</li>
+        <li>Sabato 9:00–13:00</li>
+        <li>Domenica chiuso</li>
+      </ul>
+    </div>
     <div>
       <h3>Contatti</h3>
       <ul>
         <li>{INDIRIZZO}</li>
         <li><a href="{TEL_LINK}">{TELEFONO}</a> (anche WhatsApp)</li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-        <li>Lun–Ven 9–13 · 15:30–19:30<br>Sabato 9–13</li>
       </ul>
     </div>
   </div>
@@ -444,11 +458,6 @@ def home_a():
     problemi = ''.join(
         f'<li><a href="{slug}.html">{ic(icona)}<span>{testo}</span><small>Scopri come {ic("arrow")}</small></a></li>'
         for testo, slug, icona in PROBLEMI)
-    servizi = ''.join(scheda_link(s, 'a') for s in RIPARAZIONI)
-    misura = ''.join(
-        f'<li class="scheda-su-misura"><a class="scheda-link" href="{s["slug"]}.html">'
-        f'{ic(s["icona"], "ic ic--su-misura")}<h3>{t(s["nome"])}</h3><p>{t(s["breve"])}</p>'
-        f'<span class="scheda-link__altro">Scopri di più {ic("arrow")}</span></a></li>' for s in SU_MISURA)
     marche = ''.join(f'<li>{m}</li>' for m in MARCHE)
     perche = ''.join(f'<li>{ic("check")}<span>{x}</span></li>' for x in [
         'Ti spieghiamo il problema con parole semplici, prima di fare qualsiasi cosa',
@@ -493,12 +502,25 @@ def home_a():
     </div>
   </section>
 
-  <!-- 3. Servizi, ognuno con la sua pagina -->
+  <!-- 3. Le due anime del negozio: l'elenco completo sta nel menu e nelle pagine riassuntive -->
   <section class="sezione" id="servizi" aria-labelledby="titolo-servizi">
     <div class="contenitore">
-      <h2 id="titolo-servizi">Cosa possiamo fare per te</h2>
-      <p class="sezione__intro">Tocca un servizio per vedere tutti i dettagli.</p>
-      <ul class="a-griglia-servizi">{servizi}</ul>
+      <h2 id="titolo-servizi">Cosa facciamo</h2>
+      <p class="sezione__intro">Due mestieri, una sola squadra: ripariamo i tuoi dispositivi e costruiamo gli strumenti digitali della tua attività.</p>
+      <div class="a-mondi">
+        <a class="a-mondo" href="riparazioni.html">
+          {ic('tool', 'ic a-mondo__icona')}
+          <h3>Riparazioni e assistenza</h3>
+          <p>Computer, Mac, smartphone e tablet di tutte le marche. In negozio, a domicilio e da remoto, per privati e aziende.</p>
+          <span class="a-mondo__altro">Vedi tutti i servizi {ic('arrow')}</span>
+        </a>
+        <a class="a-mondo a-mondo--scuro" href="siti-e-gestionali.html">
+          {ic('dashboard', 'ic a-mondo__icona')}
+          <h3>Siti, gestionali e software su misura</h3>
+          <p>Costruiti su come lavori tu. Un esempio? Il gestionale del nostro negozio l'abbiamo fatto noi.</p>
+          <span class="a-mondo__altro">Scopri cosa possiamo realizzare {ic('arrow')}</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -526,20 +548,6 @@ def home_a():
     <div class="contenitore">
       <h2 id="titolo-passi">Come funziona una riparazione</h2>
       <ol class="passi">{passi}</ol>
-    </div>
-  </section>
-
-  <!-- 6. Siti e gestionali -->
-  <section class="sezione sezione--scura" id="su-misura" aria-labelledby="titolo-su-misura">
-    <div class="contenitore">
-      <p class="etichetta-sezione">Non solo riparazioni</p>
-      <h2 id="titolo-su-misura">Siti, gestionali e software su misura</h2>
-      <p class="sezione__intro">Progettiamo e sviluppiamo gli strumenti digitali della tua attività, partendo da come lavori tu.</p>
-      <ul class="griglia-su-misura">{misura}</ul>
-      <div class="esempio">
-        <p class="esempio__titolo">Un esempio? Il gestionale del nostro negozio l'abbiamo fatto noi.</p>
-        <p>Schede di assistenza numerate con il QR per le recensioni, preventivi, fatture e DDT, scontrini su carta termica e cartellini per la vetrina: tutto nello stesso programma.</p>
-      </div>
     </div>
   </section>
 
@@ -596,6 +604,75 @@ def home_a():
       </div>
       <div class="foto-da-fare foto-da-fare--contatti" role="img" aria-label="Spazio per la foto dell'ingresso">
         <span>Foto dell'ingresso dalla strada<br><small>così ci si riconosce arrivando</small></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+''' + piede_a()
+
+
+# ---------------------------------------------------------------- bozza A: pagine riassuntive
+def panoramica_a(gruppo):
+    if gruppo == 'riparazioni':
+        servizi, titolo, sotto = RIPARAZIONI, 'Riparazioni e assistenza a Roma', 'Tutti i servizi del negozio'
+        intro = ("Computer, Mac, smartphone e tablet di tutte le marche, anche acquistati altrove. "
+                 "In negozio in Via Tripoli 17, a domicilio e da remoto, per privati e aziende.")
+        icona, passi, titolo_passi = 'tool', PER_SLUG['riparazione-pc-mac']['passi'], 'Come funziona una riparazione'
+        chiusura = ''
+    else:
+        servizi, titolo, sotto = SU_MISURA, 'Siti, gestionali e software su misura', 'Gli strumenti digitali della tua attività'
+        intro = ("Progettiamo e sviluppiamo siti, gestionali e app partendo da come lavori tu, "
+                 "e restiamo il tuo punto di riferimento anche dopo.")
+        icona, passi, titolo_passi = 'dashboard', PER_SLUG['gestionali']['passi'], 'Come lavoriamo'
+        chiusura = '''
+      <div class="esempio-chiaro">
+        <p class="esempio__titolo">Un esempio? Il gestionale del nostro negozio l'abbiamo fatto noi.</p>
+        <p>Schede di assistenza numerate con il QR per le recensioni, preventivi, fatture e DDT, scontrini su carta termica e cartellini per la vetrina: tutto nello stesso programma.</p>
+      </div>'''
+    schede = ''.join(scheda_link(s, 'a') for s in servizi)
+    elenco_passi = ''.join(
+        f'<li><span class="passi__numero" aria-hidden="true">{i}</span><h3>{t(a)}</h3><p>{t(b)}</p></li>'
+        for i, (a, b) in enumerate(passi, 1))
+    return testa(f'{titolo} | Meg@byte Informatica', pulito(intro)[:155], ['stile-a.css']).replace(
+        '<body>', '<body class="a-pagina">') + testata_a() + f'''
+<main id="contenuto">
+
+  <section class="pagina-eroe pagina-eroe--panoramica">
+    <div class="contenitore">
+      <nav class="briciole" aria-label="Sei qui">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">{titolo}</li>
+        </ol>
+      </nav>
+      {ic(icona, 'ic pagina-eroe__icona')}
+      <h1>{titolo}</h1>
+      <p class="pagina-eroe__sotto">{sotto}</p>
+      <p class="pagina-eroe__intro">{t(intro)}</p>
+    </div>
+  </section>
+
+  <section class="sezione" aria-label="Servizi">
+    <div class="contenitore">
+      <ul class="a-griglia-servizi a-griglia-servizi--completa">{schede}</ul>{chiusura}
+    </div>
+  </section>
+
+  <section class="sezione sezione--tinta a-passi" aria-labelledby="titolo-passi">
+    <div class="contenitore">
+      <h2 id="titolo-passi">{titolo_passi}</h2>
+      <ol class="passi">{elenco_passi}</ol>
+    </div>
+  </section>
+
+  <section class="invito" aria-labelledby="titolo-invito">
+    <div class="contenitore">
+      <h2 id="titolo-invito">Non trovi quello che cerchi?</h2>
+      <p>Chiamaci o scrivici su WhatsApp: ti diciamo subito se e come possiamo aiutarti.</p>
+      <div class="azioni">
+        <a class="bottone bottone--primario bottone--grande" href="{TEL_LINK}">{ic('phone')} {TELEFONO}</a>
+        <a class="bottone bottone--secondario bottone--grande" href="{WHATSAPP}" rel="noopener">{ic('chat')} WhatsApp</a>
       </div>
     </div>
   </section>
@@ -676,6 +753,7 @@ def scelta():
         <li>Logo al centro con telefono e WhatsApp sempre in vista</li>
         <li>Barra del menu colorata con i sottomenu dei servizi</li>
         <li>Grande apertura "Problemi con il PC?" con i problemi cliccabili</li>
+        <li>Home snella: l'elenco dei servizi sta nel menu e in due pagine riassuntive</li>
         <li>Punti di forza, marche, recensioni in evidenza</li>
         <li>Pulsante WhatsApp sempre visibile</li>
       </ul>
@@ -726,6 +804,8 @@ def main():
 
     aggiorna_home_b()
     scrivi(os.path.join(A, 'index.html'), home_a())
+    for gruppo, file in PANORAMICA_A.items():
+        scrivi(os.path.join(A, file), panoramica_a(gruppo))
 
     for s in SERVIZI:
         titolo = f"{pulito(s['titolo'])} | Meg@byte Informatica"
