@@ -595,8 +595,7 @@ def aggiorna_home_b():
                                 '<link rel="stylesheet" href="style.css">\n  <link rel="stylesheet" href="pagina.css">')
     if 'name="robots"' not in pagina:
         # Bozza online solo per farla vedere: fuori da Google
-        pagina = pagina.replace('<meta charset="utf-8">', '<meta charset="utf-8">
-  <meta name="robots" content="noindex">', 1)
+        pagina = pagina.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <meta name="robots" content="noindex">', 1)
     per_nome = {pulito(s['nome']): s for s in SERVIZI}
 
     def collega(m):
