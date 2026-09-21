@@ -1,0 +1,192 @@
+/*
+ * Pagine di dettaglio dei servizi. Si appoggia a style.css (colori, bottoni,
+ * sezioni, passi) e aggiunge solo i pezzi propri di queste pagine.
+ */
+
+/* ---------- Briciole ---------- */
+.briciole {
+  font-size: 0.9rem;
+  color: var(--testo-tenue);
+  padding: 14px 0 0;
+}
+.briciole ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.briciole li + li::before { content: '›'; margin-right: 6px; color: #94a3b8; }
+.briciole a { color: var(--testo-tenue); }
+.briciole [aria-current] { color: var(--testo); font-weight: 600; }
+
+/* ---------- Apertura della pagina ---------- */
+.pagina-eroe {
+  padding: 28px 0 56px;
+  background:
+    radial-gradient(800px 360px at 100% 0%, var(--blu-chiaro), transparent 70%),
+    var(--sfondo);
+}
+.pagina-eroe__griglia {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 20px;
+}
+.pagina-eroe__icona {
+  width: 56px;
+  height: 56px;
+  padding: 13px;
+  border-radius: 14px;
+  color: var(--blu);
+  background: var(--blu-chiaro);
+  margin-bottom: 16px;
+}
+.pagina-eroe__sotto {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--blu);
+  margin-bottom: 12px;
+}
+.pagina-eroe__intro { color: var(--testo-tenue); font-size: 1.05rem; max-width: 38em; }
+.foto-da-fare--pagina { aspect-ratio: 4 / 3; }
+
+/* ---------- Avviso ---------- */
+.avviso {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff4e8;
+  border: 1px solid #f6c89d;
+  border-radius: var(--raggio);
+  padding: 18px 20px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.avviso .ic { color: var(--arancio-bottone); width: 26px; height: 26px; margin-top: 2px; }
+.avviso h2 { font-size: 1.1rem; text-align: left; margin-bottom: 4px; }
+.avviso p { margin: 0; color: var(--testo); }
+.sezione--avviso { padding: 0 0 8px; margin-top: -20px; }
+
+/* ---------- Elenco con le spunte ---------- */
+.lista-spunte {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 28px;
+}
+.lista-spunte li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.lista-spunte .ic {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--blu);
+  stroke-width: 3;
+  margin-top: 1px;
+}
+
+/* ---------- Esempio del gestionale ---------- */
+.esempio-chiaro {
+  max-width: 820px;
+  margin: 32px auto 0;
+  text-align: center;
+  padding: 20px 24px;
+  border-radius: var(--raggio);
+  background: var(--blu-chiaro);
+  border: 1px dashed #9fbdd0;
+}
+.esempio-chiaro p { margin: 0; }
+.esempio-chiaro .esempio__titolo { font-weight: 600; color: var(--blu-scuro); margin-bottom: 6px; }
+
+/* ---------- Domande frequenti ---------- */
+.faq { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+.faq details {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 0 20px;
+}
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-weight: 600;
+  color: var(--blu-scuro);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .ic { transition: transform 0.2s; color: var(--blu); }
+.faq details[open] summary .ic { transform: rotate(180deg); }
+.faq details p { margin: 0 0 16px; color: var(--testo-tenue); }
+
+/* ---------- Altri servizi ---------- */
+.correlati {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Schede cliccabili (anche nella home) */
+.scheda-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.scheda-link:hover { color: inherit; }
+.scheda-link__altro {
+  margin-top: auto;
+  padding-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--blu);
+}
+.scheda-link__altro .ic { width: 1em; height: 1em; transition: transform 0.15s; }
+.scheda-link:hover .scheda-link__altro .ic { transform: translateX(3px); }
+.scheda-servizio:has(.scheda-link) { padding: 0; }
+.scheda-servizio .scheda-link { padding: 24px; }
+.scheda-su-misura:has(.scheda-link) { padding: 0; }
+.scheda-su-misura .scheda-link { padding: 24px; }
+.scheda-su-misura .scheda-link__altro { color: #f2a86b; }
+
+/* ---------- Invito finale ---------- */
+.invito {
+  background: linear-gradient(135deg, var(--blu-scuro), var(--blu));
+  color: #d5e3ec;
+  padding: 56px 0;
+  text-align: center;
+}
+.invito h2 { color: #fff; }
+.invito p { max-width: 36em; margin: 0 auto 20px; }
+.invito .azioni { justify-content: center; }
+.invito .bottone--secondario { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.6); }
+.invito .bottone--secondario:hover { background: rgb(255 255 255 / 0.1); color: #fff; }
+.invito__orari { font-size: 0.92rem; margin-top: 18px; color: #b8cedd; }
+
+@media (max-width: 720px) {
+  .pagina-eroe__griglia { grid-template-columns: 1fr; gap: 28px; }
+  .lista-spunte,
+  .correlati { grid-template-columns: 1fr; }
+}
+
+.prezzi--pagina { grid-template-columns: 1fr 1fr; }
+.prezzi--pagina .prezzo { padding: 22px 16px; }

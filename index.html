@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Bozze del sito Meg@byte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f4f7fa; color: #1e293b; }
+    main { width: min(100% - 32px, 980px); margin: 48px auto; }
+    img { width: 220px; display: block; margin: 0 auto 20px; }
+    h1 { font-family: Poppins, sans-serif; color: #123f57; text-align: center; margin: 0 0 8px; }
+    p.intro { text-align: center; color: #475569; margin: 0 0 32px; }
+    .scelte { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    a.bozza { display: block; background: #fff; border: 1px solid #dbe3ea; border-radius: 16px; padding: 28px; color: inherit; text-decoration: none; transition: box-shadow .15s, transform .15s; }
+    a.bozza:hover { box-shadow: 0 12px 32px rgb(15 23 42 / .1); transform: translateY(-3px); }
+    a.bozza:focus-visible { outline: 3px solid #e07c2c; outline-offset: 3px; }
+    .lettera { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; color: #fff; font: 700 1.3rem Poppins, sans-serif; background: #1c5b7c; margin-bottom: 14px; }
+    .bozza--a .lettera { background: #b85a12; }
+    h2 { font-family: Poppins, sans-serif; color: #123f57; margin: 0 0 8px; font-size: 1.3rem; }
+    ul { margin: 12px 0 18px; padding-left: 20px; color: #475569; }
+    li { margin-bottom: 4px; }
+    .apri { font-weight: 600; color: #1c5b7c; }
+    @media (max-width: 720px) { .scelte { grid-template-columns: 1fr; } main { margin: 28px auto; } }
+  </style>
+</head>
+<body>
+<main>
+  <img src="bozza-b/img/logo.png" alt="Meg@byte Informatica">
+  <h1>Due bozze del nuovo sito</h1>
+  <p class="intro">Stessi contenuti, due impostazioni diverse. In entrambe ogni servizio ha la sua pagina con tutti i dettagli.</p>
+  <div class="scelte">
+    <a class="bozza bozza--a" href="bozza-a/index.html">
+      <span class="lettera">A</span>
+      <h2>Più d'impatto, stile SoccorsoPc</h2>
+      <ul>
+        <li>Logo al centro con telefono e WhatsApp sempre in vista</li>
+        <li>Barra del menu colorata con i sottomenu dei servizi</li>
+        <li>Grande apertura "Problemi con il PC?" con i problemi cliccabili</li>
+        <li>Punti di forza, marche, recensioni in evidenza</li>
+        <li>Pulsante WhatsApp sempre visibile</li>
+      </ul>
+      <span class="apri">Apri la bozza A →</span>
+    </a>
+    <a class="bozza bozza--b" href="bozza-b/index.html">
+      <span class="lettera">B</span>
+      <h2>Pulita ed essenziale</h2>
+      <ul>
+        <li>La bozza che abbiamo costruito finora</li>
+        <li>Menu che scorre alle sezioni della home</li>
+        <li>Grafica più sobria, tanto bianco</li>
+        <li>Barra Chiama | WhatsApp in basso sul telefono</li>
+        <li>Ogni riquadro dei servizi apre la sua pagina</li>
+      </ul>
+      <span class="apri">Apri la bozza B →</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

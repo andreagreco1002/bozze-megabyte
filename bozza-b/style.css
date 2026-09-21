@@ -1,0 +1,566 @@
+/*
+ * Bozza del sito Meg@byte Informatica.
+ * Colori e misure stanno tutti qui in cima: in WordPress diventano la
+ * palette e la tipografia del tema, cosi' le pagine restano coerenti.
+ */
+:root {
+  --blu: #1c5b7c;          /* colore del logo */
+  --blu-scuro: #123f57;
+  --blu-chiaro: #e8f1f6;
+  --arancio: #e07c2c;      /* colore del logo: solo per decorazioni */
+  --arancio-bottone: #b85a12; /* arancio scurito: testo bianco leggibile (4,7:1) */
+  --arancio-bottone-su: #9c4a0c;
+  --testo: #1e293b;
+  --testo-tenue: #475569;
+  --sfondo: #ffffff;
+  --sfondo-tinta: #f4f7fa;
+  --bordo: #dbe3ea;
+  --stella: #f5a623;
+
+  --raggio: 12px;
+  --ombra: 0 1px 2px rgb(15 23 42 / 0.06), 0 4px 16px rgb(15 23 42 / 0.06);
+  --larghezza: 1140px;
+  --font-titoli: 'Poppins', system-ui, sans-serif;
+  --font-testo: 'Inter', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Le voci del menu portano alle sezioni: il titolo non deve finire sotto la testata fissa */
+section[id] { scroll-margin-top: 80px; }
+
+body {
+  margin: 0;
+  font-family: var(--font-testo);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--testo);
+  background: var(--sfondo);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-titoli);
+  line-height: 1.2;
+  color: var(--blu-scuro);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2rem, 1.3rem + 3vw, 3.1rem); }
+h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem); }
+h3 { font-size: 1.12rem; }
+p { margin: 0 0 1em; }
+
+a { color: var(--blu); }
+a:hover { color: var(--blu-scuro); }
+:focus-visible { outline: 3px solid var(--arancio); outline-offset: 3px; border-radius: 4px; }
+
+.contenitore { width: min(100% - 32px, var(--larghezza)); margin-inline: auto; }
+
+.ic {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.salta {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  padding: 10px 16px;
+  background: var(--blu);
+  color: #fff;
+  border-radius: 8px;
+  z-index: 100;
+}
+.salta:focus { top: 12px; }
+
+/* ---------- Solo bozza ---------- */
+.avviso-bozza {
+  background: #fff7d6;
+  color: #5c4400;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 6px 16px;
+  border-bottom: 1px solid #f1dc8c;
+}
+mark.da-confermare {
+  background: #fff1a8;
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.nota-bozza {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #7a5b00;
+  background: #fff7d6;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: fit-content;
+  margin: 16px auto 0;
+}
+.foto-da-fare {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: 2px dashed #9fb4c3;
+  border-radius: var(--raggio);
+  background: repeating-linear-gradient(135deg, #f4f7fa 0 14px, #eef3f7 14px 28px);
+  color: var(--testo-tenue);
+  font-weight: 600;
+  padding: 24px;
+}
+.foto-da-fare small { font-weight: 400; }
+.foto-da-fare--apertura { aspect-ratio: 4 / 3; }
+.foto-da-fare--contatti { aspect-ratio: 16 / 10; }
+
+/* ---------- Barra offerte e testata ---------- */
+.barra-offerte {
+  background: var(--blu-scuro);
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 7px 16px;
+}
+
+.testata {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgb(255 255 255 / 0.96);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--bordo);
+}
+.testata__riga {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 72px;
+}
+.testata__logo img { width: 190px; }
+
+.menu { margin-left: auto; }
+
+/* Da computer il menu sta esattamente al centro della pagina, fra logo e telefono */
+@media (min-width: 1025px) {
+  .testata__riga { display: grid; grid-template-columns: 1fr auto 1fr; }
+  .testata__logo { justify-self: start; }
+  .menu { margin: 0; }
+  .testata__chiama { justify-self: end; }
+}
+.menu ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--testo);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.15s, color 0.15s;
+}
+.menu a:hover { background: var(--blu-chiaro); color: var(--blu-scuro); }
+
+.menu-mobile { display: none; margin-left: auto; position: relative; }
+.menu-mobile summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  color: var(--blu-scuro);
+}
+.menu-mobile summary::-webkit-details-marker { display: none; }
+.menu-mobile summary .ic { width: 26px; height: 26px; }
+.menu-mobile[open] summary { background: var(--blu-chiaro); }
+.menu-mobile ul {
+  position: absolute;
+  right: 0;
+  top: 56px;
+  width: 240px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  box-shadow: var(--ombra);
+}
+.menu-mobile a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: var(--testo);
+  text-decoration: none;
+  font-weight: 500;
+}
+.menu-mobile a:hover { background: var(--blu-chiaro); }
+
+/* ---------- Bottoni ---------- */
+.bottone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font-family: var(--font-testo);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.bottone--grande { min-height: 54px; padding: 12px 26px; font-size: 1.05rem; }
+.bottone--primario { background: var(--arancio-bottone); color: #fff; }
+.bottone--primario:hover { background: var(--arancio-bottone-su); color: #fff; }
+.bottone--secondario { background: #fff; color: var(--blu-scuro); border-color: var(--blu); }
+.bottone--secondario:hover { background: var(--blu-chiaro); color: var(--blu-scuro); }
+.bottone--chiaro { background: #fff; color: var(--blu-scuro); border-color: var(--bordo); }
+.bottone--chiaro:hover { border-color: var(--blu); color: var(--blu-scuro); }
+
+.azioni { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.azioni--centro { justify-content: center; margin-top: 28px; }
+
+/* ---------- Apertura ---------- */
+.apertura {
+  padding: 56px 0 64px;
+  background:
+    radial-gradient(900px 400px at 100% 0%, var(--blu-chiaro), transparent 70%),
+    var(--sfondo);
+}
+.apertura__griglia {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.occhiello {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--blu);
+  background: var(--blu-chiaro);
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.occhiello .ic { width: 1.05em; height: 1.05em; }
+.apertura__sotto { font-size: 1.15rem; color: var(--testo-tenue); max-width: 36em; margin-bottom: 24px; }
+
+.recensioni-breve {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  color: var(--testo);
+  text-decoration: none;
+  font-size: 0.97rem;
+}
+.recensioni-breve:hover strong { text-decoration: underline; }
+.stelle { display: inline-flex; gap: 2px; color: var(--stella); }
+.stelle .ic { fill: currentColor; stroke: none; width: 20px; height: 20px; }
+
+/* ---------- Sezioni ---------- */
+.sezione { padding: 72px 0; }
+.sezione--tinta { background: var(--sfondo-tinta); }
+.sezione h2 { text-align: center; }
+.sezione__intro {
+  text-align: center;
+  color: var(--testo-tenue);
+  font-size: 1.08rem;
+  max-width: 40em;
+  margin: 0 auto 36px;
+}
+
+.griglia-servizi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.scheda-servizio {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 24px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.scheda-servizio:hover { border-color: #b7cad8; box-shadow: var(--ombra); }
+.scheda-servizio p { color: var(--testo-tenue); font-size: 0.97rem; margin: 0; }
+.ic--servizio {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin-bottom: 14px;
+  color: var(--blu);
+  background: var(--blu-chiaro);
+  border-radius: 10px;
+}
+
+.passi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  counter-reset: passo;
+}
+.passi li {
+  background: #fff;
+  border-radius: var(--raggio);
+  padding: 28px 24px;
+  border: 1px solid var(--bordo);
+}
+.passi p { color: var(--testo-tenue); margin: 0; }
+.passi__numero {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blu);
+  color: #fff;
+  font-family: var(--font-titoli);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.prezzi {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 340px));
+  justify-content: center;
+  gap: 24px;
+}
+.prezzo {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 28px;
+  text-align: center;
+}
+.prezzo--evidenza { border: 2px solid var(--blu); }
+.prezzo p { color: var(--testo-tenue); margin: 0; }
+.prezzo .prezzo__cifra {
+  font-family: var(--font-titoli);
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: var(--blu-scuro);
+  margin: 4px 0 12px;
+  line-height: 1.1;
+}
+
+.recensioni {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.recensione-segnaposto {
+  min-height: 150px;
+  display: grid;
+  place-items: center;
+  border: 2px dashed #9fb4c3;
+  border-radius: var(--raggio);
+  color: var(--testo-tenue);
+  background: #fff;
+  font-weight: 600;
+}
+
+.contatti {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.contatti h2 { text-align: left; }
+.contatti__lista { list-style: none; margin: 0 0 20px; padding: 0; }
+.contatti__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bordo);
+}
+.contatti__lista .ic { color: var(--blu); margin-top: 3px; }
+.contatti__lista a { font-weight: 600; }
+.piccolo { color: var(--testo-tenue); font-size: 0.9rem; }
+.orari {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 16px;
+  margin: 0;
+}
+.orari dt { font-weight: 600; }
+.orari dd { margin: 0; font-variant-numeric: tabular-nums; }
+/* Mattina e pomeriggio: affiancati se c'e' spazio, uno sotto l'altro sul telefono, mai spezzati */
+.orari dd span { white-space: nowrap; }
+.orari dd span + span::before { content: '· '; color: var(--testo-tenue); }
+@media (max-width: 720px) {
+  .orari dd span { display: block; }
+  .orari dd span + span::before { content: none; }
+}
+
+/* ---------- Siti e gestionali: sezione scura, per staccarla dalle riparazioni ---------- */
+.sezione--scura { background: var(--blu-scuro); color: #d5e3ec; }
+.sezione--scura h2,
+.sezione--scura h3 { color: #fff; }
+.sezione--scura .sezione__intro { color: #c3d4e0; }
+.etichetta-sezione {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f2a86b;
+  margin-bottom: 8px;
+}
+.griglia-su-misura {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.scheda-su-misura {
+  background: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--raggio);
+  padding: 24px;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.scheda-su-misura:hover { border-color: rgb(255 255 255 / 0.3); background: rgb(255 255 255 / 0.08); }
+.scheda-su-misura p { margin: 0; font-size: 0.97rem; }
+.sezione--scura mark.da-confermare { color: var(--testo); }
+.ic--su-misura {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin-bottom: 14px;
+  color: #f2a86b;
+  background: rgb(224 124 44 / 0.14);
+  border-radius: 10px;
+}
+.esempio {
+  margin: 32px auto 0;
+  max-width: 760px;
+  text-align: center;
+  padding: 20px 24px;
+  border-radius: var(--raggio);
+  border: 1px dashed rgb(255 255 255 / 0.25);
+}
+.esempio p { margin: 0; }
+.esempio .esempio__titolo { color: #fff; font-weight: 600; margin-bottom: 6px; }
+.bottone--su-scuro { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.5); }
+.bottone--su-scuro:hover { background: rgb(255 255 255 / 0.1); color: #fff; border-color: #fff; }
+
+/* ---------- Piede ---------- */
+.piede {
+  background: var(--blu-scuro);
+  color: #d5e3ec;
+  padding: 48px 0 40px;
+  font-size: 0.93rem;
+}
+.piede__griglia { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; }
+.piede__logo {
+  width: 180px;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.piede p { margin: 0 0 6px; }
+.piede a { color: #fff; }
+.piede__dati { text-align: right; }
+
+/* ---------- Barra contatti del telefono ---------- */
+.barra-contatti { display: none; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .menu { display: none; }
+  .menu-mobile { display: block; margin-left: 0; }
+  .testata__chiama { margin-left: auto; }
+  .griglia-servizi,
+  .griglia-su-misura { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Telefono ---------- */
+@media (max-width: 720px) {
+  body { font-size: 16px; padding-bottom: 68px; }
+  .testata__riga { min-height: 64px; }
+  .testata__logo img { width: 150px; }
+  .testata__chiama { display: none; }
+  .menu-mobile { margin-left: auto; }
+
+  .apertura { padding: 32px 0 44px; }
+  .apertura__griglia,
+  .contatti,
+  .piede__griglia { grid-template-columns: 1fr; gap: 28px; }
+  .azioni .bottone { flex: 1 1 100%; }
+
+  .sezione { padding: 52px 0; }
+  .griglia-servizi,
+  .griglia-su-misura,
+  .passi,
+  .recensioni,
+  .prezzi { grid-template-columns: 1fr; }
+  .scheda-servizio { padding: 20px; }
+  .piede__dati { text-align: left; }
+
+  .barra-contatti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+    background: #fff;
+    border-top: 1px solid var(--bordo);
+    box-shadow: 0 -4px 16px rgb(15 23 42 / 0.08);
+  }
+  .barra-contatti a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .barra-contatti a:first-child { background: var(--arancio-bottone); color: #fff; }
+  .barra-contatti a:last-child { background: #fff; color: var(--blu-scuro); border: 2px solid var(--blu); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

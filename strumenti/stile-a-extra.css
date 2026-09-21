@@ -1,0 +1,456 @@
+/*
+ * Bozza A, ispirata all'impostazione di SoccorsoPc: logo al centro col numero
+ * in vista, barra del menu colorata con le sottovoci, grande fascia iniziale
+ * con i problemi cliccabili, pulsante WhatsApp sempre visibile.
+ * Si somma a style.css e pagina.css: qui ci sono solo le differenze.
+ */
+:root {
+  --raggio: 16px;
+  --ombra: 0 2px 4px rgb(15 23 42 / 0.05), 0 12px 32px rgb(15 23 42 / 0.10);
+  --verde-whatsapp: #1f9d55;
+}
+
+/* ---------- Barra in alto ---------- */
+.a-topbar {
+  background: var(--blu-scuro);
+  color: #cfe0ea;
+  font-size: 0.85rem;
+}
+.a-topbar__riga {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 7px 0;
+}
+.a-topbar span { display: inline-flex; align-items: center; gap: 6px; }
+.a-topbar .ic { width: 1em; height: 1em; color: #f2a86b; }
+.a-topbar a { color: #fff; }
+
+/* ---------- Testata con logo al centro ---------- */
+.a-testata { background: #fff; }
+.a-testata__riga {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 0;
+}
+.a-slogan { margin: 0; color: var(--testo-tenue); font-size: 0.98rem; line-height: 1.4; }
+.a-slogan strong { color: var(--blu-scuro); }
+.a-logo img { width: 260px; }
+.a-contatti { justify-self: end; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.bottone--whatsapp { background: var(--verde-whatsapp); color: #fff; }
+.bottone--whatsapp:hover { background: #17824a; color: #fff; }
+
+/* ---------- Barra del menu ---------- */
+.a-menu {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--blu);
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.15);
+}
+.a-menu__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+.a-menu__lista > li { position: relative; }
+.a-menu__lista > li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 22px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.25;
+  border-bottom: 3px solid transparent;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.a-menu__lista > li > a span { font-weight: 600; font-size: 0.98rem; display: inline-flex; align-items: center; gap: 4px; }
+.a-menu__lista > li > a small { font-size: 0.75rem; color: #c3d8e5; }
+.a-menu__lista > li > a:hover,
+.a-menu__lista > li:focus-within > a { background: rgb(255 255 255 / 0.08); border-bottom-color: var(--arancio); }
+.a-menu__lista > li > a .ic { width: 0.9em; height: 0.9em; }
+
+.a-sottomenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 290px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  background: #fff;
+  border-radius: 0 0 var(--raggio) var(--raggio);
+  box-shadow: var(--ombra);
+}
+.a-menu__tendina:hover .a-sottomenu,
+.a-menu__tendina:focus-within .a-sottomenu { display: block; }
+.a-sottomenu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--testo);
+  text-decoration: none;
+  font-weight: 500;
+}
+.a-sottomenu a:hover { background: var(--blu-chiaro); color: var(--blu-scuro); }
+.a-sottomenu .ic { color: var(--blu); }
+
+.a-menu-mobile { display: none; }
+
+/* ---------- Grande apertura ---------- */
+.a-eroe {
+  position: relative;
+  overflow: hidden;
+  color: #d9e7f0;
+  text-align: center;
+  padding: 64px 0 104px;
+  background:
+    radial-gradient(600px 300px at 85% 10%, rgb(224 124 44 / 0.35), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.09) 1px, transparent 0) 0 0 / 22px 22px,
+    linear-gradient(160deg, #0d3246 0%, var(--blu-scuro) 45%, var(--blu) 100%);
+}
+.a-eroe__occhiello {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.18);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.a-eroe__occhiello .ic { color: #f2a86b; width: 1.05em; height: 1.05em; }
+.a-eroe h1 {
+  color: #fff;
+  font-size: clamp(2.3rem, 1.4rem + 4vw, 4rem);
+  margin-bottom: 14px;
+}
+.a-eroe h1 em { font-style: normal; color: #f2a86b; }
+.a-eroe__sotto { font-size: 1.15rem; max-width: 40em; margin: 0 auto 32px; }
+
+.a-problemi {
+  list-style: none;
+  margin: 0 auto 32px;
+  padding: 0;
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.a-problemi a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 20px 14px;
+  background: #fff;
+  color: var(--blu-scuro);
+  border-radius: var(--raggio);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.a-problemi a:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgb(0 0 0 / 0.24); color: var(--blu-scuro); }
+.a-problemi .ic {
+  width: 48px;
+  height: 48px;
+  padding: 11px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--arancio), var(--arancio-bottone));
+}
+.a-problemi small { font-weight: 500; color: var(--blu); display: inline-flex; align-items: center; gap: 4px; }
+.a-problemi small .ic { width: 1em; height: 1em; padding: 0; background: none; color: var(--blu); }
+.a-eroe .azioni { justify-content: center; }
+.a-eroe .bottone--secondario { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.6); }
+.a-eroe .bottone--secondario:hover { background: rgb(255 255 255 / 0.1); color: #fff; }
+
+/* ---------- Punti di forza sovrapposti all'apertura ---------- */
+.a-fiducia { position: relative; margin-top: -56px; z-index: 2; }
+.a-fiducia ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.a-fiducia li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: var(--raggio);
+  box-shadow: var(--ombra);
+  padding: 18px 20px;
+}
+.a-fiducia li > .ic {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 12px;
+  color: var(--blu);
+  background: var(--blu-chiaro);
+}
+.a-fiducia strong { display: block; color: var(--blu-scuro); font-family: var(--font-titoli); font-size: 1.05rem; line-height: 1.2; }
+.a-fiducia span { font-size: 0.9rem; color: var(--testo-tenue); }
+.a-fiducia .stelle .ic { width: 16px; height: 16px; }
+.a-fiducia .stelle { color: var(--stella); }
+
+/* ---------- Schede dei servizi ---------- */
+.a-griglia-servizi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.a-servizio {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.a-servizio::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blu), var(--arancio));
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.a-servizio:hover { transform: translateY(-4px); box-shadow: var(--ombra); border-color: transparent; }
+.a-servizio:hover::before { opacity: 1; }
+.a-servizio .scheda-link { padding: 26px 24px; }
+.a-servizio h3 { margin-top: 4px; }
+.a-servizio p { color: var(--testo-tenue); font-size: 0.97rem; margin: 0; }
+.a-servizio__icona {
+  width: 52px;
+  height: 52px;
+  padding: 12px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blu), var(--blu-scuro));
+  margin-bottom: 14px;
+}
+
+/* ---------- Perche' sceglierci ---------- */
+.a-perche {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.a-perche h2 { text-align: left; }
+.a-perche .lista-spunte { grid-template-columns: 1fr; max-width: none; }
+.a-perche .foto-da-fare { aspect-ratio: 5 / 4; }
+
+.a-marche { text-align: center; margin-top: 48px; }
+.a-marche p { color: var(--testo-tenue); font-weight: 600; margin-bottom: 14px; }
+.a-marche ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.a-marche li {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--bordo);
+  font-weight: 600;
+  color: var(--blu-scuro);
+}
+
+/* ---------- Passi in orizzontale ---------- */
+.a-passi .passi li { position: relative; text-align: center; }
+.a-passi .passi__numero { margin-inline: auto; width: 52px; height: 52px; font-size: 1.25rem; background: linear-gradient(135deg, var(--arancio), var(--arancio-bottone)); }
+
+/* ---------- Recensioni ---------- */
+.a-recensioni {
+  display: grid;
+  grid-template-columns: 0.8fr 2fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.a-voto {
+  background: linear-gradient(160deg, var(--blu-scuro), var(--blu));
+  color: #d5e3ec;
+  border-radius: var(--raggio);
+  padding: 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.a-voto strong { font-family: var(--font-titoli); font-size: 2.6rem; color: #fff; line-height: 1; }
+.a-voto .stelle { justify-content: center; }
+.a-voto .stelle .ic { width: 26px; height: 26px; }
+.a-voto .bottone { margin-top: 10px; }
+.a-recensioni .recensioni { grid-template-columns: repeat(3, 1fr); }
+
+/* ---------- Contatti ---------- */
+.a-banda-cta {
+  background: linear-gradient(120deg, var(--arancio-bottone), var(--arancio));
+  color: #fff;
+  padding: 40px 0;
+}
+.a-banda-cta__riga { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.a-banda-cta h2 { color: #fff; margin: 0; text-align: left; }
+.a-banda-cta p { margin: 4px 0 0; color: #fff5ec; }
+.a-banda-cta .bottone--chiaro { border-color: #fff; }
+.a-banda-cta .bottone--su-arancio { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.8); }
+.a-banda-cta .bottone--su-arancio:hover { background: rgb(255 255 255 / 0.12); color: #fff; }
+
+/* ---------- Piede a colonne ---------- */
+.a-piede {
+  background: #0d3246;
+  color: #b8cedd;
+  padding: 56px 0 0;
+  font-size: 0.93rem;
+}
+.a-piede__griglia { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: 36px; }
+.a-piede h3 { color: #fff; font-size: 1rem; margin-bottom: 12px; }
+.a-piede ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.a-piede a { color: #dbe8f0; text-decoration: none; }
+.a-piede a:hover { color: #fff; text-decoration: underline; }
+.a-piede__logo { width: 190px; background: #fff; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
+.a-piede__fondo {
+  margin-top: 40px;
+  padding: 18px 0;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ---------- WhatsApp sempre visibile ---------- */
+.a-whatsapp {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--verde-whatsapp);
+  color: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+  transition: transform 0.15s;
+}
+.a-whatsapp:hover { transform: scale(1.06); color: #fff; }
+.a-whatsapp .ic { width: 30px; height: 30px; }
+
+/* Nelle pagine di dettaglio l'apertura riprende i colori della home */
+.a-pagina .pagina-eroe {
+  color: #d9e7f0;
+  background:
+    radial-gradient(500px 260px at 90% 0%, rgb(224 124 44 / 0.3), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.08) 1px, transparent 0) 0 0 / 22px 22px,
+    linear-gradient(160deg, #0d3246 0%, var(--blu-scuro) 50%, var(--blu) 100%);
+  padding-bottom: 64px;
+}
+.a-pagina .pagina-eroe h1 { color: #fff; }
+.a-pagina .pagina-eroe__sotto { color: #f2a86b; }
+.a-pagina .pagina-eroe__intro { color: #d9e7f0; }
+.a-pagina .pagina-eroe__icona { color: #fff; background: linear-gradient(135deg, var(--arancio), var(--arancio-bottone)); }
+.a-pagina .briciole,
+.a-pagina .briciole a { color: #b8cedd; }
+.a-pagina .briciole [aria-current] { color: #fff; }
+.a-pagina .pagina-eroe .bottone--secondario { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.6); }
+.a-pagina .foto-da-fare { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.35); color: #d9e7f0; }
+.a-pagina .sezione--avviso { margin-top: 32px; }
+.a-pagina .lista-spunte .ic { background: linear-gradient(135deg, var(--arancio), var(--arancio-bottone)); }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .a-menu__lista > li > a { padding: 12px 14px; }
+  .a-griglia-servizi { grid-template-columns: repeat(2, 1fr); }
+  .a-fiducia ul { grid-template-columns: repeat(2, 1fr); }
+  .a-recensioni { grid-template-columns: 1fr; }
+  .a-piede__griglia { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- Telefono ---------- */
+@media (max-width: 720px) {
+  body { padding-bottom: 0; }
+  .a-topbar__riga { justify-content: center; text-align: center; }
+  .a-topbar__email { display: none !important; }
+  .a-testata__riga { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 12px; padding: 14px 0; }
+  .a-slogan { order: 2; }
+  .a-logo { order: 1; }
+  .a-logo img { width: 200px; }
+  .a-contatti { order: 3; justify-self: center; justify-content: center; }
+  .a-contatti .bottone { flex: 1 1 140px; }
+
+  .a-menu__lista { display: none; }
+  .a-menu-mobile { display: block; }
+  .a-menu-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .a-menu-mobile summary::-webkit-details-marker { display: none; }
+  .a-menu-mobile ul { list-style: none; margin: 0; padding: 0 0 12px; }
+  .a-menu-mobile a { display: block; padding: 11px 16px; color: #fff; text-decoration: none; border-radius: 8px; }
+  .a-menu-mobile a:hover { background: rgb(255 255 255 / 0.08); }
+  .a-menu-mobile .a-menu-mobile__sotto a { padding-left: 32px; color: #cfe0ea; font-size: 0.95rem; }
+
+  .a-eroe { padding: 44px 0 88px; }
+  .a-problemi { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .a-problemi a { padding: 16px 10px; font-size: 0.95rem; }
+  .a-eroe .azioni .bottone { flex: 1 1 100%; }
+  .a-fiducia ul { grid-template-columns: 1fr; }
+  /* Sul telefono schede compatte su due colonne: i dettagli sono nelle pagine dei servizi */
+  .a-griglia-servizi,
+  .griglia-su-misura { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .a-servizio .scheda-link,
+  .scheda-su-misura .scheda-link { padding: 16px 14px; }
+  .a-servizio p,
+  .scheda-su-misura p { display: none; }
+  .a-servizio h3,
+  .scheda-su-misura h3 { font-size: 0.98rem; margin-bottom: 0; }
+  .a-servizio__icona,
+  .ic--su-misura { width: 42px; height: 42px; padding: 9px; margin-bottom: 10px; }
+  .scheda-link__altro { font-size: 0.85rem; padding-top: 10px; }
+  .correlati .a-servizio p { display: block; }
+  .a-perche { grid-template-columns: 1fr; gap: 28px; }
+  .a-recensioni .recensioni { grid-template-columns: 1fr; }
+  .a-banda-cta__riga { flex-direction: column; text-align: center; }
+  .a-banda-cta h2 { text-align: center; }
+  .a-banda-cta .azioni { justify-content: center; }
+  .a-piede__griglia { grid-template-columns: 1fr; }
+  .a-whatsapp { right: 14px; bottom: 14px; width: 56px; height: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a-problemi a:hover,
+  .a-servizio:hover,
+  .a-whatsapp:hover { transform: none; }
+}
