@@ -456,7 +456,7 @@ def piede_a():
 # ---------------------------------------------------------------- home della bozza A
 def home_a():
     problemi = ''.join(
-        f'<li><a href="{slug}.html">{ic(icona)}<span>{testo}</span><small>Scopri come {ic("arrow")}</small></a></li>'
+        f'<li><a href="{slug}.html">{ic(icona)}<span>{testo}</span><small>Ti aiutiamo noi {ic("arrow")}</small></a></li>'
         for testo, slug, icona in PROBLEMI)
     marche = ''.join(f'<li>{m}</li>' for m in MARCHE)
     perche = ''.join(f'<li>{ic("check")}<span>{x}</span></li>' for x in [
