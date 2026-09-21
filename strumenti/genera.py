@@ -367,7 +367,7 @@ def testata_a():
 <nav class="a-menu" aria-label="Menu principale">
   <div class="contenitore">
     <ul class="a-menu__lista">
-      <li><a href="index.html"><span>Home</span><small>Meg@byte Informatica</small></a></li>
+      <li><a href="index.html"><span>Home</span></a></li>
       <li class="a-menu__tendina">
         <a href="riparazioni.html"><span>Riparazioni {ic('chevron')}</span><small>PC, Mac, smartphone</small></a>
         <ul class="a-sottomenu">{rip}</ul>
@@ -479,7 +479,7 @@ def home_a():
   <!-- 1. Grande apertura con i problemi piu' comuni, cliccabili -->
   <section class="a-eroe">
     <div class="contenitore">
-      <p class="a-eroe__occhiello">{ic('pin')} Roma, Via Tripoli 17 · il negozio di fiducia sotto casa</p>
+      <p><a class="a-eroe__occhiello" href="{MAPPA}" rel="noopener" title="Apri in Google Maps">{ic('pin')} Roma, Via Tripoli 17 · il negozio di fiducia sotto casa {ic('arrow', 'ic a-eroe__freccia')}</a></p>
       <h1>Problemi con il PC<br>o lo <em>smartphone</em>?</h1>
       <p class="a-eroe__sotto">Ripariamo computer, Mac, smartphone e tablet di tutte le marche. In negozio, a domicilio e da remoto. Scegli il tuo problema:</p>
       <ul class="a-problemi">{problemi}</ul>

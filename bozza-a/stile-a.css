@@ -824,6 +824,7 @@ mark.da-confermare {
 }
 .a-menu__lista > li { position: relative; }
 .a-menu__lista > li > a {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -897,6 +898,11 @@ mark.da-confermare {
   margin-bottom: 20px;
 }
 .a-eroe__occhiello .ic { color: #f2a86b; width: 1.05em; height: 1.05em; }
+/* Il riquadro dell'indirizzo apre Google Maps */
+a.a-eroe__occhiello { text-decoration: none; transition: background-color 0.15s, border-color 0.15s; }
+a.a-eroe__occhiello:hover { color: #fff; background: rgb(255 255 255 / 0.18); border-color: rgb(255 255 255 / 0.35); }
+.a-eroe__occhiello .a-eroe__freccia { color: #fff; transition: transform 0.15s; }
+a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
 .a-eroe h1 {
   color: #fff;
   font-size: clamp(2.3rem, 1.4rem + 4vw, 4rem);
