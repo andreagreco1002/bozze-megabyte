@@ -127,8 +127,18 @@ def testa(titolo, descrizione, css):
 CHIUDI_MENU = '''<script>
   // Sul telefono il menu si richiude dopo aver scelto una voce
   document.querySelectorAll('details.menu-mobile a, details.a-menu-mobile a').forEach((a) =>
-    a.addEventListener('click', () => a.closest('details').removeAttribute('open'))
+    a.addEventListener('click', () => a.closest('details.menu-mobile, details.a-menu-mobile').removeAttribute('open'))
   );
+  // Bozza A: aprendo il menu (o un suo gruppo) la barra sale in cima, cosi' il pannello ha tutto lo schermo
+  const menuA = document.querySelector('details.a-menu-mobile');
+  if (menuA) {
+    const inCima = (d) => {
+      if (!d.open) return;
+      const alto = menuA.closest('.a-menu').getBoundingClientRect().top;
+      if (alto > 1) window.scrollTo({ top: window.scrollY + alto, behavior: 'instant' });
+    };
+    [menuA, ...menuA.querySelectorAll('details')].forEach((d) => d.addEventListener('toggle', () => inCima(d)));
+  }
 </script>'''
 
 
@@ -369,12 +379,20 @@ def testata_a():
     </ul>
     <details class="a-menu-mobile">
       <summary>{ic('menu')} MENU</summary>
-      <ul>
+      <ul class="a-menu-mobile__pannello">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#servizi">Riparazioni e assistenza</a></li>
-        <li class="a-menu-mobile__sotto"><ul>{rip_m}</ul></li>
-        <li><a href="index.html#su-misura">Siti e gestionali</a></li>
-        <li class="a-menu-mobile__sotto"><ul>{mis_m}</ul></li>
+        <li>
+          <details class="a-gruppo">
+            <summary>Riparazioni e assistenza {ic('chevron')}</summary>
+            <ul><li><a href="index.html#servizi">Tutti i servizi</a></li>{rip_m}</ul>
+          </details>
+        </li>
+        <li>
+          <details class="a-gruppo">
+            <summary>Siti e gestionali {ic('chevron')}</summary>
+            <ul><li><a href="index.html#su-misura">Panoramica</a></li>{mis_m}</ul>
+          </details>
+        </li>
         <li><a href="index.html#recensioni">Recensioni</a></li>
         <li><a href="index.html#contatti">Contatti</a></li>
       </ul>

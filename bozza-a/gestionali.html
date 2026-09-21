@@ -91,12 +91,20 @@
     </ul>
     <details class="a-menu-mobile">
       <summary><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg> MENU</summary>
-      <ul>
+      <ul class="a-menu-mobile__pannello">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#servizi">Riparazioni e assistenza</a></li>
-        <li class="a-menu-mobile__sotto"><ul><li><a href="riparazione-pc-mac.html">Riparazione PC e Mac</a></li><li><a href="riparazione-smartphone-tablet.html">Smartphone e tablet</a></li><li><a href="recupero-dati.html">Recupero dati</a></li><li><a href="virus-sicurezza.html">Virus e sicurezza</a></li><li><a href="assistenza-aziende.html">Assistenza per aziende</a></li><li><a href="assistenza-remota.html">Assistenza da remoto</a></li><li><a href="vendita.html">Vendita</a></li><li><a href="telefonia-internet.html">Telefonia e internet</a></li></ul></li>
-        <li><a href="index.html#su-misura">Siti e gestionali</a></li>
-        <li class="a-menu-mobile__sotto"><ul><li><a href="siti-web.html">Landing page e siti web</a></li><li><a href="gestionali.html">Gestionali su misura</a></li><li><a href="app.html">App per telefono e computer</a></li><li><a href="automazioni.html">Automazioni</a></li><li><a href="documenti-pdf.html">Documenti e stampe automatiche</a></li><li><a href="visibilita-google.html">Visibilità su Google</a></li></ul></li>
+        <li>
+          <details class="a-gruppo">
+            <summary>Riparazioni e assistenza <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <ul><li><a href="index.html#servizi">Tutti i servizi</a></li><li><a href="riparazione-pc-mac.html">Riparazione PC e Mac</a></li><li><a href="riparazione-smartphone-tablet.html">Smartphone e tablet</a></li><li><a href="recupero-dati.html">Recupero dati</a></li><li><a href="virus-sicurezza.html">Virus e sicurezza</a></li><li><a href="assistenza-aziende.html">Assistenza per aziende</a></li><li><a href="assistenza-remota.html">Assistenza da remoto</a></li><li><a href="vendita.html">Vendita</a></li><li><a href="telefonia-internet.html">Telefonia e internet</a></li></ul>
+          </details>
+        </li>
+        <li>
+          <details class="a-gruppo">
+            <summary>Siti e gestionali <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <ul><li><a href="index.html#su-misura">Panoramica</a></li><li><a href="siti-web.html">Landing page e siti web</a></li><li><a href="gestionali.html">Gestionali su misura</a></li><li><a href="app.html">App per telefono e computer</a></li><li><a href="automazioni.html">Automazioni</a></li><li><a href="documenti-pdf.html">Documenti e stampe automatiche</a></li><li><a href="visibilita-google.html">Visibilità su Google</a></li></ul>
+          </details>
+        </li>
         <li><a href="index.html#recensioni">Recensioni</a></li>
         <li><a href="index.html#contatti">Contatti</a></li>
       </ul>
@@ -207,8 +215,18 @@
 <script>
   // Sul telefono il menu si richiude dopo aver scelto una voce
   document.querySelectorAll('details.menu-mobile a, details.a-menu-mobile a').forEach((a) =>
-    a.addEventListener('click', () => a.closest('details').removeAttribute('open'))
+    a.addEventListener('click', () => a.closest('details.menu-mobile, details.a-menu-mobile').removeAttribute('open'))
   );
+  // Bozza A: aprendo il menu (o un suo gruppo) la barra sale in cima, cosi' il pannello ha tutto lo schermo
+  const menuA = document.querySelector('details.a-menu-mobile');
+  if (menuA) {
+    const inCima = (d) => {
+      if (!d.open) return;
+      const alto = menuA.closest('.a-menu').getBoundingClientRect().top;
+      if (alto > 1) window.scrollTo({ top: window.scrollY + alto, behavior: 'instant' });
+    };
+    [menuA, ...menuA.querySelectorAll('details')].forEach((d) => d.addEventListener('toggle', () => inCima(d)));
+  }
 </script>
 
 </body>

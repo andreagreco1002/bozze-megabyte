@@ -181,8 +181,18 @@
 <script>
   // Sul telefono il menu si richiude dopo aver scelto una voce
   document.querySelectorAll('details.menu-mobile a, details.a-menu-mobile a').forEach((a) =>
-    a.addEventListener('click', () => a.closest('details').removeAttribute('open'))
+    a.addEventListener('click', () => a.closest('details.menu-mobile, details.a-menu-mobile').removeAttribute('open'))
   );
+  // Bozza A: aprendo il menu (o un suo gruppo) la barra sale in cima, cosi' il pannello ha tutto lo schermo
+  const menuA = document.querySelector('details.a-menu-mobile');
+  if (menuA) {
+    const inCima = (d) => {
+      if (!d.open) return;
+      const alto = menuA.closest('.a-menu').getBoundingClientRect().top;
+      if (alto > 1) window.scrollTo({ top: window.scrollY + alto, behavior: 'instant' });
+    };
+    [menuA, ...menuA.querySelectorAll('details')].forEach((d) => d.addEventListener('toggle', () => inCima(d)));
+  }
 </script>
 
 </body>
