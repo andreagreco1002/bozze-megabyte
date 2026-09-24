@@ -198,7 +198,7 @@ SERVIZI = [
     ),
     dict(
         slug='vendita', gruppo='vendita', icona='bag',
-        nome='Vendita',
+        nome='Computer e accessori',
         breve='Computer, portatili, smartphone e accessori delle migliori marche, consigliati su misura.',
         titolo='Vendita computer, notebook e accessori',
         sotto='Ti aiutiamo a scegliere il dispositivo giusto per te.',
@@ -222,32 +222,6 @@ SERVIZI = [
             ('Posso portare il vecchio computer?', '[[Sì: trasferiamo dati e programmi sul nuovo.]]'),
         ],
         correlati=['pc-gaming', 'riparazione-pc-mac', 'telefonia-internet'],
-    ),
-    dict(
-        slug='telefonia-internet', gruppo='vendita', icona='wifi',
-        nome='Telefonia e internet',
-        breve='Offerte Iliad e Fastweb per privati e aziende, da attivare in negozio.',
-        titolo='Telefonia e internet: offerte in negozio',
-        sotto='Offerte Iliad e Fastweb per casa, ufficio e cellulare.',
-        intro=("Scegli e attivi l'offerta direttamente in negozio: ti spieghiamo le condizioni in modo chiaro "
-               "e ti aiutiamo a configurare tutto."),
-        cosa=[
-            'Offerte Iliad per il cellulare',
-            'Fibra e telefonia Fastweb per casa e ufficio',
-            'Connettività business [[MCLINK]]',
-            'Configurazione di router e rete Wi-Fi',
-            'Portabilità del numero',
-        ],
-        passi=[
-            ('Passi in negozio', 'Porta un documento e, se cambi operatore, i dati della linea attuale.'),
-            ('Scegli l’offerta', 'Ti spieghiamo costi e condizioni senza giri di parole.'),
-            ('Attivazione', 'Seguiamo noi la pratica e ti aiutiamo a configurare router e telefono.'),
-        ],
-        faq=[
-            ('Posso tenere il mio numero?', 'Sì, con la portabilità del numero.'),
-            ('Mi aiutate anche con il router?', 'Sì: configuriamo router e rete Wi-Fi di casa o dell’ufficio.'),
-        ],
-        correlati=['vendita', 'pc-gaming', 'assistenza-aziende'],
     ),
     dict(
         slug='pc-gaming', gruppo='vendita', icona='zap',
@@ -280,6 +254,32 @@ SERVIZI = [
             ('Fate anche potenziamenti?', 'Sì: scheda video, RAM, dischi SSD e dissipatori si possono cambiare anche su un computer che hai già.'),
         ],
         correlati=['vendita', 'riparazione-pc-mac', 'assistenza-remota'],
+    ),
+    dict(
+        slug='telefonia-internet', gruppo='vendita', icona='wifi',
+        nome='Telefonia e internet',
+        breve='Offerte Iliad e Fastweb per privati e aziende, da attivare in negozio.',
+        titolo='Telefonia e internet: offerte in negozio',
+        sotto='Offerte Iliad e Fastweb per casa, ufficio e cellulare.',
+        intro=("Scegli e attivi l'offerta direttamente in negozio: ti spieghiamo le condizioni in modo chiaro "
+               "e ti aiutiamo a configurare tutto."),
+        cosa=[
+            'Offerte Iliad per il cellulare',
+            'Fibra e telefonia Fastweb per casa e ufficio',
+            'Connettività business [[MCLINK]]',
+            'Configurazione di router e rete Wi-Fi',
+            'Portabilità del numero',
+        ],
+        passi=[
+            ('Passi in negozio', 'Porta un documento e, se cambi operatore, i dati della linea attuale.'),
+            ('Scegli l’offerta', 'Ti spieghiamo costi e condizioni senza giri di parole.'),
+            ('Attivazione', 'Seguiamo noi la pratica e ti aiutiamo a configurare router e telefono.'),
+        ],
+        faq=[
+            ('Posso tenere il mio numero?', 'Sì, con la portabilità del numero.'),
+            ('Mi aiutate anche con il router?', 'Sì: configuriamo router e rete Wi-Fi di casa o dell’ufficio.'),
+        ],
+        correlati=['vendita', 'pc-gaming', 'assistenza-aziende'],
     ),
     # ------------------------------------------------------------------ su misura
     dict(
