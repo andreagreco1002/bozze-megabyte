@@ -1250,7 +1250,55 @@ a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
 .pagina-eroe--panoramica { padding-bottom: 56px; }
 .pagina-eroe--panoramica .pagina-eroe__icona { margin-top: 20px; }
 
+/* ---------- Foto ---------- */
+.foto { margin: 0; border-radius: var(--raggio); overflow: hidden; box-shadow: var(--ombra); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto--pagina { aspect-ratio: 4 / 3; }
+.foto--perche { aspect-ratio: 5 / 4; }
+.a-pagina .foto--pagina { box-shadow: 0 10px 30px rgb(0 0 0 / 0.35); }
+
+/* ---------- Recensioni che scorrono ---------- */
+.giostra { overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.giostra__nastro { display: flex; gap: 20px; width: max-content; }
+.giostra--pronta .giostra__nastro { animation: scorri calc(var(--quante, 4) * 9s) linear infinite; }
+.giostra:hover .giostra__nastro,
+.giostra:focus-within .giostra__nastro { animation-play-state: paused; }
+@keyframes scorri {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 10px)); }
+}
+.recensione {
+  width: 320px;
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 20px;
+}
+.recensione__testa { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.recensione__iniziale {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blu);
+  color: #fff;
+  font-family: var(--font-titoli);
+  font-weight: 700;
+}
+.recensione strong { display: block; color: var(--blu-scuro); }
+.recensione__quando { font-size: 0.85rem; color: var(--testo-tenue); }
+.recensione .stelle { color: var(--stella); letter-spacing: 2px; margin-bottom: 8px; }
+.recensione p { margin: 0; color: var(--testo-tenue); font-size: 0.95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .giostra--pronta .giostra__nastro { animation: none; }
+  .giostra { overflow-x: auto; }
+}
+
 /* ---------- Tablet ---------- */
+
 
 @media (max-width: 1024px) {
   .a-menu__lista > li > a { padding: 12px 14px; }
@@ -1295,7 +1343,7 @@ a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
   .a-griglia-servizi--completa { grid-template-columns: 1fr; }
   .a-griglia-servizi--completa .a-servizio p { display: block; }
   .a-mondo { padding: 26px 22px; }
-  .a-recensioni .recensioni { grid-template-columns: 1fr; }
+  .recensione { width: 260px; }
   .a-banda-cta__riga { flex-direction: column; text-align: center; }
   .a-banda-cta h2 { text-align: center; }
   .a-banda-cta .azioni { justify-content: center; }

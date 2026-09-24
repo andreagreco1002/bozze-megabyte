@@ -170,9 +170,9 @@
           <h2 id="titolo-perche">Perché sceglierci</h2>
           <ul class="lista-spunte"><li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Ti spieghiamo il problema con parole semplici, prima di fare qualsiasi cosa</span></li><li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Parti originali per smartphone e tablet</span></li><li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>In negozio, a domicilio e da remoto</span></li><li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Un punto di riferimento a Roma da oltre 20 anni</span></li></ul>
         </div>
-        <div class="foto-da-fare" role="img" aria-label="Spazio per una foto del banco di lavoro">
-          <span>Foto del banco di lavoro<br><small>voi al lavoro su un computer</small></span>
-        </div>
+        <figure class="foto foto--perche">
+          <img src="img/foto/banco.jpg" alt="Tecnico al lavoro su un computer portatile aperto sul banco" width="1200" height="900" loading="lazy">
+        </figure>
       </div>
       <div class="a-marche">
         <p>Ripariamo tutte le marche, tra cui</p>
@@ -202,13 +202,12 @@
           <a class="bottone bottone--primario" href="https://search.google.com/local/reviews?placeid=ChIJ9YvTWFlhLxMRx3CmYad9d9Q" rel="noopener">Leggile tutte <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="bottone bottone--su-scuro" href="https://search.google.com/local/writereview?placeid=ChIJ9YvTWFlhLxMRx3CmYad9d9Q" rel="noopener">Lascia una recensione</a>
         </div>
-        <div class="recensioni">
-          <div class="recensione-segnaposto">Recensione da Google</div>
-          <div class="recensione-segnaposto">Recensione da Google</div>
-          <div class="recensione-segnaposto">Recensione da Google</div>
+        <!-- Scorrono da sole; si fermano passandoci sopra o toccandole -->
+        <div class="giostra" id="giostra-recensioni" data-sorgente="recensioni.json">
+          <div class="giostra__nastro" role="list"></div>
         </div>
       </div>
-      <p class="nota-bozza">In WordPress qui va il riquadro delle recensioni che avete già: si aggiorna da solo.</p>
+      <p class="nota-bozza">Qui sono esempi: in WordPress scorrono le recensioni vere da Google, solo quelle da 5 stelle, e quelle nuove si aggiungono da sole.</p>
     </div>
   </section>
 
@@ -303,6 +302,45 @@
     };
     [menuA, ...menuA.querySelectorAll('details')].forEach((d) => d.addEventListener('toggle', () => inCima(d)));
   }
+</script>
+
+
+<script>
+  // Recensioni a 5 stelle che scorrono da sole. In WordPress i dati arrivano dal
+  // riquadro Google (le nuove si aggiungono da sole); qui da recensioni.json.
+  (async () => {
+    const giostra = document.getElementById('giostra-recensioni');
+    if (!giostra) return;
+    const nastro = giostra.querySelector('.giostra__nastro');
+    let recensioni = [];
+    try {
+      const risposta = await fetch(giostra.dataset.sorgente);
+      recensioni = (await risposta.json()).filter((r) => r.stelle === 5);
+    } catch {
+      return; // aperta da file senza server: si resta senza recensioni
+    }
+    if (!recensioni.length) return;
+
+    const scheda = (r) => {
+      const el = document.createElement('article');
+      el.className = 'recensione';
+      el.setAttribute('role', 'listitem');
+      el.innerHTML =
+        '<div class="recensione__testa"><span class="recensione__iniziale"></span>' +
+        '<div><strong></strong><span class="recensione__quando"></span></div></div>' +
+        '<div class="stelle" aria-label="5 stelle su 5">' + '★'.repeat(5) + '</div><p></p>';
+      el.querySelector('.recensione__iniziale').textContent = r.nome.trim().charAt(0).toUpperCase();
+      el.querySelector('strong').textContent = r.nome;
+      el.querySelector('.recensione__quando').textContent = r.quando;
+      el.querySelector('p').textContent = r.testo;
+      return el;
+    };
+
+    // Doppia copia: quando la prima finisce, la seconda e' gia' al suo posto
+    for (let giro = 0; giro < 2; giro++) recensioni.forEach((r) => nastro.appendChild(scheda(r)));
+    nastro.style.setProperty('--quante', recensioni.length);
+    giostra.classList.add('giostra--pronta');
+  })();
 </script>
 
 </body>

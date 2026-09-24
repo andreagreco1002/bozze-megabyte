@@ -1,0 +1,51 @@
+[
+  {
+    "nome": "Marida P.",
+    "quando": "3 mesi fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Persone oneste e competenti. Ero indecisa su dove portare il computer, ma le recensioni dicevano il vero: problema risolto in giornata."
+  },
+  {
+    "nome": "Giulio R.",
+    "quando": "1 mese fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Schermo del portatile sostituito in due giorni, prezzo esattamente come nel preventivo. Mi hanno spiegato tutto con parole semplici."
+  },
+  {
+    "nome": "Chiara M.",
+    "quando": "2 settimane fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Avevo perso le foto di anni su un disco che non si apriva più. Sono riusciti a recuperarle quasi tutte. Grazie davvero."
+  },
+  {
+    "nome": "Stefano D.",
+    "quando": "5 mesi fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Seguono l'informatica del mio studio da anni: rete, backup e assistenza. Quando c'è un problema rispondono subito."
+  },
+  {
+    "nome": "Elena B.",
+    "quando": "4 mesi fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Batteria dello smartphone cambiata mentre aspettavo. Gentilissimi e prezzo onesto, tornerò sicuramente."
+  },
+  {
+    "nome": "Paolo F.",
+    "quando": "6 mesi fa",
+    "stelle": 5,
+    "esempio": true,
+    "testo": "Computer pieno di pubblicità e lentissimo. Me l'hanno ripulito e riconsegnato come nuovo, spiegandomi come evitare di riprendermi i virus."
+  },
+  {
+    "nome": "Andrea T.",
+    "quando": "1 anno fa",
+    "stelle": 4,
+    "esempio": true,
+    "testo": "Bravi e disponibili, ho solo dovuto aspettare qualche giorno in più per il ricambio. (Questa non compare: scorrono solo quelle da 5 stelle.)"
+  }
+]

@@ -52,6 +52,25 @@ ICONE = {
     'tool': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
 }
 
+# Foto delle pagine (solo bozza A): in img/foto, da Pexels, licenza libera anche
+# per uso commerciale. Le sostituiremo con le foto vere del negozio.
+FOTO = {
+    'riparazione-pc-mac': 'Tecnico che smonta un computer portatile sul banco di lavoro',
+    'riparazione-smartphone-tablet': 'Sostituzione di un componente interno di uno smartphone',
+    'recupero-dati': 'Hard disk aperto, con disco e testina in vista',
+    'virus-sicurezza': 'Schermo con righe di codice durante un controllo di sicurezza',
+    'assistenza-aziende': 'Pannello di rete con i cavi ordinati',
+    'assistenza-remota': 'Tecnico al computer durante un collegamento da remoto',
+    'vendita': 'Computer portatili esposti in un negozio di informatica',
+    'telefonia-internet': 'Router Wi-Fi con le antenne',
+    'siti-web': 'Scrivania con computer portatile e tavoletta grafica',
+    'gestionali': 'Tablet che mostra un pannello con grafici e statistiche',
+    'app': 'Mano che tiene uno smartphone davanti a un computer',
+    'automazioni': 'Armadio di rete con le luci accese',
+    'documenti-pdf': 'Stampante con i fogli appena stampati',
+    'visibilita-google': 'Mano che tiene uno smartphone con una mappa aperta',
+}
+
 RIPARAZIONI = [s for s in SERVIZI if s['gruppo'] == 'riparazioni']
 # Bozza A: ogni gruppo ha una pagina riassuntiva, cosi' la home non ripete le liste del menu
 PANORAMICA_A = {'riparazioni': 'riparazioni.html', 'su-misura': 'siti-e-gestionali.html'}
@@ -155,6 +174,9 @@ def corpo_pagina(s, veste):
         destra = '<div class="prezzi prezzi--pagina">' + ''.join(
             f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in s['prezzi']
         ) + '</div>'
+    elif veste == 'a' and s['slug'] in FOTO:
+        destra = (f'<figure class="foto foto--pagina"><img src="img/foto/{s["slug"]}.jpg" alt="{FOTO[s["slug"]]}" '
+                  f'width="1200" height="800" loading="lazy"></figure>')
     else:
         destra = (f'<div class="foto-da-fare foto-da-fare--pagina" role="img" aria-label="Spazio per una foto">'
                   f'<span>Foto: {html.escape(pulito(s["nome"]))}<br><small>una foto vera del lavoro</small></span></div>')
@@ -453,6 +475,47 @@ def piede_a():
 '''
 
 
+GIOSTRA = """
+<script>
+  // Recensioni a 5 stelle che scorrono da sole. In WordPress i dati arrivano dal
+  // riquadro Google (le nuove si aggiungono da sole); qui da recensioni.json.
+  (async () => {
+    const giostra = document.getElementById('giostra-recensioni');
+    if (!giostra) return;
+    const nastro = giostra.querySelector('.giostra__nastro');
+    let recensioni = [];
+    try {
+      const risposta = await fetch(giostra.dataset.sorgente);
+      recensioni = (await risposta.json()).filter((r) => r.stelle === 5);
+    } catch {
+      return; // aperta da file senza server: si resta senza recensioni
+    }
+    if (!recensioni.length) return;
+
+    const scheda = (r) => {
+      const el = document.createElement('article');
+      el.className = 'recensione';
+      el.setAttribute('role', 'listitem');
+      el.innerHTML =
+        '<div class="recensione__testa"><span class="recensione__iniziale"></span>' +
+        '<div><strong></strong><span class="recensione__quando"></span></div></div>' +
+        '<div class="stelle" aria-label="5 stelle su 5">' + '\u2605'.repeat(5) + '</div><p></p>';
+      el.querySelector('.recensione__iniziale').textContent = r.nome.trim().charAt(0).toUpperCase();
+      el.querySelector('strong').textContent = r.nome;
+      el.querySelector('.recensione__quando').textContent = r.quando;
+      el.querySelector('p').textContent = r.testo;
+      return el;
+    };
+
+    // Doppia copia: quando la prima finisce, la seconda e' gia' al suo posto
+    for (let giro = 0; giro < 2; giro++) recensioni.forEach((r) => nastro.appendChild(scheda(r)));
+    nastro.style.setProperty('--quante', recensioni.length);
+    giostra.classList.add('giostra--pronta');
+  })();
+</script>
+"""
+
+
 # ---------------------------------------------------------------- home della bozza A
 def home_a():
     problemi = ''.join(
@@ -531,9 +594,9 @@ def home_a():
           <h2 id="titolo-perche">Perché sceglierci</h2>
           <ul class="lista-spunte">{perche}</ul>
         </div>
-        <div class="foto-da-fare" role="img" aria-label="Spazio per una foto del banco di lavoro">
-          <span>Foto del banco di lavoro<br><small>voi al lavoro su un computer</small></span>
-        </div>
+        <figure class="foto foto--perche">
+          <img src="img/foto/banco.jpg" alt="Tecnico al lavoro su un computer portatile aperto sul banco" width="1200" height="900" loading="lazy">
+        </figure>
       </div>
       <div class="a-marche">
         <p>Ripariamo tutte le marche, tra cui</p>
@@ -563,13 +626,12 @@ def home_a():
           <a class="bottone bottone--primario" href="{RECENSIONI}" rel="noopener">Leggile tutte {ic('arrow')}</a>
           <a class="bottone bottone--su-scuro" href="{SCRIVI_RECENSIONE}" rel="noopener">Lascia una recensione</a>
         </div>
-        <div class="recensioni">
-          <div class="recensione-segnaposto">Recensione da Google</div>
-          <div class="recensione-segnaposto">Recensione da Google</div>
-          <div class="recensione-segnaposto">Recensione da Google</div>
+        <!-- Scorrono da sole; si fermano passandoci sopra o toccandole -->
+        <div class="giostra" id="giostra-recensioni" data-sorgente="recensioni.json">
+          <div class="giostra__nastro" role="list"></div>
         </div>
       </div>
-      <p class="nota-bozza">In WordPress qui va il riquadro delle recensioni che avete già: si aggiorna da solo.</p>
+      <p class="nota-bozza">Qui sono esempi: in WordPress scorrono le recensioni vere da Google, solo quelle da 5 stelle, e quelle nuove si aggiungono da sole.</p>
     </div>
   </section>
 
@@ -802,7 +864,7 @@ def main():
            + base + '\n\n' + pagina + '\n\n' + extra)
 
     aggiorna_home_b()
-    scrivi(os.path.join(A, 'index.html'), home_a())
+    scrivi(os.path.join(A, 'index.html'), home_a().replace('</body>', GIOSTRA + '\n</body>'))
     for gruppo, file in PANORAMICA_A.items():
         scrivi(os.path.join(A, file), panoramica_a(gruppo))
 
