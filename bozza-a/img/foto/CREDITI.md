@@ -15,6 +15,6 @@ Da sostituire con foto vere del negozio quando disponibili.
 - `gestionali.jpg` - https://www.pexels.com/photo/10020092/ - Tablet che mostra un pannello con grafici e statistiche
 - `app.jpg` - https://www.pexels.com/photo/887751/ - Mano che tiene uno smartphone davanti a un computer portatile
 - `automazioni.jpg` - https://www.pexels.com/photo/1148820/ - Armadio di rete con luci accese
-- `documenti-pdf.jpg` - https://www.pexels.com/photo/7014415/ - Stampante con fogli appena stampati
+- `documenti-pdf.jpg` - https://www.pexels.com/photo/7680681/ - Scontrini e documenti stampati su una scrivania
 - `visibilita-google.jpg` - https://www.pexels.com/photo/4543006/ - Mano che tiene uno smartphone con una mappa aperta
 - `banco.jpg` - https://www.pexels.com/photo/10558600/ - Mani al lavoro su un portatile aperto, viste dall'alto
