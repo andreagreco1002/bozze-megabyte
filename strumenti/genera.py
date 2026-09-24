@@ -67,7 +67,7 @@ FOTO = {
     'gestionali': 'Tablet che mostra un pannello con grafici e statistiche',
     'app': 'Mano che tiene uno smartphone davanti a un computer',
     'automazioni': 'Armadio di rete con le luci accese',
-    "documenti-pdf": "Tre schede di assistenza stampate, una accanto all'altra",
+    "documenti-pdf": "Tre moduli stampati uguali, appoggiati uno accanto all'altro",
     'pc-gaming': 'Computer da gaming assemblato, con il fianco in vetro e le ventole illuminate',
 }
 # I loghi degli operatori non vanno ritagliati: si vedono per intero
