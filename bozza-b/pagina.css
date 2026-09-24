@@ -190,3 +190,17 @@
 
 .prezzi--pagina { grid-template-columns: 1fr 1fr; }
 .prezzi--pagina .prezzo { padding: 22px 16px; }
+
+/* ---------- Modulo del preventivo (bozza B) ---------- */
+.modulo { max-width: 820px; margin: 0 auto; background: #fff; border: 1px solid var(--bordo); border-radius: var(--raggio); padding: 28px; display: grid; gap: 16px; }
+.modulo__riga { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.campo { display: grid; gap: 6px; }
+.campo label { font-weight: 600; color: var(--blu-scuro); font-size: 0.95rem; }
+.campo input, .campo select, .campo textarea { font: inherit; color: var(--testo); background: #fff; border: 1px solid var(--bordo); border-radius: 10px; padding: 11px 12px; width: 100%; }
+.campo textarea { resize: vertical; }
+.modulo .azioni { justify-content: center; }
+.modulo__errore { margin: 0; color: #b42318; font-weight: 600; }
+.modulo__nota { margin: 0; text-align: center; font-size: 0.88rem; color: var(--testo-tenue); }
+.bottone--whatsapp { background: #1f9d55; color: #fff; }
+.bottone--whatsapp:hover { background: #17824a; color: #fff; }
+@media (max-width: 720px) { .modulo { padding: 20px; } .modulo__riga { grid-template-columns: 1fr; } }

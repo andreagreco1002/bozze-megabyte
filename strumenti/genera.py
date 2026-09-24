@@ -68,12 +68,21 @@ FOTO = {
     'app': 'Mano che tiene uno smartphone davanti a un computer',
     'automazioni': 'Armadio di rete con le luci accese',
     'documenti-pdf': 'Stampante con i fogli appena stampati',
-    'visibilita-google': 'Mano che tiene uno smartphone con una mappa aperta',
+    'pc-gaming': 'Computer da gaming assemblato, con il fianco in vetro e le ventole illuminate',
 }
+# I loghi degli operatori non vanno ritagliati: si vedono per intero
+FOTO_INTERE = {'telefonia-internet'}
 
+# I tre mestieri del negozio. Ogni gruppo ha la sua pagina riassuntiva, cosi' la
+# home non ripete gli elenchi che stanno gia' nel menu.
+GRUPPI = {
+    'riparazioni': ('Riparazioni e assistenza', 'riparazioni.html'),
+    'vendita': ('Vendita e PC assemblati', 'vendita-e-assemblaggio.html'),
+    'su-misura': ('Siti e gestionali', 'siti-e-gestionali.html'),
+}
+PANORAMICA_A = {gruppo: pagina for gruppo, (_, pagina) in GRUPPI.items()}
 RIPARAZIONI = [s for s in SERVIZI if s['gruppo'] == 'riparazioni']
-# Bozza A: ogni gruppo ha una pagina riassuntiva, cosi' la home non ripete le liste del menu
-PANORAMICA_A = {'riparazioni': 'riparazioni.html', 'su-misura': 'siti-e-gestionali.html'}
+VENDITA = [s for s in SERVIZI if s['gruppo'] == 'vendita']
 SU_MISURA = [s for s in SERVIZI if s['gruppo'] == 'su-misura']
 FONT = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
         '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -163,10 +172,132 @@ CHIUDI_MENU = '''<script>
 </script>'''
 
 
+MODULO_GAMING = f"""
+  <section class="sezione sezione--tinta" id="preventivo" aria-labelledby="titolo-modulo">
+    <div class="contenitore">
+      <h2 id="titolo-modulo">Chiedi un preventivo</h2>
+      <p class="sezione__intro">Rispondi a poche domande: ti mandiamo una configurazione con i componenti e il prezzo finale.</p>
+
+      <form class="modulo" id="modulo-pc" novalidate>
+        <div class="modulo__riga">
+          <div class="campo">
+            <label for="pc-uso">A cosa ti serve</label>
+            <select id="pc-uso" name="A cosa serve" required>
+              <option value="">Scegli...</option>
+              <option>Giochi</option>
+              <option>Montaggio video e grafica</option>
+              <option>Lavoro e ufficio</option>
+              <option>Un po' di tutto</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="pc-budget">Quanto vuoi spendere</label>
+            <select id="pc-budget" name="Budget" required>
+              <option value="">Scegli...</option>
+              <option>Fino a 700 euro</option>
+              <option>700 - 1.000 euro</option>
+              <option>1.000 - 1.500 euro</option>
+              <option>1.500 - 2.500 euro</option>
+              <option>Oltre 2.500 euro</option>
+              <option>Non so, consigliatemi voi</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modulo__riga">
+          <div class="campo">
+            <label for="pc-componenti">Hai già dei componenti?</label>
+            <select id="pc-componenti" name="Componenti">
+              <option>No, ci pensate voi</option>
+              <option>Sì, ne ho qualcuno</option>
+              <option>Sì, ho tutto: serve solo il montaggio</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="pc-schermo">Ti serve anche altro?</label>
+            <select id="pc-schermo" name="Altro">
+              <option>Solo il computer</option>
+              <option>Anche il monitor</option>
+              <option>Monitor, tastiera e mouse</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="pc-note">Componenti che hai già, giochi o programmi che usi, preferenze</label>
+          <textarea id="pc-note" name="Note" rows="3" placeholder="Es. ho già la scheda video e 32 GB di RAM, gioco e monto video in 4K"></textarea>
+        </div>
+
+        <div class="modulo__riga">
+          <div class="campo">
+            <label for="pc-nome">Nome</label>
+            <input id="pc-nome" name="Nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="pc-contatto">Telefono o email</label>
+            <input id="pc-contatto" name="Contatto" type="text" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <p class="modulo__errore" id="modulo-errore" role="alert" hidden></p>
+        <div class="azioni">
+          <button type="submit" class="bottone bottone--primario bottone--grande" data-via="email">{ic('mail')} Invia per email</button>
+          <button type="button" class="bottone bottone--whatsapp bottone--grande" data-via="whatsapp">{ic('chat')} Mandalo su WhatsApp</button>
+        </div>
+        <p class="modulo__nota">Nella bozza il modulo apre la tua email o WhatsApp con il messaggio già scritto. In WordPress la richiesta arriverà direttamente a {EMAIL}.</p>
+      </form>
+    </div>
+  </section>
+"""
+
+# Le graffe del JavaScript restano cosi' come sono: i due segnaposto vengono
+# sostituiti quando la pagina viene scritta.
+SCRIPT_MODULO = """
+<script>
+  // Modulo preventivo: mette insieme le risposte e le manda per email o WhatsApp.
+  const modulo = document.getElementById('modulo-pc');
+  if (modulo) {
+    const errore = document.getElementById('modulo-errore');
+    const testoRichiesta = () => {
+      const righe = ['Richiesta di preventivo per un PC assemblato', ''];
+      modulo.querySelectorAll('select, input, textarea').forEach((campo) => {
+        const valore = campo.value.trim();
+        if (valore) righe.push(campo.name + ': ' + valore);
+      });
+      return righe.join('\n');
+    };
+    const manda = (via) => {
+      const mancanti = [...modulo.querySelectorAll('[required]')].filter((c) => !c.value.trim());
+      if (mancanti.length) {
+        errore.textContent = 'Manca ancora: ' + mancanti.map((c) => c.name.toLowerCase()).join(', ') + '.';
+        errore.hidden = false;
+        mancanti[0].focus();
+        return;
+      }
+      errore.hidden = true;
+      const messaggio = testoRichiesta();
+      if (via === 'whatsapp') {
+        window.open('SEGNAPOSTO_WHATSAPP?text=' + encodeURIComponent(messaggio), '_blank', 'noopener');
+      } else {
+        window.location.href =
+          'mailto:SEGNAPOSTO_EMAIL?subject=' + encodeURIComponent('Preventivo PC assemblato') +
+          '&body=' + encodeURIComponent(messaggio);
+      }
+    };
+    modulo.addEventListener('submit', (e) => {
+      e.preventDefault();
+      manda('email');
+    });
+    modulo.querySelector('[data-via="whatsapp"]').addEventListener('click', () => manda('whatsapp'));
+  }
+</script>
+""".replace('SEGNAPOSTO_WHATSAPP', WHATSAPP).replace('SEGNAPOSTO_EMAIL', EMAIL)
+
+
 # ---------------------------------------------------------------- corpo delle pagine di dettaglio
 def corpo_pagina(s, veste):
-    gruppo = 'Riparazioni e assistenza' if s['gruppo'] == 'riparazioni' else 'Siti e gestionali'
-    ancora = 'servizi' if s['gruppo'] == 'riparazioni' else 'su-misura'
+    gruppo = GRUPPI[s['gruppo']][0]
+    ancora = 'su-misura' if s['gruppo'] == 'su-misura' else 'servizi'
     msg = f"Buongiorno, vi scrivo per: {s['nome']}"
     nota = ('\n      <p class="nota-bozza">Servizio proposto: da confermare prima di pubblicarlo.</p>'
             if s.get('da_confermare') else '')
@@ -175,7 +306,8 @@ def corpo_pagina(s, veste):
             f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in s['prezzi']
         ) + '</div>'
     elif veste == 'a' and s['slug'] in FOTO:
-        destra = (f'<figure class="foto foto--pagina"><img src="img/foto/{s["slug"]}.jpg" alt="{FOTO[s["slug"]]}" '
+        intera = ' foto--intera' if s['slug'] in FOTO_INTERE else ''
+        destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg" alt="{FOTO[s["slug"]]}" '
                   f'width="1200" height="800" loading="lazy"></figure>')
     else:
         destra = (f'<div class="foto-da-fare foto-da-fare--pagina" role="img" aria-label="Spazio per una foto">'
@@ -194,6 +326,7 @@ def corpo_pagina(s, veste):
     </div>
   </section>
 '''
+    modulo = MODULO_GAMING if s.get('modulo') else ''
     esempio = ''
     if s.get('esempio'):
         esempio = '''
@@ -209,8 +342,8 @@ def corpo_pagina(s, veste):
     faq = ''.join(
         f'<details><summary>{t(d)} {ic("chevron")}</summary><p>{t(r)}</p></details>' for d, r in s['faq'])
     correlati = ''.join(scheda_link(PER_SLUG[c], veste) for c in s['correlati'])
-    titolo_cosa = 'Cosa facciamo' if s['gruppo'] == 'riparazioni' else 'Cosa possiamo realizzare'
-    titolo_invito = 'Hai bisogno di aiuto?' if s['gruppo'] == 'riparazioni' else 'Raccontaci il tuo progetto'
+    titolo_cosa = 'Cosa possiamo realizzare' if s['gruppo'] == 'su-misura' else 'Cosa facciamo'
+    titolo_invito = 'Raccontaci il tuo progetto' if s['gruppo'] == 'su-misura' else 'Hai bisogno di aiuto?'
 
     return f'''
 <main id="contenuto">
@@ -246,6 +379,7 @@ def corpo_pagina(s, veste):
       <ul class="lista-spunte">{cosa}</ul>{esempio}
     </div>
   </section>
+{modulo}
 
   <section class="sezione sezione--tinta{' a-passi' if veste == 'a' else ''}" aria-labelledby="titolo-passi">
     <div class="contenitore">
@@ -360,10 +494,10 @@ def piede_b():
 
 # ---------------------------------------------------------------- veste A: testata e piede
 def testata_a():
-    rip = ''.join(f'<li><a href="{s["slug"]}.html">{ic(s["icona"])} {t(s["nome"])}</a></li>' for s in RIPARAZIONI)
-    mis = ''.join(f'<li><a href="{s["slug"]}.html">{ic(s["icona"])} {t(s["nome"])}</a></li>' for s in SU_MISURA)
-    rip_m = ''.join(f'<li><a href="{s["slug"]}.html">{t(s["nome"])}</a></li>' for s in RIPARAZIONI)
-    mis_m = ''.join(f'<li><a href="{s["slug"]}.html">{t(s["nome"])}</a></li>' for s in SU_MISURA)
+    voci = lambda elenco: ''.join(f'<li><a href="{s["slug"]}.html">{ic(s["icona"])} {t(s["nome"])}</a></li>' for s in elenco)
+    voci_m = lambda elenco: ''.join(f'<li><a href="{s["slug"]}.html">{t(s["nome"])}</a></li>' for s in elenco)
+    rip, ven, mis = voci(RIPARAZIONI), voci(VENDITA), voci(SU_MISURA)
+    rip_m, ven_m, mis_m = voci_m(RIPARAZIONI), voci_m(VENDITA), voci_m(SU_MISURA)
     return f'''
 <div class="a-topbar">
   <div class="contenitore a-topbar__riga">
@@ -395,6 +529,10 @@ def testata_a():
         <ul class="a-sottomenu">{rip}</ul>
       </li>
       <li class="a-menu__tendina">
+        <a href="vendita-e-assemblaggio.html"><span>Vendita {ic('chevron')}</span><small>computer, PC su misura, offerte</small></a>
+        <ul class="a-sottomenu">{ven}</ul>
+      </li>
+      <li class="a-menu__tendina">
         <a href="siti-e-gestionali.html"><span>Siti e gestionali {ic('chevron')}</span><small>su misura per te</small></a>
         <ul class="a-sottomenu">{mis}</ul>
       </li>
@@ -409,6 +547,12 @@ def testata_a():
           <details class="a-gruppo">
             <summary>Riparazioni e assistenza {ic('chevron')}</summary>
             <ul><li><a href="riparazioni.html">Tutti i servizi</a></li>{rip_m}</ul>
+          </details>
+        </li>
+        <li>
+          <details class="a-gruppo">
+            <summary>Vendita {ic('chevron')}</summary>
+            <ul><li><a href="vendita-e-assemblaggio.html">Tutto quello che vendiamo</a></li>{ven_m}</ul>
           </details>
         </li>
         <li>
@@ -438,6 +582,7 @@ def piede_a():
       <h3>Meg@byte</h3>
       <ul>
         <li><a href="riparazioni.html">Riparazioni e assistenza</a></li>
+        <li><a href="vendita-e-assemblaggio.html">Vendita e PC assemblati</a></li>
         <li><a href="siti-e-gestionali.html">Siti e gestionali</a></li>
         <li><a href="index.html#recensioni">Recensioni</a></li>
         <li><a href="index.html#contatti">Dove siamo</a></li>
@@ -568,13 +713,19 @@ def home_a():
   <section class="sezione" id="servizi" aria-labelledby="titolo-servizi">
     <div class="contenitore">
       <h2 id="titolo-servizi">Cosa facciamo</h2>
-      <p class="sezione__intro">Due mestieri, una sola squadra: ripariamo i tuoi dispositivi e costruiamo gli strumenti digitali della tua attività.</p>
-      <div class="a-mondi">
+      <p class="sezione__intro">Ripariamo i tuoi dispositivi, ti vendiamo quello che ti serve e costruiamo gli strumenti digitali della tua attività.</p>
+      <div class="a-mondi a-mondi--tre">
         <a class="a-mondo" href="riparazioni.html">
           {ic('tool', 'ic a-mondo__icona')}
           <h3>Riparazioni e assistenza</h3>
-          <p>Computer, Mac, smartphone e tablet di tutte le marche. In negozio, a domicilio e da remoto, per privati e aziende.</p>
+          <p>Computer, Mac, smartphone e tablet di tutte le marche. In negozio, a domicilio e da remoto.</p>
           <span class="a-mondo__altro">Vedi tutti i servizi {ic('arrow')}</span>
+        </a>
+        <a class="a-mondo" href="vendita-e-assemblaggio.html">
+          {ic('bag', 'ic a-mondo__icona')}
+          <h3>Vendita e PC assemblati</h3>
+          <p>Computer, smartphone e accessori, PC da gaming costruiti pezzo per pezzo, offerte Iliad e Fastweb.</p>
+          <span class="a-mondo__altro">Guarda cosa vendiamo {ic('arrow')}</span>
         </a>
         <a class="a-mondo a-mondo--scuro" href="siti-e-gestionali.html">
           {ic('dashboard', 'ic a-mondo__icona')}
@@ -663,8 +814,11 @@ def home_a():
           <a class="bottone bottone--primario" href="{MAPPA}" rel="noopener">{ic('pin')} Apri in Google Maps</a>
         </div>
       </div>
-      <div class="foto-da-fare foto-da-fare--contatti" role="img" aria-label="Spazio per la foto dell'ingresso">
-        <span>Foto dell'ingresso dalla strada<br><small>così ci si riconosce arrivando</small></span>
+      <div>
+        <figure class="foto foto--contatti">
+          <img src="img/foto/negozio.jpg" alt="L'ingresso del negozio Meg@byte Informatica in Via Tripoli 17 a Roma" width="1200" height="749" loading="lazy">
+        </figure>
+        <p class="nota-bozza">Foto presa da Google Street View, solo per la bozza: prima di pubblicare serve una foto vostra.</p>
       </div>
     </div>
   </section>
@@ -680,6 +834,12 @@ def panoramica_a(gruppo):
         intro = ("Ripariamo computer, Mac, smartphone e tablet di tutte le marche, per privati e aziende: "
                  "nel nostro negozio di Via Tripoli 17, a domicilio o da remoto.")
         icona, passi, titolo_passi = 'tool', PER_SLUG['riparazione-pc-mac']['passi'], 'Come funziona una riparazione'
+        chiusura = ''
+    elif gruppo == 'vendita':
+        servizi, titolo, sotto = VENDITA, 'Vendita e PC assemblati', 'Quello che trovi in negozio'
+        intro = ("Computer, portatili, smartphone e accessori delle migliori marche, PC assemblati pezzo per pezzo "
+                 "e offerte di telefonia e internet: ti aiutiamo a scegliere quello che ti serve davvero.")
+        icona, passi, titolo_passi = 'bag', PER_SLUG['pc-gaming']['passi'], 'Come nasce un PC su misura'
         chiusura = ''
     else:
         servizi, titolo, sotto = SU_MISURA, 'Siti, gestionali e software su misura', 'Gli strumenti digitali della tua attività'
@@ -872,10 +1032,12 @@ def main():
         titolo = f"{pulito(s['titolo'])} | Meg@byte Informatica"
         descr = pulito(s['intro'])[:155]
         scrivi(os.path.join(B, f"{s['slug']}.html"),
-               testa(titolo, descr, ['style.css', 'pagina.css']) + testata_b() + corpo_pagina(s, 'b') + piede_b())
+               (testa(titolo, descr, ['style.css', 'pagina.css']) + testata_b() + corpo_pagina(s, 'b')
+                + piede_b()).replace('</body>', (SCRIPT_MODULO if s.get('modulo') else '') + '</body>'))
+        coda = SCRIPT_MODULO if s.get('modulo') else ''
         scrivi(os.path.join(A, f"{s['slug']}.html"),
-               testa(titolo, descr, ['stile-a.css']).replace('<body>', '<body class="a-pagina">')
-               + testata_a() + corpo_pagina(s, 'a') + piede_a())
+               (testa(titolo, descr, ['stile-a.css']).replace('<body>', '<body class="a-pagina">')
+                + testata_a() + corpo_pagina(s, 'a') + piede_a()).replace('</body>', coda + '</body>'))
 
     scrivi(os.path.join(RADICE, 'index.html'), scelta())
     print(f'Fatto: {len(SERVIZI)} pagine di dettaglio per bozza, home A e B, pagina di scelta.')

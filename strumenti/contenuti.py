@@ -197,7 +197,7 @@ SERVIZI = [
         correlati=['virus-sicurezza', 'riparazione-pc-mac', 'assistenza-aziende'],
     ),
     dict(
-        slug='vendita', gruppo='riparazioni', icona='bag',
+        slug='vendita', gruppo='vendita', icona='bag',
         nome='Vendita',
         breve='Computer, portatili, smartphone e accessori delle migliori marche, consigliati su misura.',
         titolo='Vendita computer, notebook e accessori',
@@ -221,10 +221,10 @@ SERVIZI = [
             ('Mi aiutate a scegliere?', 'Certo: ti spieghiamo le differenze con parole semplici e ti consigliamo solo quello che ti serve.'),
             ('Posso portare il vecchio computer?', '[[Sì: trasferiamo dati e programmi sul nuovo.]]'),
         ],
-        correlati=['riparazione-pc-mac', 'telefonia-internet', 'assistenza-aziende'],
+        correlati=['pc-gaming', 'riparazione-pc-mac', 'telefonia-internet'],
     ),
     dict(
-        slug='telefonia-internet', gruppo='riparazioni', icona='wifi',
+        slug='telefonia-internet', gruppo='vendita', icona='wifi',
         nome='Telefonia e internet',
         breve='Offerte Iliad e Fastweb per privati e aziende, da attivare in negozio.',
         titolo='Telefonia e internet: offerte in negozio',
@@ -247,7 +247,39 @@ SERVIZI = [
             ('Posso tenere il mio numero?', 'Sì, con la portabilità del numero.'),
             ('Mi aiutate anche con il router?', 'Sì: configuriamo router e rete Wi-Fi di casa o dell’ufficio.'),
         ],
-        correlati=['vendita', 'assistenza-aziende', 'riparazione-smartphone-tablet'],
+        correlati=['vendita', 'pc-gaming', 'assistenza-aziende'],
+    ),
+    dict(
+        slug='pc-gaming', gruppo='vendita', icona='zap',
+        nome='PC assemblati e da gaming',
+        breve='Computer costruiti pezzo per pezzo: con i componenti che porti tu o con quelli che procuriamo noi.',
+        titolo='PC assemblati e da gaming a Roma',
+        sotto='Lo costruiamo su misura di quello che ci devi fare.',
+        intro=("Vuoi un computer che regga i giochi di oggi, il montaggio video o la grafica? Lo assembliamo noi: "
+               "puoi portarci i componenti che hai già comprato, oppure li scegliamo e li ordiniamo insieme a te."),
+        cosa=[
+            'Assemblaggio con i componenti che porti tu',
+            'Scelta e acquisto dei componenti, se preferisci',
+            'Configurazioni per gioco, montaggio video, grafica o ufficio',
+            'Montaggio, cablaggio ordinato e prova di stabilità',
+            'Installazione di Windows, driver e aggiornamenti',
+            'Trasferimento dei dati dal vecchio computer',
+            'Potenziamenti: scheda video, RAM, SSD, dissipatore',
+            '[[Garanzia sui componenti nuovi forniti da noi]]',
+        ],
+        modulo=True,
+        passi=[
+            ('Ci dici come lo userai', 'Giochi, video, grafica o ufficio, e quanto vuoi spendere.'),
+            ('Ti proponiamo la configurazione', '[[Una lista di componenti chiara, con il prezzo finale e senza impegno.]]'),
+            ('Lo montiamo e lo provi', 'Assemblaggio, installazione e prova: te lo consegniamo pronto all’uso.'),
+        ],
+        faq=[
+            ('Posso portare io i componenti?', 'Sì: puoi portarli tutti o solo in parte, al montaggio pensiamo noi.'),
+            ("Quanto costa l'assemblaggio?", "[[Dipende dalla configurazione: te lo diciamo insieme al preventivo, prima di iniziare.]]"),
+            ('In quanto tempo è pronto?', '[[Dipende dalla disponibilità dei componenti: di solito pochi giorni.]]'),
+            ('Fate anche potenziamenti?', 'Sì: scheda video, RAM, dischi SSD e dissipatori si possono cambiare anche su un computer che hai già.'),
+        ],
+        correlati=['vendita', 'riparazione-pc-mac', 'assistenza-remota'],
     ),
     # ------------------------------------------------------------------ su misura
     dict(
@@ -268,7 +300,7 @@ SERVIZI = [
         ],
         passi=PASSI_SU_MISURA,
         faq=[('Posso cambiare i testi da solo?', 'Sì: se lo vuoi, lo realizziamo in modo che testi, foto e prezzi si cambino facilmente.')] + FAQ_SU_MISURA,
-        correlati=['visibilita-google', 'gestionali', 'app'],
+        correlati=['gestionali', 'app', 'documenti-pdf'],
     ),
     dict(
         slug='gestionali', gruppo='su-misura', icona='dashboard',
@@ -352,26 +384,7 @@ SERVIZI = [
         esempio=True,
         passi=PASSI_SU_MISURA,
         faq=FAQ_SU_MISURA,
-        correlati=['gestionali', 'automazioni', 'visibilita-google'],
-    ),
-    dict(
-        slug='visibilita-google', gruppo='su-misura', icona='search', da_confermare=True,
-        nome='Visibilità su Google',
-        breve='Scheda Google, recensioni e ottimizzazione per le ricerche in zona: farti trovare da chi cerca vicino a te.',
-        titolo='Visibilità su Google',
-        sotto='Fatti trovare da chi ti cerca in zona.',
-        intro=("Scheda Google curata, recensioni e un sito ottimizzato per le ricerche locali: così chi cerca "
-               "quello che fai trova proprio te."),
-        cosa=[
-            'Creazione e cura della scheda Google: orari, foto, categorie',
-            'Raccolta di recensioni, anche con un QR code',
-            'Sito ottimizzato per le ricerche locali',
-            'Dati strutturati con orari e indirizzo',
-            'Statistiche: visite, chiamate e richieste di indicazioni',
-        ],
-        passi=PASSI_SU_MISURA,
-        faq=FAQ_SU_MISURA,
-        correlati=['siti-web', 'documenti-pdf', 'gestionali'],
+        correlati=['gestionali', 'automazioni', 'siti-web'],
     ),
 ]
 

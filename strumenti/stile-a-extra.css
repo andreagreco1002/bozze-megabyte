@@ -533,7 +533,51 @@ a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
   .giostra { overflow-x: auto; }
 }
 
+/* ---------- Tre porte d'ingresso ---------- */
+.a-mondi--tre { grid-template-columns: repeat(3, 1fr); }
+.a-mondi--tre .a-mondo { padding: 30px 26px; }
+.a-mondi--tre .a-mondo h3 { font-size: 1.25rem; }
+
+/* Loghi e foto dell'ingresso: la prima non si ritaglia, la seconda sì */
+.foto--intera { background: #f4f7fa; }
+.foto--intera img { object-fit: contain; padding: 6%; }
+.foto--contatti { aspect-ratio: 16 / 10; }
+
+/* ---------- Modulo del preventivo ---------- */
+.modulo {
+  max-width: 820px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 28px;
+  display: grid;
+  gap: 16px;
+}
+.modulo__riga { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.campo { display: grid; gap: 6px; }
+.campo label { font-weight: 600; color: var(--blu-scuro); font-size: 0.95rem; }
+.campo input,
+.campo select,
+.campo textarea {
+  font: inherit;
+  color: var(--testo);
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+  padding: 11px 12px;
+  width: 100%;
+}
+.campo textarea { resize: vertical; }
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible { outline: 3px solid var(--arancio); outline-offset: 1px; border-color: var(--blu); }
+.modulo .azioni { justify-content: center; margin-top: 4px; }
+.modulo__errore { margin: 0; color: #b42318; font-weight: 600; }
+.modulo__nota { margin: 0; text-align: center; font-size: 0.88rem; color: var(--testo-tenue); }
+
 /* ---------- Tablet ---------- */
+
 
 
 @media (max-width: 1024px) {
@@ -575,7 +619,9 @@ a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
   .scheda-link__altro { font-size: 0.85rem; padding-top: 10px; }
   .correlati .a-servizio p { display: block; }
   .a-perche { grid-template-columns: 1fr; gap: 28px; }
-  .a-mondi { grid-template-columns: 1fr; gap: 16px; }
+  .a-mondi, .a-mondi--tre { grid-template-columns: 1fr; gap: 16px; }
+  .modulo { padding: 20px; }
+  .modulo__riga { grid-template-columns: 1fr; }
   .a-griglia-servizi--completa { grid-template-columns: 1fr; }
   .a-griglia-servizi--completa .a-servizio p { display: block; }
   .a-mondo { padding: 26px 22px; }
