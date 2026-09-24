@@ -67,7 +67,7 @@ FOTO = {
     'gestionali': 'Tablet che mostra un pannello con grafici e statistiche',
     'app': 'Mano che tiene uno smartphone davanti a un computer',
     'automazioni': 'Armadio di rete con le luci accese',
-    'documenti-pdf': 'Scontrini e documenti stampati su una scrivania',
+    "documenti-pdf": "Tre schede di assistenza stampate, una accanto all'altra",
     'pc-gaming': 'Computer da gaming assemblato, con il fianco in vetro e le ventole illuminate',
 }
 # I loghi degli operatori non vanno ritagliati: si vedono per intero
@@ -98,6 +98,17 @@ def t(testo):
 
 def pulito(testo):
     return re.sub(r'\[\[(.+?)\]\]', r'\1', testo)
+
+
+def versione_foto(nome):
+    """Impronta del file: cambiando la foto cambia l'indirizzo, cosi' i browser
+    non continuano a mostrare quella vecchia dalla memoria."""
+    percorso = os.path.join(A, 'img', 'foto', f'{nome}.jpg')
+    if not os.path.exists(percorso):
+        return ''
+    import hashlib
+    with open(percorso, 'rb') as f:
+        return '?v=' + hashlib.md5(f.read()).hexdigest()[:8]
 
 
 def ic(nome, classe='ic'):
@@ -307,8 +318,8 @@ def corpo_pagina(s, veste):
         ) + '</div>'
     elif veste == 'a' and s['slug'] in FOTO:
         intera = ' foto--intera' if s['slug'] in FOTO_INTERE else ''
-        destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg" alt="{FOTO[s["slug"]]}" '
-                  f'width="1200" height="800" loading="lazy"></figure>')
+        destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg{versione_foto(s["slug"])}" '
+                  f'alt="{FOTO[s["slug"]]}" width="1200" height="800" loading="lazy"></figure>')
     else:
         destra = (f'<div class="foto-da-fare foto-da-fare--pagina" role="img" aria-label="Spazio per una foto">'
                   f'<span>Foto: {html.escape(pulito(s["nome"]))}<br><small>una foto vera del lavoro</small></span></div>')
@@ -746,7 +757,7 @@ def home_a():
           <ul class="lista-spunte">{perche}</ul>
         </div>
         <figure class="foto foto--perche">
-          <img src="img/foto/banco.jpg" alt="Mani al lavoro su un computer portatile aperto, viste dall'alto" width="1200" height="900" loading="lazy">
+          <img src="img/foto/banco.jpg{versione_foto("banco")}" alt="Mani al lavoro su un computer portatile aperto, viste dall'alto" width="1200" height="900" loading="lazy">
         </figure>
       </div>
       <div class="a-marche">
@@ -816,7 +827,7 @@ def home_a():
       </div>
       <div>
         <figure class="foto foto--contatti">
-          <img src="img/foto/negozio.jpg" alt="L'ingresso del negozio Meg@byte Informatica in Via Tripoli 17 a Roma" width="1200" height="749" loading="lazy">
+          <img src="img/foto/negozio.jpg{versione_foto("negozio")}" alt="L'ingresso del negozio Meg@byte Informatica in Via Tripoli 17 a Roma" width="1200" height="749" loading="lazy">
         </figure>
         <p class="nota-bozza">Foto presa da Google Street View, solo per la bozza: prima di pubblicare serve una foto vostra.</p>
       </div>
