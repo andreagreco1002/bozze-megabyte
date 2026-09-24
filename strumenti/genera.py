@@ -55,7 +55,7 @@ ICONE = {
 # Foto delle pagine (solo bozza A): in img/foto, da Pexels, licenza libera anche
 # per uso commerciale. Le sostituiremo con le foto vere del negozio.
 FOTO = {
-    'riparazione-pc-mac': 'Tecnico che smonta un computer portatile sul banco di lavoro',
+    'riparazione-pc-mac': 'Computer portatile aperto sul banco con i componenti a vista durante la riparazione',
     'riparazione-smartphone-tablet': 'Sostituzione di un componente interno di uno smartphone',
     'recupero-dati': 'Hard disk aperto, con disco e testina in vista',
     'virus-sicurezza': 'Schermo con righe di codice durante un controllo di sicurezza',
@@ -595,7 +595,7 @@ def home_a():
           <ul class="lista-spunte">{perche}</ul>
         </div>
         <figure class="foto foto--perche">
-          <img src="img/foto/banco.jpg" alt="Tecnico al lavoro su un computer portatile aperto sul banco" width="1200" height="900" loading="lazy">
+          <img src="img/foto/banco.jpg" alt="Mani al lavoro su un computer portatile aperto, viste dall'alto" width="1200" height="900" loading="lazy">
         </figure>
       </div>
       <div class="a-marche">
