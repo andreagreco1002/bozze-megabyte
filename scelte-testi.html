@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sito nuovo — frasi da confermare</title>
+<style>
+  :root {
+    --blu: #1c5b7c;
+    --blu-chiaro: #e8f1f6;
+    --arancio: #e07c2c;
+    --testo: #1e293b;
+    --tenue: #5b6878;
+    --bordo: #d8dee6;
+    --giallo: #fdf3c7;
+    --sfondo: #f1f5f9;
+    --ok: #15803d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 16px 150px;
+    background: var(--sfondo);
+    color: var(--testo);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .foglio { max-width: 780px; margin: 0 auto; }
+  header { padding: 32px 0 4px; }
+  h1 { font-size: 1.7rem; margin: 0 0 10px; color: var(--blu); line-height: 1.2; }
+  .istruzioni {
+    background: #fff;
+    border: 1px solid var(--bordo);
+    border-left: 5px solid var(--arancio);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 8px;
+  }
+  .istruzioni p { margin: 0 0 10px; }
+  .istruzioni p:last-child { margin-bottom: 0; }
+  .istruzioni ol { margin: 0; padding-left: 22px; }
+  .istruzioni li { margin-bottom: 6px; }
+  .gruppo {
+    margin: 34px 0 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blu);
+  }
+  .voce {
+    background: #fff;
+    border: 1px solid var(--bordo);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .dove {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    align-items: baseline;
+    font-size: 0.88rem;
+    color: var(--tenue);
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eef2f6;
+  }
+  .dove b { color: var(--testo); font-weight: 600; }
+  .dove a { color: var(--blu); font-weight: 600; white-space: nowrap; }
+  .frase { margin: 0 0 16px; font-size: 1.02rem; }
+  .numero {
+    display: inline-block;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 999px;
+    background: var(--blu);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-right: 8px;
+  }
+  mark { background: var(--giallo); padding: 2px 4px; border-radius: 3px; }
+  .opzione {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--bordo);
+    border-radius: 10px;
+    margin-bottom: 9px;
+    cursor: pointer;
+    min-height: 46px;
+  }
+  .opzione:hover { background: #f8fafc; }
+  .opzione:has(input:checked) { border-color: var(--blu); background: var(--blu-chiaro); }
+  .opzione input[type=radio] { margin-top: 4px; width: 21px; height: 21px; accent-color: var(--blu); flex: none; }
+  .lettera { font-weight: 700; color: var(--blu); }
+  .altro { width: 100%; margin-top: 8px; padding: 11px 12px; border: 1px solid var(--bordo); border-radius: 8px; font: inherit; font-size: 0.97rem; }
+  .altro:focus { outline: 2px solid var(--blu); outline-offset: 1px; }
+  .barra {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--bordo);
+    padding: 12px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 -2px 12px rgb(15 23 42 / 0.08);
+  }
+  .conteggio { color: var(--tenue); font-size: 0.92rem; }
+  button {
+    font: inherit;
+    font-weight: 600;
+    padding: 13px 22px;
+    min-height: 46px;
+    border-radius: 10px;
+    border: 1px solid var(--blu);
+    background: var(--blu);
+    color: #fff;
+    cursor: pointer;
+  }
+  button.chiaro { background: #fff; color: var(--blu); }
+  button:focus-visible { outline: 3px solid #94a3b8; outline-offset: 2px; }
+  #esito { color: var(--ok); font-weight: 600; font-size: 0.92rem; width: 100%; text-align: center; }
+  textarea#riepilogo {
+    width: 100%; min-height: 240px; margin-top: 14px; padding: 12px;
+    border: 1px solid var(--bordo); border-radius: 10px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85rem;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    h1 { font-size: 1.4rem; }
+    .voce { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="foglio">
+<header>
+  <h1>Sito nuovo: le frasi da confermare</h1>
+  <div class="istruzioni">
+    <p>Nella bozza del sito ci sono alcune frasi <mark>evidenziate in giallo</mark>: le ho scritte io a senso, ma nessuno le ha ancora confermate. Sono prezzi, tempi, garanzie e promesse che il negozio fa ai clienti, quindi devono dirlo le persone giuste.</p>
+    <ol>
+      <li>Per ogni frase c'è scritto <b>in che pagina del sito si trova</b> e in che punto. Accanto c'è il collegamento <b>«apri la pagina»</b>: si apre la bozza vera, così si vede com'è in mezzo al resto.</li>
+      <li>Si sceglie una delle quattro risposte. Se nessuna va bene, c'è <b>«Altro»</b>: lì si scrive la frase giusta, con parole proprie.</li>
+      <li>Alla fine si preme <b>«Manda ad Andrea»</b> in fondo: si apre WhatsApp con le risposte già scritte, basta scegliere Andrea e premere invio. Da computer, in alternativa, <b>«Salva il file»</b> scarica un foglio di testo da allegare a una email.</li>
+    </ol>
+    <p>Non serve rispondere a tutte in una volta: le risposte restano salvate, si può chiudere e riprendere.</p>
+  </div>
+</header>
+<form id="modulo"></form>
+</div>
+
+<div class="barra">
+  <span class="conteggio" id="conteggio">0 di 22 risposte</span>
+  <button type="button" id="whatsapp">Manda ad Andrea</button>
+  <button type="button" class="chiaro" id="copia">Copia il testo</button>
+  <button type="button" class="chiaro" id="scarica">Salva il file</button>
+  <span id="esito" role="status"></span>
+</div>
+<div class="foglio"><textarea id="riepilogo" hidden readonly aria-label="Riepilogo delle risposte"></textarea></div>
+
+<script>
+const BOZZA = 'https://andreagreco1002.github.io/bozze-megabyte/bozza-a/';
+
+const VOCI = [
+  { gruppo: 'Riparazione PC e Mac', pagina: 'Riparazione PC e Mac', slug: 'riparazione-pc-mac',
+    sezione: 'riquadro «Come funziona», terzo passo (Diagnosi e preventivo)',
+    frase: ['', 'Ti contattiamo con il preventivo prima di procedere', ': nessuna sorpresa.'],
+    opzioni: [
+      'Va bene così: «Ti contattiamo con il preventivo prima di procedere»',
+      '«Ti chiamiamo con il preventivo: decidi tu se procedere»',
+      '«Ti scriviamo su WhatsApp con il preventivo prima di toccare niente»',
+      '«Niente lavori senza il tuo ok: prima il preventivo, poi si procede»' ] },
+
+  { gruppo: 'Riparazione PC e Mac', pagina: 'Riparazione PC e Mac', slug: 'riparazione-pc-mac',
+    sezione: 'in fondo, «Domande frequenti» → Quanto costa la diagnosi?',
+    frase: ['', 'Ti facciamo un preventivo prima di procedere: se non lo accetti, non paghi la riparazione.', ''],
+    opzioni: [
+      '«La diagnosi è gratuita: ti facciamo un preventivo e se non lo accetti non paghi nulla»',
+      '«La diagnosi costa ___ €, che scaliamo dal conto se accetti il preventivo»',
+      '«La diagnosi è gratuita; se serve smontare il dispositivo te lo diciamo prima»',
+      '«Ti facciamo un preventivo prima di procedere: se non lo accetti paghi solo la diagnosi, ___ €»' ] },
+
+  { gruppo: 'Riparazione PC e Mac', pagina: 'Riparazione PC e Mac', slug: 'riparazione-pc-mac',
+    sezione: 'in fondo, «Domande frequenti» → I miei dati sono al sicuro?',
+    frase: ['Li trattiamo solo per la riparazione, come scritto sulla scheda di accettazione. ', 'Se temi di perderli, possiamo farne prima una copia.', ''],
+    opzioni: [
+      'Va bene così: «Se temi di perderli, possiamo farne prima una copia»',
+      '«Se vuoi, prima di lavorare facciamo una copia dei tuoi dati: basta chiederla»',
+      '«Su richiesta facciamo una copia di sicurezza dei dati prima di intervenire (servizio a pagamento)»',
+      '«Prima di ogni intervento che tocca il disco facciamo sempre una copia dei dati»' ] },
+
+  { gruppo: 'Smartphone e tablet', pagina: 'Smartphone e tablet', slug: 'riparazione-smartphone-tablet',
+    sezione: 'elenco «Cosa ripariamo», ultima voce',
+    frase: ['', 'Telefoni caduti in acqua: verifica e recupero', ''],
+    opzioni: [
+      'Va bene così: «Telefoni caduti in acqua: verifica e recupero»',
+      '«Telefoni caduti in acqua: apertura, pulizia e tentativo di recupero»',
+      '«Danni da liquidi: diagnosi e recupero quando possibile»',
+      'Togliere la voce: questo lavoro non lo facciamo' ] },
+
+  { gruppo: 'Recupero dati', pagina: 'Recupero dati', slug: 'recupero-dati',
+    sezione: '«Domande frequenti» → Riuscite sempre a recuperare tutto?',
+    frase: ['Non sempre: dipende dal danno. ', 'Dopo la diagnosi ti diciamo cosa si può recuperare, e solo allora decidi se procedere.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Dopo la diagnosi ti diciamo cosa si può recuperare e quanto costa: decidi tu»',
+      '«Facciamo una diagnosi, ti mostriamo l’elenco dei file recuperabili e poi decidi»',
+      '«Nei casi più complessi ci appoggiamo a un laboratorio specializzato: te lo diciamo prima, col preventivo»' ] },
+
+  { gruppo: 'Recupero dati', pagina: 'Recupero dati', slug: 'recupero-dati',
+    sezione: '«Domande frequenti» → Quanto costa?',
+    frase: ['', 'Dipende dal tipo di danno: la diagnosi ci dice cosa è recuperabile e ti facciamo un preventivo.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Dipende dal danno: la diagnosi costa ___ € e la scaliamo se procedi»',
+      '«Diagnosi gratuita, poi un preventivo fisso prima di iniziare»',
+      '«Si parte da ___ € per i casi semplici; per i danni gravi serve un preventivo»' ] },
+
+  { gruppo: 'Virus e sicurezza', pagina: 'Virus e sicurezza', slug: 'virus-sicurezza',
+    sezione: '«Domande frequenti» → Perdo i miei file?',
+    frase: ['Nella maggior parte dei casi no: rimuoviamo il virus lasciando i tuoi documenti al loro posto. ', 'Se serve, prima ne facciamo una copia.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Se il caso è grave, prima mettiamo al sicuro una copia dei tuoi file»',
+      '«Su richiesta facciamo una copia di sicurezza prima della pulizia»',
+      '«Prima di ogni pulizia facciamo sempre una copia dei documenti»' ] },
+
+  { gruppo: 'Aziende e telefonia', pagina: 'Assistenza per aziende  ·  e anche Telefonia e internet', slug: 'assistenza-aziende',
+    sezione: 'elenco dei servizi (la stessa riga compare su tutte e due le pagine)',
+    frase: ['Connettività business Fastweb e ', 'MCLINK', ''],
+    opzioni: [
+      'Va bene così: lavoriamo anche con MCLINK',
+      'Solo «Connettività business Fastweb»: MCLINK non lo trattiamo più',
+      '«Connettività business con i principali operatori», senza fare nomi',
+      'Un altro operatore al posto di MCLINK (scriverlo in Altro)' ] },
+
+  { gruppo: 'Aziende e telefonia', pagina: 'Assistenza per aziende', slug: 'assistenza-aziende',
+    sezione: 'riquadro «Come funziona», ultimo passo (Proposta)',
+    frase: ['', 'Ti proponiamo gli interventi e, se ti serve, un contratto di assistenza su misura.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Ti proponiamo gli interventi necessari, con priorità e costi»',
+      '«Ti proponiamo gli interventi; se preferisci, un contratto di assistenza annuale»',
+      '«Ti lasciamo una proposta scritta: interventi, tempi e costi»' ] },
+
+  { gruppo: 'Aziende e telefonia', pagina: 'Assistenza per aziende', slug: 'assistenza-aziende',
+    sezione: '«Domande frequenti» → Come funziona un contratto di assistenza?',
+    frase: ['', 'Si concorda un pacchetto di ore o un canone con tempi di intervento definiti, costruito sulle esigenze dell’azienda.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Un pacchetto di ore prepagate, da usare quando servono»',
+      '«Un canone mensile con assistenza da remoto illimitata e ___ uscite l’anno»',
+      '«Lo costruiamo insieme: ore, canone o solo chiamata, come preferisci»' ] },
+
+  { gruppo: 'Assistenza da remoto', pagina: 'Assistenza da remoto', slug: 'assistenza-remota',
+    sezione: 'riquadro dei prezzi, prima riga',
+    frase: ['Intervento da 30 minuti: ', '30 €', ''],
+    opzioni: ['Confermo 30 €', '25 €', '35 €', 'Niente prezzi sul sito: scrivere «preventivo su richiesta»'] },
+
+  { gruppo: 'Assistenza da remoto', pagina: 'Assistenza da remoto', slug: 'assistenza-remota',
+    sezione: 'riquadro dei prezzi, seconda riga',
+    frase: ['Intervento da 60 minuti: ', '60 €', ''],
+    opzioni: ['Confermo 60 €', '50 €', '55 €', 'Niente prezzi sul sito: scrivere «preventivo su richiesta»'] },
+
+  { gruppo: 'Vendita', pagina: 'Computer e accessori', slug: 'vendita',
+    sezione: 'primo paragrafo, in cima alla pagina',
+    frase: ['…per consigliarti quello giusto', ', e te lo consegniamo pronto e configurato', '.'],
+    opzioni: [
+      'Va bene così',
+      '«…e se vuoi te lo consegniamo pronto e configurato»',
+      '«…e te lo configuriamo prima di consegnartelo, senza costi aggiuntivi»',
+      'Togliere la frase: lo vendiamo e basta' ] },
+
+  { gruppo: 'Vendita', pagina: 'Computer e accessori', slug: 'vendita',
+    sezione: 'riquadro «Come funziona», passo «Pronto da usare»',
+    frase: ['', 'Configuriamo il dispositivo e ci trasferiamo i tuoi dati.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Configuriamo il dispositivo e trasferiamo i dati dal vecchio»',
+      '«Lo accendiamo, lo aggiorniamo e ti trasferiamo i dati: lo porti a casa pronto»',
+      '«Configurazione inclusa; il trasferimento dei dati su richiesta»' ] },
+
+  { gruppo: 'Vendita', pagina: 'Computer e accessori', slug: 'vendita',
+    sezione: '«Domande frequenti» → Posso portare il vecchio computer?',
+    frase: ['', 'Sì: trasferiamo dati e programmi sul nuovo.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Sì: trasferiamo i tuoi dati; i programmi dove le licenze lo permettono»',
+      '«Sì: portalo con l’alimentatore, al trasferimento pensiamo noi»',
+      '«Sì, è un servizio a pagamento: te lo quotiamo prima»' ] },
+
+  { gruppo: 'PC assemblati e da gaming', pagina: 'PC assemblati e da gaming', slug: 'pc-gaming',
+    sezione: 'elenco «Cosa facciamo», ultima voce',
+    frase: ['', 'Garanzia sui componenti nuovi forniti da noi', ''],
+    opzioni: [
+      'Va bene così',
+      '«Garanzia 24 mesi sui componenti nuovi forniti da noi»',
+      '«Garanzia del produttore sui componenti nuovi, gestita da noi»',
+      '«Garanzia sui componenti nuovi; dell’assemblaggio rispondiamo noi»' ] },
+
+  { gruppo: 'PC assemblati e da gaming', pagina: 'PC assemblati e da gaming', slug: 'pc-gaming',
+    sezione: 'riquadro «Come funziona», secondo passo',
+    frase: ['', 'Una lista di componenti chiara, con il prezzo finale e senza impegno.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Un elenco dei componenti con il prezzo finale, senza impegno»',
+      '«Due o tre configurazioni a confronto, con il prezzo finale»',
+      '«Una configurazione su misura per il tuo budget, senza impegno»' ] },
+
+  { gruppo: 'PC assemblati e da gaming', pagina: 'PC assemblati e da gaming', slug: 'pc-gaming',
+    sezione: '«Domande frequenti» → Quanto costa l’assemblaggio?',
+    frase: ['', 'Dipende dalla configurazione: te lo diciamo insieme al preventivo, prima di iniziare.', ''],
+    opzioni: [
+      'Va bene così',
+      '«L’assemblaggio costa ___ €, compreso nel preventivo»',
+      '«L’assemblaggio è incluso se i componenti li compri da noi; se li porti tu, ___ €»',
+      '«Dipende dalla macchina: da ___ € a ___ €, sempre detto prima»' ] },
+
+  { gruppo: 'PC assemblati e da gaming', pagina: 'PC assemblati e da gaming', slug: 'pc-gaming',
+    sezione: '«Domande frequenti» → In quanto tempo è pronto?',
+    frase: ['', 'Dipende dalla disponibilità dei componenti: di solito pochi giorni.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Di solito 3-5 giorni lavorativi, se i componenti sono disponibili»',
+      '«Una settimana circa: ti aggiorniamo quando arrivano i pezzi»',
+      '«Se i componenti sono in negozio, in giornata o il giorno dopo»' ] },
+
+  { gruppo: 'Gestionali su misura', pagina: 'Gestionali su misura', slug: 'gestionali',
+    sezione: '«Domande frequenti» → Serve installare qualcosa?',
+    frase: ['No: si usa dal browser, anche da telefono. ', 'I dati sono salvati in modo sicuro, con copie di backup.', ''],
+    opzioni: [
+      'Va bene così',
+      '«I dati stanno su server europei, con backup automatico ogni giorno»',
+      '«I dati sono al sicuro e ne facciamo una copia ogni giorno»',
+      'Togliere la frase' ] },
+
+  { gruppo: 'Gestionali su misura', pagina: 'Gestionali su misura', slug: 'gestionali',
+    sezione: '«Domande frequenti» → Posso partire dai dati che ho già?',
+    frase: ['', 'Sì: possiamo importare clienti e articoli da Excel o dal vecchio programma.', ''],
+    opzioni: [
+      'Va bene così',
+      '«Sì: importiamo clienti e articoli da Excel; dal vecchio programma dipende dai formati»',
+      '«Sì: al trasferimento di clienti e articoli pensiamo noi»',
+      '«Sì, lo valutiamo caso per caso: dipende da come escono i dati dal vecchio programma»' ] },
+
+  { gruppo: 'Una domanda in più', pagina: 'App per telefono e computer · Automazioni · Documenti e stampe automatiche', slug: 'app',
+    sezione: 'tre pagine intere, nel menu sotto «Siti e gestionali»',
+    frase: ['Queste tre pagine raccontano lavori che proponiamo ma che non abbiamo mai confermato. ', 'Le teniamo sul sito?', ''],
+    opzioni: [
+      'Sì, tutte e tre come sono',
+      'Sì, ma solo «Documenti e stampe automatiche»',
+      'Sì, ma solo «App per telefono e computer» e «Automazioni»',
+      'No: toglierle, restano siti e gestionali' ] },
+];
+
+const modulo = document.getElementById('modulo');
+let gruppoCorrente = '';
+
+VOCI.forEach((v, i) => {
+  if (v.gruppo !== gruppoCorrente) {
+    gruppoCorrente = v.gruppo;
+    const g = document.createElement('p');
+    g.className = 'gruppo';
+    g.textContent = v.gruppo;
+    modulo.appendChild(g);
+  }
+
+  const voce = document.createElement('section');
+  voce.className = 'voce';
+
+  const dove = document.createElement('p');
+  dove.className = 'dove';
+  const pagina = document.createElement('span');
+  pagina.innerHTML = 'Pagina <b></b>';
+  pagina.querySelector('b').textContent = v.pagina;
+  const sezione = document.createElement('span');
+  sezione.textContent = v.sezione;
+  const link = document.createElement('a');
+  link.href = BOZZA + v.slug + '.html';
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.textContent = 'apri la pagina ↗';
+  dove.append(pagina, sezione, link);
+
+  const frase = document.createElement('p');
+  frase.className = 'frase';
+  const num = document.createElement('span');
+  num.className = 'numero';
+  num.textContent = i + 1;
+  frase.append(num, document.createTextNode(v.frase[0]));
+  const giallo = document.createElement('mark');
+  giallo.textContent = v.frase[1];
+  frase.append(giallo, document.createTextNode(v.frase[2]));
+
+  voce.append(dove, frase);
+
+  v.opzioni.forEach((testo, n) => {
+    const et = document.createElement('label');
+    et.className = 'opzione';
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'v' + i;
+    radio.value = 'abcd'[n];
+    const span = document.createElement('span');
+    const lettera = document.createElement('span');
+    lettera.className = 'lettera';
+    lettera.textContent = 'abcd'[n] + ') ';
+    span.append(lettera, document.createTextNode(testo));
+    et.append(radio, span);
+    voce.appendChild(et);
+  });
+
+  const et = document.createElement('label');
+  et.className = 'opzione';
+  const radio = document.createElement('input');
+  radio.type = 'radio';
+  radio.name = 'v' + i;
+  radio.value = 'altro';
+  const span = document.createElement('span');
+  span.style.flex = '1';
+  const lettera = document.createElement('span');
+  lettera.className = 'lettera';
+  lettera.textContent = 'e) ';
+  const campo = document.createElement('input');
+  campo.className = 'altro';
+  campo.type = 'text';
+  campo.placeholder = 'Scrivi qui la frase giusta';
+  campo.setAttribute('aria-label', 'Altra risposta per la frase ' + (i + 1));
+  campo.addEventListener('input', () => { if (campo.value.trim()) radio.checked = true; salva(); });
+  span.append(lettera, document.createTextNode('Altro, la scrivo io:'), campo);
+  et.append(radio, span);
+  voce.appendChild(et);
+
+  modulo.appendChild(voce);
+});
+
+const conteggio = document.getElementById('conteggio');
+const esito = document.getElementById('esito');
+const voci = modulo.querySelectorAll('.voce');
+
+function scelte() {
+  return VOCI.map((v, i) => {
+    const scelta = modulo.querySelector('input[name="v' + i + '"]:checked');
+    if (!scelta) return null;
+    const campo = voci[i].querySelector('.altro');
+    return scelta.value === 'altro'
+      ? 'ALTRO → ' + (campo.value.trim() || '(da scrivere)')
+      : scelta.value + ') ' + v.opzioni['abcd'.indexOf(scelta.value)];
+  });
+}
+
+function aggiorna() {
+  conteggio.textContent = scelte().filter(Boolean).length + ' di ' + VOCI.length + ' risposte';
+}
+
+function salva() {
+  try {
+    const stato = VOCI.map((v, i) => {
+      const scelta = modulo.querySelector('input[name="v' + i + '"]:checked');
+      return [scelta ? scelta.value : '', voci[i].querySelector('.altro').value];
+    });
+    localStorage.setItem('sito-scelte-testi', JSON.stringify(stato));
+  } catch (e) { /* finestra privata: pazienza, le risposte restano a schermo */ }
+  aggiorna();
+}
+
+try {
+  (JSON.parse(localStorage.getItem('sito-scelte-testi') || '[]')).forEach(([valore, altro], i) => {
+    if (!voci[i]) return;
+    if (altro) voci[i].querySelector('.altro').value = altro;
+    const radio = valore && modulo.querySelector('input[name="v' + i + '"][value="' + valore + '"]');
+    if (radio) radio.checked = true;
+  });
+} catch (e) { /* niente di salvato */ }
+
+modulo.addEventListener('change', salva);
+aggiorna();
+
+function testoRisposte() {
+  const oggi = new Date().toLocaleDateString('it-IT');
+  const righe = [
+    'SITO MEG@BYTE — FRASI DA CONFERMARE',
+    'Risposte del ' + oggi,
+    'Mancano ' + (VOCI.length - scelte().filter(Boolean).length) + ' risposte su ' + VOCI.length + '.',
+    '',
+  ];
+  const tutte = scelte();
+  VOCI.forEach((v, i) => {
+    righe.push('--- ' + (i + 1) + '. ' + v.pagina + ' — ' + v.sezione);
+    righe.push('    frase attuale: ' + v.frase.join(''));
+    righe.push('    RISPOSTA: ' + (tutte[i] || 'DA DECIDERE'));
+    righe.push('');
+  });
+  return righe.join('\r\n');
+}
+
+/** Per WhatsApp solo numero e risposta: il testo lungo non ci sta nel collegamento. */
+function testoBreve() {
+  const tutte = scelte();
+  const righe = ['Sito nuovo, risposte sulle frasi da confermare:', ''];
+  VOCI.forEach((v, i) => {
+    righe.push((i + 1) + '. ' + v.pagina.split(' · ')[0] + ' — ' + (tutte[i] || 'da decidere'));
+  });
+  return righe.join(String.fromCharCode(10));
+}
+
+document.getElementById('whatsapp').addEventListener('click', () => {
+  window.open('https://wa.me/?text=' + encodeURIComponent(testoBreve()), '_blank', 'noopener');
+  esito.textContent = 'Si apre WhatsApp: scegli Andrea e premi invio.';
+});
+
+document.getElementById('scarica').addEventListener('click', () => {
+  const blob = new Blob([testoRisposte()], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'risposte-sito-megabyte.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+  esito.textContent = 'File salvato: «risposte-sito-megabyte.txt». Ora mandalo ad Andrea.';
+});
+
+document.getElementById('copia').addEventListener('click', async () => {
+  const testo = testoRisposte();
+  try {
+    await navigator.clipboard.writeText(testo);
+    esito.textContent = 'Copiato: ora si può incollare in WhatsApp o in una email.';
+  } catch (e) {
+    const area = document.getElementById('riepilogo');
+    area.hidden = false;
+    area.value = testo;
+    area.select();
+    area.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    esito.textContent = 'Copia a mano il testo qui sotto.';
+  }
+});
+</script>
+</body>
+</html>
