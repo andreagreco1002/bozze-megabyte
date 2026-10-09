@@ -20,7 +20,7 @@ ORARI = [('Lunedì – Venerdì', ['9:00–13:00', '15:30–19:30']), ('Sabato',
 
 PASSI_RIPARAZIONE = [
     ('Porti il dispositivo', 'Ti diamo subito la scheda di accettazione con il numero della riparazione.'),
-    ('Diagnosi e preventivo', '[[Ti contattiamo con il preventivo prima di procedere]]: nessuna sorpresa.'),
+    ('Diagnosi e preventivo', 'Ti contattiamo con il preventivo prima di procedere: nessuna sorpresa.'),
     ('Ritiro', 'Quando è pronto ti avvisiamo: passi in negozio con la scheda e lo ritiri.'),
 ]
 PASSI_SU_MISURA = [
@@ -56,10 +56,10 @@ SERVIZI = [
         ],
         passi=PASSI_RIPARAZIONE,
         faq=[
-            ('Quanto costa la diagnosi?', '[[Ti facciamo un preventivo prima di procedere: se non lo accetti, non paghi la riparazione.]]'),
+            ('Quanto costa la diagnosi?', 'Diagnosi e preventivo sono gratuiti al 100% e senza impegno.'),
             ('In quanto tempo è pronto?', "Dipende dal guasto e dai ricambi: all'accettazione ti diamo una stima e ti avvisiamo appena è pronto."),
             ('Riparate anche i Mac?', 'Sì: lavoriamo su Windows, Mac e Linux.'),
-            ('I miei dati sono al sicuro?', "Li trattiamo solo per la riparazione, come scritto sulla scheda di accettazione. [[Se temi di perderli, possiamo farne prima una copia.]]"),
+            ('I miei dati sono al sicuro?', "Li trattiamo solo per la riparazione, come scritto sulla scheda di accettazione. Prima di ogni intervento che tocca il disco facciamo sempre una copia dei dati."),
         ],
         correlati=['recupero-dati', 'virus-sicurezza', 'vendita'],
     ),
@@ -75,7 +75,7 @@ SERVIZI = [
             'Sostituzione di schermi e vetri rotti',
             'Sostituzione della batteria',
             'Connettore di ricarica, microfono, altoparlante e fotocamere',
-            '[[Telefoni caduti in acqua: verifica e recupero]]',
+            'Danni da liquidi: diagnosi e recupero quando possibile',
             'Trasferimento di dati, contatti e foto sul nuovo telefono',
             'Configurazione di email, WhatsApp e backup',
         ],
@@ -107,8 +107,7 @@ SERVIZI = [
         ],
         passi=PASSI_RIPARAZIONE,
         faq=[
-            ('Riuscite sempre a recuperare tutto?', "Non sempre: dipende dal danno. [[Dopo la diagnosi ti diciamo cosa si può recuperare, e solo allora decidi se procedere.]]"),
-            ('Quanto costa?', "[[Dipende dal tipo di danno: la diagnosi ci dice cosa è recuperabile e ti facciamo un preventivo.]]"),
+            ('Riuscite sempre a recuperare tutto?', "Non sempre: dipende dal danno. La diagnosi di recupero è gratuita e senza impegno."),
             ('Come evito che succeda di nuovo?', "Con un backup automatico: ti consigliamo la soluzione adatta, su NAS o dischi esterni, e la configuriamo noi."),
         ],
         correlati=['riparazione-pc-mac', 'virus-sicurezza', 'assistenza-aziende'],
@@ -134,7 +133,7 @@ SERVIZI = [
         ],
         passi=PASSI_RIPARAZIONE,
         faq=[
-            ('Perdo i miei file?', "Nella maggior parte dei casi no: rimuoviamo il virus lasciando i tuoi documenti al loro posto. [[Se serve, prima ne facciamo una copia.]]"),
+            ('Perdo i miei file?', "Nella maggior parte dei casi no: rimuoviamo il virus lasciando i tuoi documenti al loro posto. Se serve, prima ne facciamo una copia."),
             ('Si può fare da remoto?', "Spesso sì, se il computer si accende e si collega a internet. Altrimenti è meglio portarlo in negozio."),
         ],
         correlati=['assistenza-remota', 'recupero-dati', 'assistenza-aziende'],
@@ -154,17 +153,17 @@ SERVIZI = [
             'Router, firewall, access point e stampanti di rete',
             'Sicurezza della rete e misure per la privacy',
             'Fornitura di computer, accessori e materiali di consumo',
-            'Connettività business Fastweb e [[MCLINK]]',
+            'Telefonia e connettività Iliad e Fastweb, per privati e aziende',
             'Siti e gestionali su misura per la tua azienda',
         ],
         passi=[
             ('Sopralluogo', "Vediamo com'è organizzata l'informatica dell'ufficio e cosa non funziona."),
-            ('Proposta', '[[Ti proponiamo gli interventi e, se ti serve, un contratto di assistenza su misura.]]'),
+            ('Proposta', 'Ti proponiamo gli interventi e, se ti serve, un contratto di assistenza su misura.'),
             ('Assistenza continua', 'Interveniamo in sede o da remoto, e teniamo tutto in ordine nel tempo.'),
         ],
         faq=[
             ('Intervenite in sede?', 'Sì: interveniamo in sede e, quando basta, da remoto.'),
-            ('Come funziona un contratto di assistenza?', "[[Si concorda un pacchetto di ore o un canone con tempi di intervento definiti, costruito sulle esigenze dell'azienda.]]"),
+            ('Come funziona un contratto di assistenza?', 'Un pacchetto di ore prepagate, da usare quando servono.'),
         ],
         correlati=['gestionali', 'virus-sicurezza', 'telefonia-internet'],
     ),
@@ -176,7 +175,7 @@ SERVIZI = [
         sotto='Veloce e sicura, senza uscire di casa.',
         intro=("Molti problemi si risolvono a distanza: con il tuo permesso ci colleghiamo al computer "
                "tramite TeamViewer e lo sistemiamo mentre guardi."),
-        prezzi=[('30 minuti', '[[30 €]]'), ('60 minuti', '[[60 €]]')],
+        prezzi=[('30 minuti', '30 €'), ('60 minuti', '60 €')],
         cosa=[
             'Programmi che non funzionano o non si installano',
             'Configurazione della posta elettronica',
@@ -203,7 +202,7 @@ SERVIZI = [
         titolo='Vendita computer, notebook e accessori',
         sotto='Ti aiutiamo a scegliere il dispositivo giusto per te.',
         intro=("Computer, portatili, smartphone e accessori delle migliori marche. Partiamo da come lo userai "
-               "per consigliarti quello giusto[[, e te lo consegniamo pronto e configurato]]."),
+               "per consigliarti quello giusto, e te lo consegniamo pronto e configurato."),
         cosa=[
             'Computer fissi e portatili',
             'PC assemblati su misura',
@@ -215,11 +214,11 @@ SERVIZI = [
         passi=[
             ('Ci dici cosa ti serve', 'Lavoro, scuola, grafica, gioco: partiamo da come lo userai.'),
             ('Ti consigliamo', 'Ti proponiamo le soluzioni giuste per il tuo budget, spiegando le differenze.'),
-            ('Pronto da usare', '[[Configuriamo il dispositivo e ci trasferiamo i tuoi dati.]]'),
+            ('Pronto da usare', 'Configuriamo il dispositivo e ci trasferiamo i tuoi dati.'),
         ],
         faq=[
             ('Mi aiutate a scegliere?', 'Certo: ti spieghiamo le differenze con parole semplici e ti consigliamo solo quello che ti serve.'),
-            ('Posso portare il vecchio computer?', '[[Sì: trasferiamo dati e programmi sul nuovo.]]'),
+            ('Posso portare il vecchio computer?', 'Sì: trasferiamo i tuoi dati; i programmi dove le licenze lo permettono.'),
         ],
         correlati=['pc-gaming', 'riparazione-pc-mac', 'telefonia-internet'],
     ),
@@ -239,18 +238,18 @@ SERVIZI = [
             'Installazione di Windows, driver e aggiornamenti',
             'Trasferimento dei dati dal vecchio computer',
             'Potenziamenti: scheda video, RAM, SSD, dissipatore',
-            '[[Garanzia sui componenti nuovi forniti da noi]]',
+            'Garanzia 24 mesi sui componenti nuovi forniti da noi',
         ],
         modulo=True,
         passi=[
             ('Ci dici come lo userai', 'Giochi, video, grafica o ufficio, e quanto vuoi spendere.'),
-            ('Ti proponiamo la configurazione', '[[Una lista di componenti chiara, con il prezzo finale e senza impegno.]]'),
+            ('Ti proponiamo la configurazione', 'Una configurazione su misura per il tuo budget, senza impegno.'),
             ('Lo montiamo e lo provi', 'Assemblaggio, installazione e prova: te lo consegniamo pronto all’uso.'),
         ],
         faq=[
             ('Posso portare io i componenti?', 'Sì: puoi portarli tutti o solo in parte, al montaggio pensiamo noi.'),
-            ("Quanto costa l'assemblaggio?", "[[Dipende dalla configurazione: te lo diciamo insieme al preventivo, prima di iniziare.]]"),
-            ('In quanto tempo è pronto?', '[[Dipende dalla disponibilità dei componenti: di solito pochi giorni.]]'),
+            ("Quanto costa l'assemblaggio?", "Dipende dalla configurazione: te lo diciamo insieme al preventivo, prima di iniziare."),
+            ('In quanto tempo è pronto?', 'Di solito 3-5 giorni lavorativi, se i componenti sono disponibili.'),
             ('Fate anche potenziamenti?', 'Sì: scheda video, RAM, dischi SSD e dissipatori si possono cambiare anche su un computer che hai già.'),
         ],
         correlati=['vendita', 'riparazione-pc-mac', 'assistenza-remota'],
@@ -266,7 +265,7 @@ SERVIZI = [
         cosa=[
             'Offerte Iliad per il cellulare',
             'Fibra e telefonia Fastweb per casa e ufficio',
-            'Connettività business [[MCLINK]]',
+            'Offerte business Iliad e Fastweb per le aziende',
             'Configurazione di router e rete Wi-Fi',
             'Portabilità del numero',
         ],
@@ -300,7 +299,7 @@ SERVIZI = [
         ],
         passi=PASSI_SU_MISURA,
         faq=[('Posso cambiare i testi da solo?', 'Sì: se lo vuoi, lo realizziamo in modo che testi, foto e prezzi si cambino facilmente.')] + FAQ_SU_MISURA,
-        correlati=['gestionali', 'app', 'documenti-pdf'],
+        correlati=['gestionali', 'assistenza-aziende'],
     ),
     dict(
         slug='gestionali', gruppo='su-misura', icona='dashboard',
@@ -323,68 +322,10 @@ SERVIZI = [
         esempio=True,
         passi=PASSI_SU_MISURA,
         faq=[
-            ('Serve installare qualcosa?', 'No: si usa dal browser, anche da telefono. [[I dati sono salvati in modo sicuro, con copie di backup.]]'),
-            ('Posso partire dai dati che ho già?', '[[Sì: possiamo importare clienti e articoli da Excel o dal vecchio programma.]]'),
+            ('Serve installare qualcosa?', 'No: si usa dal browser, anche da telefono. I dati sono salvati in modo sicuro, con copie di backup.'),
+            ('Posso partire dai dati che ho già?', 'Sì, lo valutiamo caso per caso: dipende da come escono i dati dal vecchio programma.'),
         ] + FAQ_SU_MISURA,
-        correlati=['documenti-pdf', 'automazioni', 'app'],
-    ),
-    dict(
-        slug='app', gruppo='su-misura', icona='smartphone', da_confermare=True,
-        nome='App per telefono e computer',
-        breve='App che funzionano dal browser e si installano sul telefono con un tocco, senza passare dagli store.',
-        titolo='App per telefono e computer',
-        sotto="Un'app tutta tua, per i clienti o per il personale.",
-        intro=("App che si installano sulla schermata del telefono con un tocco, senza passare da App Store o "
-               "Google Play. Un solo progetto che funziona su telefono, tablet e computer."),
-        cosa=[
-            'App per i clienti: prenotazioni, cataloghi, tessere fedeltà',
-            'App interne per il personale',
-            'Funzionano anche con una connessione debole',
-            'Aggiornamenti immediati, senza reinstallare',
-            'Accesso con password e profili diversi',
-        ],
-        passi=PASSI_SU_MISURA,
-        faq=FAQ_SU_MISURA,
-        correlati=['gestionali', 'siti-web', 'automazioni'],
-    ),
-    dict(
-        slug='automazioni', gruppo='su-misura', icona='zap', da_confermare=True,
-        nome='Automazioni',
-        breve="I lavori ripetitivi fatti da soli: promemoria ai clienti, email, report, dati che passano da un programma all'altro.",
-        titolo='Automazioni per la tua attività',
-        sotto='Meno tempo perso, meno errori.',
-        intro=("Le attività ripetitive che ti rubano tempo possono andare avanti da sole: promemoria, email, "
-               "report, dati copiati da un programma all'altro."),
-        cosa=[
-            'Promemoria ai clienti: appuntamenti, ritiri, scadenze',
-            'Email e messaggi inviati al momento giusto',
-            'Report e riepiloghi periodici',
-            'Dati passati tra programmi, fogli Excel e gestionale',
-            'Backup automatici',
-        ],
-        passi=PASSI_SU_MISURA,
-        faq=FAQ_SU_MISURA,
-        correlati=['gestionali', 'documenti-pdf', 'app'],
-    ),
-    dict(
-        slug='documenti-pdf', gruppo='su-misura', icona='file', da_confermare=True,
-        nome='Documenti e stampe automatiche',
-        breve='Preventivi, schede, etichette e cartellini generati in PDF con i tuoi dati e il tuo logo, pronti da stampare o inviare.',
-        titolo='Documenti e stampe automatiche',
-        sotto='Documenti professionali in un clic.',
-        intro=("Preventivi, schede, etichette, cartellini e ricevute che si compilano da soli con i tuoi dati "
-               "e il tuo logo, pronti da stampare, mandare per email o condividere su WhatsApp."),
-        cosa=[
-            'Documenti PDF impaginati con cura',
-            'Stampa su A4, su carta termica per scontrini e su etichette',
-            'QR code, per esempio per le recensioni',
-            'Invio per email o WhatsApp',
-            'Cartellini dei prezzi per la vetrina',
-        ],
-        esempio=True,
-        passi=PASSI_SU_MISURA,
-        faq=FAQ_SU_MISURA,
-        correlati=['gestionali', 'automazioni', 'siti-web'],
+        correlati=['siti-web', 'assistenza-aziende'],
     ),
 ]
 

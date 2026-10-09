@@ -160,7 +160,7 @@ def testa(titolo, descrizione, css):
 
 <!-- Solo nella bozza: non va copiato in WordPress -->
 <div class="avviso-bozza" role="note">
-  <strong>Bozza.</strong> I testi <mark class="da-confermare">evidenziati così</mark> sono da confermare; i riquadri tratteggiati sono foto da scattare.
+  <strong>Bozza.</strong> I testi sono confermati; manca la foto vera della vetrina, quella di adesso è provvisoria.
 </div>
 '''
 
