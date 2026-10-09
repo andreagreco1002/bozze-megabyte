@@ -169,8 +169,7 @@ def pagina_home():
         'titolo': 'Home',
         'descrizione': 'Assistenza, riparazione e vendita computer a Roma. Diagnosi gratuita, '
                        'preventivo prima di procedere.'[:155],
-        # La foto della vetrina arriva quando ce n'è una vera: quella di prova è di Google
-        'foto': None,
+        'foto': 'negozio.jpg',
         'blocchi': '\n\n'.join(blocchi),
     }
 

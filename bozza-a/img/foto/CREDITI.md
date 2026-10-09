@@ -1,7 +1,7 @@
 # Foto
 
-Foto da Pexels, licenza gratuita anche per uso commerciale (pexels.com/license).
-Da sostituire con foto vere del negozio quando disponibili.
+Le foto del negozio sono nostre, scattate in Via Tripoli 17 (ottobre 2026).
+Le altre vengono da Pexels, licenza gratuita anche per uso commerciale (pexels.com/license).
 
 - `riparazione-pc-mac.jpg` - https://www.pexels.com/photo/34514242/ - Portatile aperto sul banco con i componenti a vista
 - `riparazione-smartphone-tablet.jpg` - https://www.pexels.com/photo/6755075/ - Sostituzione di un componente interno di uno smartphone con il cacciavite
@@ -17,4 +17,6 @@ Da sostituire con foto vere del negozio quando disponibili.
 - `automazioni.jpg` - https://www.pexels.com/photo/1148820/ - Armadio di rete con luci accese
 - `documenti-pdf.jpg` - https://www.pexels.com/photo/6207369/ - Modulo stampato con i riquadri da compilare, sulla scrivania accanto a una penna (ritagliata)
 - `visibilita-google.jpg` - https://www.pexels.com/photo/4543006/ - Mano che tiene uno smartphone con una mappa aperta
-- `banco.jpg` - https://www.pexels.com/photo/10558600/ - Mani al lavoro su un portatile aperto, viste dall'alto
+- `banco.jpg` - nostra - L'interno del negozio: il banco, le vetrine e gli scaffali
+- `negozio.jpg` - nostra - La vetrina da fuori, con l'insegna e i marchi trattati
+- `negozio-fronte.jpg` - nostra - La vetrina ripresa di fronte (seconda inquadratura)

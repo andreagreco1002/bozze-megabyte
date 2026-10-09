@@ -757,7 +757,7 @@ def home_a():
           <ul class="lista-spunte">{perche}</ul>
         </div>
         <figure class="foto foto--perche">
-          <img src="img/foto/banco.jpg{versione_foto("banco")}" alt="Mani al lavoro su un computer portatile aperto, viste dall'alto" width="1200" height="900" loading="lazy">
+          <img src="img/foto/banco.jpg{versione_foto("banco")}" alt="L'interno del negozio: il banco con il logo Meg@byte, le vetrine e gli scaffali" width="1200" height="800" loading="lazy">
         </figure>
       </div>
       <div class="a-marche">
@@ -827,7 +827,7 @@ def home_a():
       </div>
       <div>
         <figure class="foto foto--contatti">
-          <img src="img/foto/negozio.jpg{versione_foto("negozio")}" alt="L'ingresso del negozio Meg@byte Informatica in Via Tripoli 17 a Roma" width="1200" height="749" loading="lazy">
+          <img src="img/foto/negozio.jpg{versione_foto("negozio")}" alt="La vetrina di Meg@byte Informatica in Via Tripoli 17 a Roma, con l'insegna e i marchi trattati" width="1200" height="800" loading="lazy">
         </figure>
         <p class="nota-bozza">Foto presa da Google Street View, solo per la bozza: prima di pubblicare serve una foto vostra.</p>
       </div>
