@@ -125,6 +125,10 @@ add_action('wp_enqueue_scripts', function () {
     wp_dequeue_style('global-styles');
 }, 20);
 
+/** WordPress aggiunge <p> e <br> dove capita: sul nostro HTML fa solo danni. */
+remove_filter('the_content', 'wpautop');
+remove_filter('the_excerpt', 'wpautop');
+
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
 add_theme_support('html5', ['style', 'script']);
