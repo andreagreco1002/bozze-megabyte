@@ -13,6 +13,17 @@ add_action('wp_enqueue_scripts', function () {
 remove_filter('the_content', 'wpautop');
 remove_filter('the_excerpt', 'wpautop');
 
+/** Le nostre visite non finiscono nelle statistiche: chi e' collegato non viene contato. */
+add_action('wp_enqueue_scripts', function () {
+    if (!is_user_logged_in()) {
+        return;
+    }
+    foreach (['burst', 'burst-timeme', 'burst-goals'] as $pezzo) {
+        wp_dequeue_script($pezzo);
+        wp_deregister_script($pezzo);
+    }
+}, 100);
+
 /** Gli indirizzi vecchi portano alla pagina nuova che li sostituisce. */
 add_action('template_redirect', function () {
     $vecchi = [
