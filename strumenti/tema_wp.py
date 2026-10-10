@@ -129,6 +129,25 @@ add_action('wp_enqueue_scripts', function () {
 remove_filter('the_content', 'wpautop');
 remove_filter('the_excerpt', 'wpautop');
 
+/** Gli indirizzi vecchi portano alla pagina nuova che li sostituisce. */
+add_action('template_redirect', function () {
+    $vecchi = [
+        'home' => '/',
+        'chi-siamo' => '/',
+        'servizi' => '/#servizi',
+        'contattaci' => '/#contatti',
+        'assistenza-informatica-per-i-privati' => '/riparazioni/',
+        'assistenza-informatica-per-le-aziende' => '/assistenza-aziende/',
+        'assistenza-e-consulenza-informatica-per-i-professionisti' => '/assistenza-aziende/',
+        'assistenza-informatica-remota' => '/assistenza-remota/',
+    ];
+    $via = trim((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    if (isset($vecchi[$via])) {
+        wp_redirect(home_url($vecchi[$via]), 301);
+        exit;
+    }
+});
+
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
 add_theme_support('html5', ['style', 'script']);
