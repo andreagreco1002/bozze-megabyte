@@ -37,9 +37,18 @@ def titolo(testo, livello=2):
             f'<!-- /wp:heading -->')
 
 
-def elenco(voci):
-    dentro = ''.join(f'<!-- wp:list-item --><li>{e(v)}</li><!-- /wp:list-item -->' for v in voci)
-    return f'<!-- wp:list --><ul class="wp-block-list">{dentro}</ul><!-- /wp:list -->'
+def elenco(voci, classe=None):
+    """voci: testo semplice, oppure (testo, indirizzo) per farne un collegamento."""
+    dentro = ''
+    for voce in voci:
+        if isinstance(voce, tuple):
+            testo, href = voce
+            dentro += f'<!-- wp:list-item --><li><a href="{href}">{e(testo)}</a></li><!-- /wp:list-item -->'
+        else:
+            dentro += f'<!-- wp:list-item --><li>{e(voce)}</li><!-- /wp:list-item -->'
+    attr = f' {{"className":"{classe}"}}' if classe else ''
+    cl = f'wp-block-list {classe}' if classe else 'wp-block-list'
+    return f'<!-- wp:list{attr} --><ul class="{cl}">{dentro}</ul><!-- /wp:list -->'
 
 
 def domanda(q, r):
@@ -101,7 +110,8 @@ def pagina_servizio(s):
     correlati = [PER_SLUG[c] for c in s.get('correlati', []) if c in PER_SLUG]
     if correlati:
         blocchi.append(titolo('Vedi anche'))
-        blocchi.append(elenco([f'{c["nome"]}: {c["breve"]}' for c in correlati]))
+        blocchi.append(elenco([(f'{pulito(c["nome"])}: {pulito(c["breve"])}', f'/{c["slug"]}/') for c in correlati],
+                              'vedi-anche'))
 
     blocchi += invito()
     return {

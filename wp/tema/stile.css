@@ -1,0 +1,208 @@
+/* Il vestito del sito nuovo su WordPress.
+   Rifà l'aspetto della bozza sui blocchi di WordPress: stessi colori, stessi
+   caratteri, stessi componenti (pulsanti, elenchi con la spunta, domande a
+   fisarmonica, fasce alternate). Va in Aspetto → Stili globali → CSS. */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+:root {
+  --blu: #1c5b7c;
+  --blu-scuro: #123f57;
+  --blu-chiaro: #e8f1f6;
+  --arancio: #e07c2c;
+  --arancio-bottone: #b85a12;
+  --arancio-bottone-su: #9c4a0c;
+  --testo: #1e293b;
+  --testo-tenue: #475569;
+  --sfondo-tinta: #f4f7fa;
+  --bordo: #dbe3ea;
+  --raggio: 12px;
+  --ombra: 0 1px 2px rgb(15 23 42 / 0.06), 0 4px 16px rgb(15 23 42 / 0.06);
+  --larghezza: 1140px;
+  --font-titoli: 'Poppins', system-ui, sans-serif;
+  --font-testo: 'Inter', system-ui, sans-serif;
+}
+
+/* ---------- impostazioni di fondo ---------- */
+body {
+  font-family: var(--font-testo);
+  color: var(--testo);
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: var(--font-titoli); color: var(--blu-scuro); line-height: 1.2; }
+h1 { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.1rem); margin-top: 2.4em; }
+h3 { font-size: 1.15rem; margin-top: 1.8em; }
+a { color: var(--blu); }
+
+/* ---------- barra dei contatti, in cima ---------- */
+.barra-contatti {
+  background: var(--blu-scuro);
+  color: #fff;
+  font-size: 0.92rem;
+}
+.barra-contatti a { color: #fff; text-decoration: none; }
+.barra-contatti a:hover { text-decoration: underline; }
+
+/* ---------- intestazione ---------- */
+.intestazione-sito { background: #fff; border-bottom: 1px solid var(--bordo); }
+.intestazione-sito .wp-block-site-logo img { max-width: 260px; height: auto; }
+.claim-intestazione { color: var(--testo-tenue); font-size: 0.95rem; line-height: 1.35; margin: 0; }
+.claim-intestazione strong { color: var(--blu-scuro); display: block; }
+
+/* ---------- menu ---------- */
+.barra-menu { background: var(--blu); }
+.barra-menu .wp-block-navigation a { color: #fff; font-weight: 600; text-decoration: none; }
+.barra-menu .wp-block-navigation a:hover { text-decoration: underline; }
+.barra-menu .wp-block-navigation__submenu-container {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+  box-shadow: var(--ombra);
+  padding: 6px;
+  min-width: 260px;
+}
+.barra-menu .wp-block-navigation__submenu-container a { color: var(--testo); border-radius: 7px; padding: 9px 12px; }
+.barra-menu .wp-block-navigation__submenu-container a:hover { background: var(--blu-chiaro); text-decoration: none; }
+
+/* ---------- pulsanti ---------- */
+.wp-block-button__link {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font-family: var(--font-testo);
+  font-weight: 600;
+  background: var(--arancio-bottone);
+  color: #fff;
+  text-decoration: none;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.wp-block-button__link:hover { background: var(--arancio-bottone-su); color: #fff; }
+.wp-block-button.is-style-outline .wp-block-button__link {
+  background: #fff;
+  color: var(--blu-scuro);
+  border-color: var(--blu);
+}
+.wp-block-button.is-style-outline .wp-block-button__link:hover { background: var(--blu-chiaro); }
+.bottone-whatsapp .wp-block-button__link { background: #1ebe5d; }
+.bottone-whatsapp .wp-block-button__link:hover { background: #17a04e; }
+
+/* ---------- corpo della pagina ---------- */
+.pagina-contenuto { width: min(100% - 32px, var(--larghezza)); margin-inline: auto; padding-block: 48px 72px; }
+.pagina-contenuto > * + * { margin-top: 1.1em; }
+.pagina-contenuto p.lead { font-size: 1.2rem; color: var(--testo-tenue); max-width: 60ch; }
+.pagina-contenuto .wp-block-image img { border-radius: var(--raggio); box-shadow: var(--ombra); }
+
+/* elenchi: la stessa griglia con la spunta della bozza */
+.pagina-contenuto ul.wp-block-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px 24px;
+}
+.pagina-contenuto ul.wp-block-list li {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+  padding: 14px 16px 14px 44px;
+  position: relative;
+}
+.pagina-contenuto ul.wp-block-list li::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 19px;
+  width: 14px;
+  height: 8px;
+  border-left: 2.5px solid var(--arancio);
+  border-bottom: 2.5px solid var(--arancio);
+  transform: rotate(-45deg);
+}
+
+/* "Vedi anche": sono collegamenti ad altre pagine, non cose che facciamo */
+.pagina-contenuto ul.vedi-anche li { padding-left: 16px; }
+.pagina-contenuto ul.vedi-anche li::before { content: none; }
+.pagina-contenuto ul.vedi-anche a { font-weight: 600; text-decoration: none; }
+.pagina-contenuto ul.vedi-anche li:hover { border-color: var(--blu); }
+
+/* i passi numerati di "Come funziona" */
+.pagina-contenuto h3 { color: var(--blu); }
+
+/* domande a fisarmonica */
+.pagina-contenuto .wp-block-details {
+  background: #fff;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 0 20px;
+  margin-top: 10px;
+}
+.pagina-contenuto .wp-block-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 0;
+  font-weight: 600;
+  color: var(--blu-scuro);
+  position: relative;
+  padding-right: 32px;
+}
+.pagina-contenuto .wp-block-details summary::-webkit-details-marker { display: none; }
+.pagina-contenuto .wp-block-details summary::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 22px;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--blu);
+  border-bottom: 2px solid var(--blu);
+  transform: rotate(45deg);
+  transition: transform .15s;
+}
+.pagina-contenuto .wp-block-details[open] summary::after { transform: rotate(-135deg); top: 26px; }
+.pagina-contenuto .wp-block-details p { padding-bottom: 16px; margin: 0; color: var(--testo-tenue); }
+
+/* la chiusura "Parliamone" su fondo tinta, come la fascia della bozza */
+.pagina-contenuto .wp-block-separator { border: 0; border-top: 1px solid var(--bordo); margin: 56px 0 0; }
+
+/* ---------- piè di pagina ---------- */
+.pie-sito { background: var(--blu-scuro); color: #e8f1f6; }
+.pie-sito a { color: #fff; }
+.pie-sito h2, .pie-sito h3 { color: #fff; font-size: 1rem; }
+
+/* ---------- WhatsApp sempre a portata ---------- */
+.whatsapp-fisso {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #1ebe5d;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 20px rgb(15 23 42 / .25);
+  text-decoration: none;
+}
+.whatsapp-fisso:hover { background: #17a04e; color: #fff; }
+.whatsapp-fisso svg { width: 28px; height: 28px; fill: currentColor; }
+
+/* ---------- telefono ---------- */
+@media (max-width: 781px) {
+  .pagina-contenuto { padding-block: 32px 56px; }
+  .claim-intestazione { display: none; }
+  h2 { margin-top: 1.8em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
