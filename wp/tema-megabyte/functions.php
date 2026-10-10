@@ -32,6 +32,20 @@ add_action('template_redirect', function () {
     }
 });
 
+/** Yoast: se non c'e' una descrizione scritta a mano, usa il riassunto della pagina. */
+add_filter('wpseo_metadesc', function ($descrizione) {
+    if ($descrizione) {
+        return $descrizione;
+    }
+    $pagina = get_queried_object();
+    return ($pagina instanceof WP_Post && $pagina->post_excerpt) ? $pagina->post_excerpt : $descrizione;
+});
+
+/** Su Google il titolo della home dice cosa facciamo e dove, non solo "Home". */
+add_filter('wpseo_title', function ($titolo) {
+    return is_front_page() ? 'Assistenza e riparazione computer a Roma - Meg@byte Informatica' : $titolo;
+});
+
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
 add_theme_support('html5', ['style', 'script']);
