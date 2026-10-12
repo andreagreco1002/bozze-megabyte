@@ -22,8 +22,10 @@ NOME_TEMA = 'tema-megabyte'
 SITO = 'https://www.megabyteinformatica.it'
 ASSETS = f'{SITO}/wp/wp-content/themes/{NOME_TEMA}/assets'
 
-# Lo shortcode del plugin già installato: recensioni vere, aggiornate da sole
-RECENSIONI_VERE = '[trustindex no-registration=google]'
+# Il widget creato nell'account Trustindex del negozio: recensioni vere da Google.
+# (Prima era '[trustindex no-registration=google]', che si aggiornava solo a mano
+# ogni 10 giorni e mostrava i testi in inglese.)
+RECENSIONI_VERE = '[trustindex data-widget-id=f9adb76838124221b90675161e3]'
 
 
 def leggi(nome):
