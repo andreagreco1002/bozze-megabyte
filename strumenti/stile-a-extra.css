@@ -295,7 +295,8 @@ a.a-eroe__occhiello:hover .a-eroe__freccia { transform: translateX(3px); }
   display: grid;
   grid-template-columns: 0.8fr 2fr;
   gap: 28px;
-  align-items: stretch;
+  /* "start": quando una recensione si apre, si allunga solo quella e non il riquadro blu */
+  align-items: start;
 }
 .a-voto {
   background: linear-gradient(160deg, var(--blu-scuro), var(--blu));
