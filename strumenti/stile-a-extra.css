@@ -43,6 +43,10 @@
 .bottone--whatsapp { background: var(--verde-whatsapp); color: #fff; }
 .bottone--whatsapp:hover { background: #17824a; color: #fff; }
 
+/* Nei contatti il pulsante WhatsApp sta in riga col numero: piu' basso del solito */
+.bottone--inriga { min-height: 38px; padding: 6px 14px; font-size: 0.95rem; }
+.contatti__lista li.riga-telefono { align-items: center; flex-wrap: wrap; }
+
 /* ---------- Barra del menu ---------- */
 .a-menu {
   position: sticky;

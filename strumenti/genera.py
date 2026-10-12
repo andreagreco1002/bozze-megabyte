@@ -818,7 +818,7 @@ def home_a():
         <ul class="contatti__lista">
           <li>{ic('pin')}<span>{INDIRIZZO}</span></li>
           <li>{ic('clock')}{orari_dl()}</li>
-          <li>{ic('phone')}<a href="{TEL_LINK}">{TELEFONO}</a> <span class="piccolo">(anche WhatsApp)</span></li>
+          <li class="riga-telefono">{ic('phone')}<a href="{TEL_LINK}">{TELEFONO}</a> <a class="bottone bottone--whatsapp bottone--inriga" href="{WHATSAPP}" rel="noopener">{ic('chat')} WhatsApp</a></li>
           <li>{ic('mail')}<a href="mailto:{EMAIL}">{EMAIL}</a></li>
         </ul>
         <div class="azioni">
