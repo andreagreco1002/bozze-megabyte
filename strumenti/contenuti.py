@@ -14,7 +14,11 @@ INDIRIZZO = 'Via Tripoli 17, 00199 Roma (RM)'
 PLACE_ID = 'ChIJ9YvTWFlhLxMRx3CmYad9d9Q'
 MAPPA = ('https://www.google.com/maps/search/?api=1&amp;query=Meg%40byte%20Informatica%20Via%20Tripoli%2017%20Roma'
          f'&amp;query_place_id={PLACE_ID}')
-RECENSIONI = f'https://search.google.com/local/reviews?placeid={PLACE_ID}'
+# Apre Google Maps gia' sull'elenco delle recensioni (il vecchio
+# search.google.com/local/reviews ormai finisce su una ricerca qualsiasi).
+RECENSIONI = ('https://www.google.com/maps/place/Megabyte+Informatica+-+Vendita+e+Assistenza+Informatica/'
+              '@41.9287389,12.5243322,17z/data=!3m1!4b1!4m7!3m6'
+              '!1s0x132f615958d38bf5:0xd4777da761a670c7!8m2!3d41.9287389!4d12.5243322!9m1!1b1')
 SCRIVI_RECENSIONE = f'https://search.google.com/local/writereview?placeid={PLACE_ID}'
 ORARI = [('Lunedì – Venerdì', ['9:00–13:00', '15:30–19:30']), ('Sabato', ['9:00–13:00']), ('Domenica', ['chiuso'])]
 
