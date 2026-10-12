@@ -25,7 +25,7 @@ ASSETS = f'{SITO}/wp/wp-content/themes/{NOME_TEMA}/assets'
 # Il widget creato nell'account Trustindex del negozio: recensioni vere da Google.
 # (Prima era '[trustindex no-registration=google]', che si aggiornava solo a mano
 # ogni 10 giorni e mostrava i testi in inglese.)
-RECENSIONI_VERE = '[trustindex data-widget-id=f9adb76838124221b90675161e3]'
+RECENSIONI_VERE = '[trustindex data-widget-id=5adef0983cb3431645261ad374e]'
 
 
 def leggi(nome):
