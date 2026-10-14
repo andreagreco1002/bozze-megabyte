@@ -697,8 +697,20 @@ GIOSTRA = """
 """
 
 
+MSG_REMOTO = 'Buongiorno, vorrei richiedere assistenza da remoto. Il problema è: '
+
+
 # ---------------------------------------------------------------- home della bozza A
 def home_a():
+    # Gli stessi prezzi e lo stesso programma della pagina dedicata: scritti una volta sola.
+    remoto = PER_SLUG['assistenza-remota']
+    prezzi_remoto = ''.join(
+        f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in remoto['prezzi'])
+    scarica_remoto = (f'''<div class="prezzi__sotto">
+          <a class="bottone bottone--primario bottone--grande" href="{TEAMVIEWER}" rel="noopener">
+            {ic('monitor')} Scarica il programma per l'assistenza</a>
+          <p class="prezzi__nota">Scaricalo e aprilo: ci detti il numero che compare e ci colleghiamo noi.</p>
+        </div>''' if TEAMVIEWER else '')
     problemi = ''.join(
         f'<li><a href="{slug}.html">{ic(icona)}<span>{testo}</span><small>Ti aiutiamo noi {ic("arrow")}</small></a></li>'
         for testo, slug, icona in PROBLEMI)
@@ -797,6 +809,22 @@ def home_a():
     <div class="contenitore">
       <h2 id="titolo-passi">Come funziona una riparazione</h2>
       <ol class="passi">{passi}</ol>
+    </div>
+  </section>
+
+  <!-- 6. Assistenza da remoto -->
+  <section class="sezione a-remoto" id="da-remoto" aria-labelledby="titolo-remoto">
+    <div class="contenitore a-remoto__riga">
+      <div>
+        <h2 id="titolo-remoto">Assistenza da remoto, senza uscire di casa</h2>
+        <p>Molti problemi si risolvono a distanza: ci colleghiamo al tuo computer e lo sistemiamo
+        mentre guardi. La diagnosi è sempre gratuita.</p>
+        <div class="azioni">
+          <a class="bottone bottone--primario bottone--grande" href="{whatsapp(MSG_REMOTO)}" rel="noopener">{ic('chat')} Richiedi assistenza</a>
+          <a class="bottone bottone--chiaro bottone--grande" href="assistenza-remota.html">Come funziona</a>
+        </div>
+      </div>
+      <div class="prezzi prezzi--pagina">{prezzi_remoto}{scarica_remoto}</div>
     </div>
   </section>
 
