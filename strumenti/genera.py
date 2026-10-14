@@ -839,7 +839,6 @@ def home_a():
           <strong>5 stelle</strong>
           <span>Tutte le recensioni su Google</span>
           <a class="bottone bottone--primario" href="{RECENSIONI}" rel="noopener">Leggile tutte {ic('arrow')}</a>
-          <a class="bottone bottone--su-scuro" href="{SCRIVI_RECENSIONE}" rel="noopener">Lascia una recensione</a>
         </div>
         <!-- Scorrono da sole; si fermano passandoci sopra o toccandole -->
         <div class="giostra" id="giostra-recensioni" data-sorgente="recensioni.json">
