@@ -14,7 +14,7 @@ import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from contenuti import (EMAIL, INDIRIZZO, MAPPA, MARCHE, ORARI, PAGAMENTI, PER_SLUG, PROBLEMI,  # noqa: E402
+from contenuti import (EMAIL, INDIRIZZO, MAPPA, MARCHE, ORARI, PER_SLUG, PROBLEMI,  # noqa: E402
                        RECENSIONI, SCRIVI_RECENSIONE, SERVIZI, TEAMVIEWER, TEL_LINK, TELEFONO, WHATSAPP)
 
 RADICE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -309,17 +309,18 @@ SCRIPT_MODULO = """
 def corpo_pagina(s, veste):
     gruppo = GRUPPI[s['gruppo']][0]
     ancora = 'su-misura' if s['gruppo'] == 'su-misura' else 'servizi'
-    msg = f"Buongiorno, vi scrivo per: {s['nome']}"
+    msg = s.get('messaggio') or f"Buongiorno, vi scrivo per: {s['nome']}"
+    # Dove il cliente deve raccontare un problema, diamo anche la via dell'email.
+    from urllib.parse import quote
+    per_email = (f'<a class="bottone bottone--chiaro bottone--grande" '
+                 f'href="mailto:{EMAIL}?subject={quote(s["email_oggetto"])}&amp;body={quote(msg)}">'
+                 f'{ic("mail")} Scrivici una email</a>') if s.get('email_oggetto') else ''
     nota = ('\n      <p class="nota-bozza">Servizio proposto: da confermare prima di pubblicarlo.</p>'
             if s.get('da_confermare') else '')
     if s.get('prezzi'):
-        riquadri = []
-        for d, p in s['prezzi']:
-            paga = PAGAMENTI.get(d, '')
-            bottone = (f'<a class="bottone bottone--primario bottone--paga" href="{paga}" rel="noopener">'
-                       f'Paga {t(p)}</a>') if paga else ''
-            riquadri.append(f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p>{bottone}</div>')
-        destra = '<div class="prezzi prezzi--pagina">' + ''.join(riquadri) + '</div>'
+        destra = '<div class="prezzi prezzi--pagina">' + ''.join(
+            f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in s['prezzi']
+        ) + '</div>'
     elif veste == 'a' and s['slug'] in FOTO:
         intera = ' foto--intera' if s['slug'] in FOTO_INTERE else ''
         destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg{versione_foto(s["slug"])}" '
@@ -354,6 +355,17 @@ def corpo_pagina(s, veste):
     passi = ''.join(
         f'<li><span class="passi__numero" aria-hidden="true">{i}</span><h3>{t(a)}</h3><p>{t(b)}</p></li>'
         for i, (a, b) in enumerate(s['passi'], 1))
+    condizioni = ''
+    if s.get('condizioni'):
+        voci = ''.join(f'<li>{ic("check")}<span>{t(c)}</span></li>' for c in s['condizioni'])
+        condizioni = f'''
+  <section class="sezione" aria-labelledby="titolo-condizioni">
+    <div class="contenitore">
+      <h2 id="titolo-condizioni">Come ci regoliamo</h2>
+      <ul class="lista-spunte">{voci}</ul>
+    </div>
+  </section>
+'''
     # Solo dove serve davvero: il programma per farsi assistere da remoto.
     scarica = (f'''
       <div class="azioni azioni--centro">
@@ -389,6 +401,7 @@ def corpo_pagina(s, veste):
           <div class="azioni">
             <a class="bottone bottone--primario bottone--grande" href="{TEL_LINK}">{ic('phone')} Chiama ora</a>
             <a class="bottone bottone--secondario bottone--grande" href="{whatsapp(msg)}" rel="noopener">{ic('chat')} Scrivici su WhatsApp</a>
+            {per_email}
           </div>
         </div>
         {destra}
@@ -410,6 +423,7 @@ def corpo_pagina(s, veste):
       <ol class="passi">{passi}</ol>{scarica}
     </div>
   </section>
+{condizioni}
 
   <section class="sezione" aria-labelledby="titolo-faq">
     <div class="contenitore">

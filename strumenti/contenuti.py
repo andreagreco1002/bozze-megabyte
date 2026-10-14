@@ -22,11 +22,9 @@ RECENSIONI = ('https://www.google.com/maps/place/Megabyte+Informatica+-+Vendita+
 SCRIVI_RECENSIONE = f'https://search.google.com/local/writereview?placeid={PLACE_ID}'
 ORARI = [('Lunedì – Venerdì', ['9:00–13:00', '15:30–19:30']), ('Sabato', ['9:00–13:00']), ('Domenica', ['chiuso'])]
 
-# Assistenza da remoto: finche' questi restano vuoti, sul sito non compare nessun pulsante.
-# TEAMVIEWER = il modulo QuickSupport personalizzato del negozio (get.teamviewer.com/...).
-# PAGAMENTI = il link PayPal per ciascuna durata.
-TEAMVIEWER = ''
-PAGAMENTI = {'30 minuti': '', '60 minuti': ''}
+# Il modulo QuickSupport personalizzato del negozio (get.teamviewer.com/...).
+# Finche' resta vuoto, il pulsante per scaricarlo non compare.
+TEAMVIEWER = 'https://get.teamviewer.com/6hg29tt'
 
 PASSI_RIPARAZIONE = [
     ('Porti il dispositivo', 'Ti diamo subito la scheda di accettazione con il numero della riparazione.'),
@@ -194,10 +192,23 @@ SERVIZI = [
             'Rimozione di programmi indesiderati',
             'Consulenza e piccoli lavori guidati',
         ],
+        messaggio='Buongiorno, vorrei richiedere assistenza da remoto. Il problema è: ',
+        email_oggetto='Richiesta di assistenza da remoto',
         passi=[
-            ('Ci contatti', 'Chiamaci o scrivici su WhatsApp e raccontaci il problema.'),
-            ('Ti colleghi', 'Ti diciamo come avviare TeamViewer: bastano un paio di clic.'),
+            ('Ci scrivi', 'Su WhatsApp o per email, raccontandoci il problema. Rispondiamo negli orari del negozio.'),
+            ('Ti diciamo se si può fare', 'Valutiamo il problema senza farti pagare nulla e ti diciamo quanto tempo serve.'),
+            ('Paghi', 'Ti mandiamo noi il link per il pagamento, prima del collegamento.'),
+            ('Ti colleghi', 'Scarichi il nostro programma, ci detti il numero che compare e ci colleghiamo.'),
             ('Risolviamo', 'Lavoriamo mentre guardi. Il collegamento lo chiudi tu quando vuoi.'),
+        ],
+        condizioni=[
+            'La diagnosi è sempre gratuita: prima di chiederti di pagare valutiamo insieme il problema.',
+            'Se non è risolvibile da remoto te lo diciamo subito e non paghi niente: semmai ti aspettiamo in negozio.',
+            '30 minuti costano 30 €, 60 minuti costano 60 €, IVA inclusa.',
+            'Il pagamento avviene prima del collegamento, con il link che ti inviamo noi su WhatsApp o per email.',
+            'Durante il collegamento vedi tutto quello che facciamo e puoi interromperlo quando vuoi.',
+            'Non apriamo i tuoi documenti personali se non serve per risolvere il problema, e non conserviamo nulla.',
+            'Emettiamo regolare fattura.',
         ],
         faq=[
             ('È sicuro?', 'Sì: il collegamento lo avvii tu, vedi tutto quello che facciamo e puoi chiuderlo in qualsiasi momento.'),
