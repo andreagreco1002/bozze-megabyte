@@ -750,7 +750,7 @@ def home_a():
     <div class="contenitore">
       <ul>
         <li>{ic('award')}<div><strong>Da oltre 20 anni</strong><span>a Roma, in Via Tripoli</span></div></li>
-        <li>{ic('star')}<div><strong>{stelle()}</strong><span>5 stelle su Google · 66 recensioni</span></div></li>
+        <li>{ic('star')}<div><strong>{stelle()}</strong><span>5 stelle su Google</span></div></li>
         <li>{ic('laptop')}<div><strong>Windows · Mac · Linux</strong><span>computer e smartphone di tutte le marche</span></div></li>
         <li>{ic('home')}<div><strong>Dove ti serve</strong><span>in negozio, a domicilio e da remoto</span></div></li>
       </ul>
@@ -837,7 +837,7 @@ def home_a():
         <div class="a-voto">
           {stelle()}
           <strong>5 stelle</strong>
-          <span>66 recensioni su Google</span>
+          <span>Tutte le recensioni su Google</span>
           <a class="bottone bottone--primario" href="{RECENSIONI}" rel="noopener">Leggile tutte {ic('arrow')}</a>
           <a class="bottone bottone--su-scuro" href="{SCRIVI_RECENSIONE}" rel="noopener">Lascia una recensione</a>
         </div>
