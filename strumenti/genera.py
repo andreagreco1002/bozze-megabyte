@@ -160,7 +160,7 @@ def testa(titolo, descrizione, css):
 
 <!-- Solo nella bozza: non va copiato in WordPress -->
 <div class="avviso-bozza" role="note">
-  <strong>Bozza.</strong> I testi sono confermati; manca la foto vera della vetrina, quella di adesso è provvisoria.
+  <strong>Bozza.</strong> Il sito vero è già online su megabyteinformatica.it: qui proviamo le modifiche prima di pubblicarle.
 </div>
 '''
 
