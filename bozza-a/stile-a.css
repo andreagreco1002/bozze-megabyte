@@ -821,9 +821,10 @@ mark.da-confermare {
 .bottone--whatsapp { background: var(--verde-whatsapp); color: #fff; }
 .bottone--whatsapp:hover { background: #17824a; color: #fff; }
 
-/* Assistenza da remoto: pulsante di pagamento dentro il riquadro del prezzo */
-.bottone--paga { margin-top: 12px; width: 100%; }
-.passi__nota { margin: 10px 0 0; text-align: center; color: var(--testo-tenue); font-size: 0.95rem; }
+/* Assistenza da remoto: sotto i due prezzi, il pulsante per scaricare il programma */
+.prezzi__sotto { grid-column: 1 / -1; text-align: center; }
+.prezzi__sotto .bottone { width: 100%; }
+.prezzi__nota { margin: 10px 0 0; color: rgb(255 255 255 / 0.85); font-size: 0.92rem; line-height: 1.4; }
 
 /* Nei contatti il pulsante WhatsApp sta in riga col numero: piu' basso del solito */
 .bottone--inriga { min-height: 38px; padding: 6px 14px; font-size: 0.95rem; }

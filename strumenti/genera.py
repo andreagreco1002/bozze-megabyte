@@ -317,10 +317,17 @@ def corpo_pagina(s, veste):
                  f'{ic("mail")} Scrivici una email</a>') if s.get('email_oggetto') else ''
     nota = ('\n      <p class="nota-bozza">Servizio proposto: da confermare prima di pubblicarlo.</p>'
             if s.get('da_confermare') else '')
+    # Sotto i prezzi, dove l'occhio arriva subito: il programma per farsi assistere.
+    scarica = (f'''<div class="prezzi__sotto">
+          <a class="bottone bottone--primario bottone--grande" href="{TEAMVIEWER}" rel="noopener">
+            {ic('monitor')} Scarica il programma per l'assistenza</a>
+          <p class="prezzi__nota">Non si installa: lo apri, ci detti il numero che compare e ci colleghiamo.</p>
+        </div>'''
+               if TEAMVIEWER and s['slug'] == 'assistenza-remota' else '')
     if s.get('prezzi'):
         destra = '<div class="prezzi prezzi--pagina">' + ''.join(
             f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in s['prezzi']
-        ) + '</div>'
+        ) + scarica + '</div>'
     elif veste == 'a' and s['slug'] in FOTO:
         intera = ' foto--intera' if s['slug'] in FOTO_INTERE else ''
         destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg{versione_foto(s["slug"])}" '
@@ -366,14 +373,6 @@ def corpo_pagina(s, veste):
     </div>
   </section>
 '''
-    # Solo dove serve davvero: il programma per farsi assistere da remoto.
-    scarica = (f'''
-      <div class="azioni azioni--centro">
-        <a class="bottone bottone--primario bottone--grande" href="{TEAMVIEWER}" rel="noopener">
-          {ic('monitor')} Scarica il programma per l'assistenza</a>
-      </div>
-      <p class="passi__nota">Non si installa: lo apri, ci detti il numero che compare e ci colleghiamo.</p>'''
-               if TEAMVIEWER and s['slug'] == 'assistenza-remota' else '')
     faq = ''.join(
         f'<details><summary>{t(d)} {ic("chevron")}</summary><p>{t(r)}</p></details>' for d, r in s['faq'])
     correlati = ''.join(scheda_link(PER_SLUG[c], veste) for c in s['correlati'])
@@ -420,7 +419,7 @@ def corpo_pagina(s, veste):
   <section class="sezione sezione--tinta{' a-passi' if veste == 'a' else ''}" aria-labelledby="titolo-passi">
     <div class="contenitore">
       <h2 id="titolo-passi">Come funziona</h2>
-      <ol class="passi">{passi}</ol>{scarica}
+      <ol class="passi">{passi}</ol>
     </div>
   </section>
 {condizioni}
