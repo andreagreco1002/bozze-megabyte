@@ -22,6 +22,12 @@ RECENSIONI = ('https://www.google.com/maps/place/Megabyte+Informatica+-+Vendita+
 SCRIVI_RECENSIONE = f'https://search.google.com/local/writereview?placeid={PLACE_ID}'
 ORARI = [('Lunedì – Venerdì', ['9:00–13:00', '15:30–19:30']), ('Sabato', ['9:00–13:00']), ('Domenica', ['chiuso'])]
 
+# Assistenza da remoto: finche' questi restano vuoti, sul sito non compare nessun pulsante.
+# TEAMVIEWER = il modulo QuickSupport personalizzato del negozio (get.teamviewer.com/...).
+# PAGAMENTI = il link PayPal per ciascuna durata.
+TEAMVIEWER = ''
+PAGAMENTI = {'30 minuti': '', '60 minuti': ''}
+
 PASSI_RIPARAZIONE = [
     ('Porti il dispositivo', 'Ti diamo subito la scheda di accettazione con il numero della riparazione.'),
     ('Diagnosi e preventivo', 'Ti contattiamo con il preventivo prima di procedere: nessuna sorpresa.'),

@@ -14,8 +14,8 @@ import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from contenuti import (EMAIL, INDIRIZZO, MAPPA, MARCHE, ORARI, PER_SLUG, PROBLEMI, RECENSIONI,  # noqa: E402
-                       SCRIVI_RECENSIONE, SERVIZI, TEL_LINK, TELEFONO, WHATSAPP)
+from contenuti import (EMAIL, INDIRIZZO, MAPPA, MARCHE, ORARI, PAGAMENTI, PER_SLUG, PROBLEMI,  # noqa: E402
+                       RECENSIONI, SCRIVI_RECENSIONE, SERVIZI, TEAMVIEWER, TEL_LINK, TELEFONO, WHATSAPP)
 
 RADICE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STRUMENTI = os.path.join(RADICE, 'strumenti')
@@ -313,9 +313,13 @@ def corpo_pagina(s, veste):
     nota = ('\n      <p class="nota-bozza">Servizio proposto: da confermare prima di pubblicarlo.</p>'
             if s.get('da_confermare') else '')
     if s.get('prezzi'):
-        destra = '<div class="prezzi prezzi--pagina">' + ''.join(
-            f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p></div>' for d, p in s['prezzi']
-        ) + '</div>'
+        riquadri = []
+        for d, p in s['prezzi']:
+            paga = PAGAMENTI.get(d, '')
+            bottone = (f'<a class="bottone bottone--primario bottone--paga" href="{paga}" rel="noopener">'
+                       f'Paga {t(p)}</a>') if paga else ''
+            riquadri.append(f'<div class="prezzo"><h3>{d}</h3><p class="prezzo__cifra">{t(p)}</p>{bottone}</div>')
+        destra = '<div class="prezzi prezzi--pagina">' + ''.join(riquadri) + '</div>'
     elif veste == 'a' and s['slug'] in FOTO:
         intera = ' foto--intera' if s['slug'] in FOTO_INTERE else ''
         destra = (f'<figure class="foto foto--pagina{intera}"><img src="img/foto/{s["slug"]}.jpg{versione_foto(s["slug"])}" '
@@ -350,6 +354,14 @@ def corpo_pagina(s, veste):
     passi = ''.join(
         f'<li><span class="passi__numero" aria-hidden="true">{i}</span><h3>{t(a)}</h3><p>{t(b)}</p></li>'
         for i, (a, b) in enumerate(s['passi'], 1))
+    # Solo dove serve davvero: il programma per farsi assistere da remoto.
+    scarica = (f'''
+      <div class="azioni azioni--centro">
+        <a class="bottone bottone--primario bottone--grande" href="{TEAMVIEWER}" rel="noopener">
+          {ic('monitor')} Scarica il programma per l'assistenza</a>
+      </div>
+      <p class="passi__nota">Non si installa: lo apri, ci detti il numero che compare e ci colleghiamo.</p>'''
+               if TEAMVIEWER and s['slug'] == 'assistenza-remota' else '')
     faq = ''.join(
         f'<details><summary>{t(d)} {ic("chevron")}</summary><p>{t(r)}</p></details>' for d, r in s['faq'])
     correlati = ''.join(scheda_link(PER_SLUG[c], veste) for c in s['correlati'])
@@ -395,7 +407,7 @@ def corpo_pagina(s, veste):
   <section class="sezione sezione--tinta{' a-passi' if veste == 'a' else ''}" aria-labelledby="titolo-passi">
     <div class="contenitore">
       <h2 id="titolo-passi">Come funziona</h2>
-      <ol class="passi">{passi}</ol>
+      <ol class="passi">{passi}</ol>{scarica}
     </div>
   </section>
 
