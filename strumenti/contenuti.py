@@ -198,7 +198,7 @@ SERVIZI = [
             ('Ci scrivi', 'Su WhatsApp o per email, raccontandoci il problema. Rispondiamo negli orari del negozio.'),
             ('Ti diciamo se si può fare', 'Valutiamo il problema senza farti pagare nulla e ti diciamo quanto tempo serve.'),
             ('Paghi', 'Ti mandiamo noi il link per il pagamento, prima del collegamento.'),
-            ('Ti colleghi', 'Scarichi il nostro programma, ci detti il numero che compare e ci colleghiamo.'),
+            ('Ti colleghi', 'Scarichi il nostro programma e lo apri: ci detti il numero che compare e ci colleghiamo.'),
             ('Risolviamo', 'Lavoriamo mentre guardi. Il collegamento lo chiudi tu quando vuoi.'),
         ],
         condizioni=[

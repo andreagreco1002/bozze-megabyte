@@ -321,7 +321,7 @@ def corpo_pagina(s, veste):
     scarica = (f'''<div class="prezzi__sotto">
           <a class="bottone bottone--primario bottone--grande" href="{TEAMVIEWER}" rel="noopener">
             {ic('monitor')} Scarica il programma per l'assistenza</a>
-          <p class="prezzi__nota">Non si installa: lo apri, ci detti il numero che compare e ci colleghiamo.</p>
+          <p class="prezzi__nota">Scaricalo e aprilo: ci detti il numero che compare e ci colleghiamo noi.</p>
         </div>'''
                if TEAMVIEWER and s['slug'] == 'assistenza-remota' else '')
     if s.get('prezzi'):
